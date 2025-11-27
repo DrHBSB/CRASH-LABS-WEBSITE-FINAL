@@ -5,7 +5,7 @@ import gsap from 'gsap';
 
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="w-full relative pt-12 pb-0 lg:pt-24 lg:pb-0 overflow-hidden bg-paper">
+    <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
@@ -26,8 +26,9 @@ const Hero: React.FC = () => {
          />
       </div>
 
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* Main Hero Content - Takes up available space */}
+      <div className="flex-1 flex items-center container mx-auto px-6 md:px-12 relative z-10 pt-24 lg:pt-0">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             
             {/* Left Column: Text & CTA */}
             <div className="flex flex-col items-start max-w-xl relative z-10">
@@ -227,7 +228,7 @@ const Hero: React.FC = () => {
         `}</style>
       </div>
 
-      {/* Logo Slider Section */}
+      {/* Logo Slider Section - At bottom of hero */}
       <LogoSlider />
     </section>
   );
@@ -275,7 +276,7 @@ const LogoSlider: React.FC = () => {
   }, [logos.length]);
 
   return (
-    <div className="w-full mt-16 lg:mt-24 py-8 border-t border-gray-200/60 overflow-hidden bg-paper relative">
+    <div className="w-full py-8 border-t border-gray-200/60 overflow-hidden bg-paper relative">
       {/* Gradient Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-paper to-transparent z-10 pointer-events-none"></div>
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-paper to-transparent z-10 pointer-events-none"></div>
