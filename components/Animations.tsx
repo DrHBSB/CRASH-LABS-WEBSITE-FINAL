@@ -35,12 +35,17 @@ export const FadeIn: React.FC<FadeInProps> = ({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out transform ${
+      className={`transform ${
         isVisible 
           ? 'opacity-100 translate-y-0' 
           : 'opacity-0 translate-y-4'
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ 
+        transitionDelay: `${delay}ms`,
+        transitionProperty: 'opacity, transform',
+        transitionDuration: '600ms',
+        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)'
+      }}
     >
       {children}
     </div>
@@ -134,14 +139,19 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  // Simplified: just fade in the whole text, no per-letter/word animation
+  // Simplified: just fade in the whole text with premium easing
   return (
     <span 
       ref={ref} 
-      className={`inline-block transition-opacity duration-500 ease-out ${
+      className={`inline-block ${
         isVisible ? 'opacity-100' : 'opacity-0'
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ 
+        transitionDelay: `${delay}ms`,
+        transitionProperty: 'opacity',
+        transitionDuration: '500ms',
+        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)'
+      }}
       aria-label={text}
     >
       {text}
