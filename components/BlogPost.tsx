@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Share2, Download } from 'lucide-react';
+import { ArrowLeft, Share2, Download, FileText } from 'lucide-react';
 import { FadeIn } from './Animations';
 
 interface BlogPostProps {
@@ -20,16 +20,53 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
           Back to Research
         </button>
 
-        <FadeIn className="max-w-4xl">
+        <FadeIn className="max-w-5xl mx-auto">
+            
+            {/* Featured Image Card */}
+            <div className="w-full bg-navy-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative h-[400px] mb-12 group">
+                 <img 
+                    src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=2664&auto=format&fit=crop" 
+                    alt="Radiology Scan" 
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" 
+                />
+                 {/* Overlay UI */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-transparent to-transparent"></div>
+                 
+                 {/* Floating UI Elements inside the card */}
+                 <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+                    <div>
+                        <div className="flex items-center gap-2 mb-3">
+                            <span className="px-3 py-1 bg-brand-blue text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Benchmark Update</span>
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-serif text-white leading-tight">
+                            Gemini 3.0 Pro <span className="text-blue-200">Surpasses Trainees</span>
+                        </h2>
+                    </div>
+                    
+                    <div className="hidden md:block bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10">
+                         <div className="flex items-center gap-2 mb-2">
+                             <FileText className="text-brand-blue w-4 h-4" />
+                             <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Accuracy Delta</span>
+                         </div>
+                         <div className="text-4xl font-serif text-white font-medium mb-1">+6.0%</div>
+                         <div className="text-xs font-bold text-green-400 uppercase tracking-wider flex items-center gap-1">
+                             <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                             vs Trainees
+                         </div>
+                    </div>
+                 </div>
+                 
+                 {/* Scan Lines Overlay */}
+                 <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,99,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%] pointer-events-none"></div>
+            </div>
+
             <div className="flex flex-wrap gap-4 items-center text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">
-                <span className="text-brand-blue">Benchmark Update</span>
-                <span className="w-1 h-1 rounded-full bg-gray-400"></span>
-                <span>Nov 20, 2025</span>
+                <span className="text-brand-blue">Nov 20, 2025</span>
                 <span className="w-1 h-1 rounded-full bg-gray-400"></span>
                 <span>5 Min Read</span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-serif font-medium text-navy-900 leading-[1.1] mb-8 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-navy-900 leading-[1.1] mb-8 tracking-tight">
                 Gemini 3.0 Pro Surpasses Radiology Trainees on Radiology's Last Exam (RadLE)
             </h1>
 
@@ -59,7 +96,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
       {/* Main Content */}
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
         
-        <div className="lg:col-span-8 max-w-none prose prose-lg prose-headings:font-serif prose-headings:font-medium prose-p:font-sans prose-p:font-light prose-p:text-navy-800 prose-p:leading-relaxed">
+        <div className="lg:col-span-8 max-w-none prose prose-lg prose-headings:font-serif prose-headings:font-medium prose-p:font-sans prose-p:font-light prose-p:text-navy-800 prose-p:leading-relaxed mx-auto lg:mx-0">
             
             <FadeIn delay={100} className="bg-navy-900/5 p-8 rounded-xl border border-navy-900/10 mb-12 not-prose">
                 <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue mb-4">TL;DR</h3>
