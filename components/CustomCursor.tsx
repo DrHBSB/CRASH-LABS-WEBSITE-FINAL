@@ -1,38 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-import gsap from 'gsap';
 
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorDotRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isButton, setIsButton] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [buttonRect, setButtonRect] = useState<DOMRect | null>(null);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const cursorDot = cursorDotRef.current;
-    
-    if (!cursor || !cursorDot) return;
-
-    // Mouse position
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      
+      setPosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
-
-      // Move dot immediately
-      gsap.to(cursorDot, {
-        x: mouseX,
-        y: mouseY,
-        duration: 0.1,
-        ease: 'power2.out'
-      });
     };
 
     const handleMouseLeave = () => {
@@ -43,40 +22,50 @@ const CustomCursor: React.FC = () => {
       setIsVisible(true);
     };
 
-    // Smooth follow animation for main cursor
-    const animateCursor = () => {
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
-      
-      gsap.set(cursor, {
-        x: cursorX,
-        y: cursorY
-      });
-      
-      requestAnimationFrame(animateCursor);
-    };
-    animateCursor();
-
     // Handle hover states
     const handleElementHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       
       // Check if hovering over interactive elements
+      const interactiveElement = target.closest('a, button, [role="button"]');
       const isInteractive = target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer');
-      const isButtonElement = target.closest('a, button, [role="button"]');
+      
+      if (interactiveElement) {
+        const rect = interactiveElement.getBoundingClientRect();
+        setButtonRect(rect);
+        setIsButton(true);
+      } else {
+        setButtonRect(null);
+        setIsButton(false);
+      }
       
       setIsHovering(!!isInteractive);
-      setIsButton(!!isButtonElement);
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const relatedTarget = e.relatedTarget as HTMLElement;
+      
+      // Check if we're leaving an interactive element
+      const leavingInteractive = target.closest('a, button, [role="button"]');
+      const enteringInteractive = relatedTarget?.closest?.('a, button, [role="button"]');
+      
+      if (leavingInteractive && !enteringInteractive) {
+        setButtonRect(null);
+        setIsButton(false);
+      }
     };
 
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseover', handleElementHover);
+    document.addEventListener('mouseout', handleMouseOut);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseover', handleElementHover);
+      document.removeEventListener('mouseout', handleMouseOut);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
@@ -87,50 +76,67 @@ const CustomCursor: React.FC = () => {
     return null;
   }
 
+  // Calculate cursor styles based on state
+  const getCursorStyle = (): React.CSSProperties => {
+    if (isButton && buttonRect) {
+      // Merge with button - position at button center, match button size
+      return {
+        left: buttonRect.left + buttonRect.width / 2,
+        top: buttonRect.top + buttonRect.height / 2,
+        width: buttonRect.width + 8,
+        height: buttonRect.height + 8,
+        borderRadius: buttonRect.height / 2 + 4,
+        transform: 'translate(-50%, -50%)',
+        transition: 'all 0.15s ease-out',
+      };
+    }
+    
+    // Default circular cursor
+    return {
+      left: position.x,
+      top: position.y,
+      width: isHovering ? 48 : 32,
+      height: isHovering ? 48 : 32,
+      borderRadius: '50%',
+      transform: 'translate(-50%, -50%)',
+      transition: 'width 0.15s ease-out, height 0.15s ease-out, border-radius 0.15s ease-out',
+    };
+  };
+
   return (
     <>
-      {/* Main cursor circle */}
+      {/* Main cursor */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-300 ease-out ${
+        className={`fixed pointer-events-none z-[9999] border-2 ${
           isVisible ? 'opacity-100' : 'opacity-0'
+        } ${
+          isButton 
+            ? 'border-brand-blue bg-brand-blue/10' 
+            : isHovering 
+              ? 'border-navy-900 bg-white mix-blend-difference' 
+              : 'border-navy-900/60'
         }`}
-        style={{
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
+        style={getCursorStyle()}
+      />
+
+      {/* Center dot - only show when not on button */}
+      {!isButton && (
         <div
-          className={`rounded-full border-2 transition-all duration-300 ease-out ${
-            isButton
-              ? 'w-16 h-16 bg-brand-blue/20 border-brand-blue scale-150'
-              : isHovering
-              ? 'w-12 h-12 bg-white mix-blend-difference border-white'
-              : 'w-10 h-10 border-navy-900/50 mix-blend-difference bg-transparent'
+          className={`fixed pointer-events-none z-[9999] rounded-full transition-all duration-100 ${
+            isVisible ? 'opacity-100' : 'opacity-0'
+          } ${
+            isHovering 
+              ? 'w-1.5 h-1.5 bg-white mix-blend-difference' 
+              : 'w-1 h-1 bg-navy-900'
           }`}
           style={{
-            backdropFilter: isButton ? 'blur(4px)' : 'none',
+            left: position.x,
+            top: position.y,
+            transform: 'translate(-50%, -50%)',
           }}
         />
-      </div>
-
-      {/* Center dot */}
-      <div
-        ref={cursorDotRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-200 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        } ${isButton ? 'scale-0' : 'scale-100'}`}
-        style={{
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <div
-          className={`rounded-full transition-all duration-200 ${
-            isHovering
-              ? 'w-2 h-2 bg-white mix-blend-difference'
-              : 'w-1.5 h-1.5 bg-navy-900 mix-blend-difference'
-          }`}
-        />
-      </div>
+      )}
 
       {/* Global style to hide default cursor */}
       <style>{`
@@ -145,4 +151,3 @@ const CustomCursor: React.FC = () => {
 };
 
 export default CustomCursor;
-
