@@ -96,43 +96,43 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
       {/* Main Content */}
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
         
-        <div className="lg:col-span-8 max-w-none prose prose-lg prose-headings:font-serif prose-headings:font-medium prose-p:font-sans prose-p:font-light prose-p:text-navy-800 prose-p:leading-relaxed mx-auto lg:mx-0">
+        <div className="lg:col-span-8 max-w-none mx-auto lg:mx-0">
             
-            <FadeIn delay={100} className="bg-navy-900/5 p-8 rounded-xl border border-navy-900/10 mb-12 not-prose">
-                <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue mb-4">TL;DR</h3>
+            <FadeIn delay={100} className="bg-navy-900/5 p-8 rounded-xl border border-navy-900/10 mb-12">
+                <h3 className="text-sm font-sans font-bold uppercase tracking-[0.2em] text-brand-blue mb-4">TL;DR</h3>
                 <p className="text-xl font-serif text-navy-900 italic leading-relaxed">
                     On our RadLE v1 benchmark of complex radiology cases, Gemini 3.0 Pro is now the first generalist AI model to outperform radiology trainees (51% vs 45%), but it still performs below board certified radiologists (83%).
                 </p>
             </FadeIn>
 
             <FadeIn delay={200}>
-                <h2 className="text-3xl font-serif text-navy-900 mt-12 mb-6">Background</h2>
-                <p>
-                    Over the last few months, at the Centre for Responsible Autonomous Systems in Healthcare (CRASH Lab), we have been systematically benchmarking frontier AI models on Radiology’s Last Exam (RadLE v1), a spectrum biased diagnostic dataset designed to reflect the kind of complex, multi-system cases radiologists routinely struggle with. In our previous analysis done on September 2025, every major model: GPT-5, Gemini 2.5 Pro, o3, Claude Opus 4.1, had performed below radiology trainees.
+                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">Background</h2>
+                <p className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6">
+                    Over the last few months, at the Centre for Responsible Autonomous Systems in Healthcare (CRASH Lab), we have been systematically benchmarking frontier AI models on Radiology's Last Exam (RadLE v1), a spectrum biased diagnostic dataset designed to reflect the kind of complex, multi-system cases radiologists routinely struggle with. In our previous analysis done on September 2025, every major model: GPT-5, Gemini 2.5 Pro, o3, Claude Opus 4.1, had performed below radiology trainees.
                 </p>
-                <p>
+                <p className="text-lg font-sans font-light text-navy-800 leading-relaxed">
                     In our current blog, we share a small but important update. With the release of Gemini 3.0 Pro, we tested the model on our privately held same benchmark, using the same prompt, the same 50 cases from v1 dataset, and following the same evaluation rubric. The results demonstrate a clear upward shift and significant advancement in the multimodal reasoning capabilities of Gemini 3.0 Pro.
                 </p>
             </FadeIn>
 
             <FadeIn delay={300}>
-                <h2 className="text-3xl font-serif text-navy-900 mt-12 mb-6">Benchmarking Setup</h2>
-                <ul className="list-disc pl-5 space-y-2 marker:text-brand-blue">
-                    <li><strong>Dataset:</strong> RadLE v1 (50 difficult radiology cases; CT, MRI, radiographs).</li>
-                    <li><strong>New Models tested:</strong>
+                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">Benchmarking Setup</h2>
+                <ul className="list-disc pl-5 space-y-3 text-lg font-sans font-light text-navy-800 leading-relaxed marker:text-brand-blue">
+                    <li><strong className="font-medium">Dataset:</strong> RadLE v1 (50 difficult radiology cases; CT, MRI, radiographs).</li>
+                    <li><strong className="font-medium">New Models tested:</strong>
                         <ul className="list-circle pl-5 mt-2 space-y-1 text-gray-600">
                             <li>Gemini 3.0 Pro (Preview) on Google AI Studio</li>
                             <li>Gemini 3.0 Pro via API high-thinking mode, repeated three times for reproducibility.</li>
                         </ul>
                     </li>
                 </ul>
-                <p className="text-sm text-gray-500 mt-4">All other settings remained unchanged from the original RadLE v1 experiment. This ensures the comparison is direct and fair.</p>
+                <p className="text-sm font-sans text-gray-500 mt-4">All other settings remained unchanged from the original RadLE v1 experiment. This ensures the comparison is direct and fair.</p>
             </FadeIn>
 
             <FadeIn delay={400}>
-                <h2 className="text-3xl font-serif text-navy-900 mt-12 mb-8">Results</h2>
+                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-8 tracking-tight">Results</h2>
                 
-                <div className="overflow-hidden rounded-xl border border-gray-200 shadow-sm mb-12 not-prose">
+                <div className="overflow-hidden rounded-xl border border-gray-200 shadow-sm mb-12">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-gray-50 border-b border-gray-200">
@@ -174,20 +174,20 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
                     </table>
                 </div>
 
-                <p>
+                <p className="text-lg font-sans font-light text-navy-800 leading-relaxed">
                     These results are significant, because for the first time in our evaluations, a generalist AI model has crossed radiology-trainee level performance on our benchmark (51% vs 45%). While still far from expert radiologist-level performance, the jump from previous models is noteworthy and demonstrates significant progress of generalist models.
                 </p>
             </FadeIn>
 
             <FadeIn delay={500}>
-                <h2 className="text-3xl font-serif text-navy-900 mt-12 mb-6">An Example where Gemini 3.0 outperformed prior SOTA</h2>
-                <p>
+                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">An Example where Gemini 3.0 outperformed prior SOTA</h2>
+                <p className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6">
                     One of the clearest improvements appeared in an acute appendicitis case. This was a case that earlier frontier models, including GPT-5 (reasoning-high), had not been able to diagnose. In our prior experiment GPT-5 had shown poor anatomical localisation and premature diagnostic closure.
                 </p>
-                <p>
+                <p className="text-lg font-sans font-light text-navy-800 leading-relaxed">
                     In contrast, Gemini 3.0 Pro demonstrated a noticeably more structured and radiologist-like approach:
                 </p>
-                <ul className="space-y-4 my-8 not-prose">
+                <ul className="space-y-4 my-8">
                     {[
                         { title: "Correct anatomical identification", desc: 'It located the appendix in the "right lower quadrant, anterior to the psoas, near the caecum".' },
                         { title: "Clear description of imaging features", desc: '"Dilated tubular appendix, wall enhancement, periappendiceal fat stranding, fluid-filled lumen."' },
@@ -206,11 +206,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
             </FadeIn>
 
             <FadeIn delay={600}>
-                <h2 className="text-3xl font-serif text-navy-900 mt-12 mb-6">Conclusion</h2>
-                <p>
+                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">Conclusion</h2>
+                <p className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6">
                     We update the results on the Radiology's Last Exam (RadLE v1) dataset. We show significant progress of generalist models but still short of readiness for deployment, autonomy or diagnostic replacement.
                 </p>
-                <p className="font-medium text-navy-900">
+                <p className="text-lg font-sans font-medium text-navy-900 leading-relaxed">
                     Gemini 3.0 Pro becomes the first generalist AI model to surpass radiology trainees on the RadLE v1 benchmark.
                 </p>
 
