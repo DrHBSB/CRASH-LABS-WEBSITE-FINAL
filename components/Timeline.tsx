@@ -54,9 +54,9 @@ const Timeline: React.FC = () => {
                 </div>
 
                 <FadeIn delay={600}>
-                    <div className="mt-24 bg-navy-900 text-paper p-10 md:p-16 rounded-xl">
-                        <h3 className="text-3xl font-serif font-medium mb-6">Future Outlook</h3>
-                        <p className="text-lg md:text-xl font-sans font-light leading-relaxed opacity-90">
+                    <div className="mt-24 bg-navy-900 text-white p-10 md:p-16 rounded-2xl">
+                        <h3 className="text-3xl md:text-4xl font-serif font-medium mb-6 text-white">Future Outlook</h3>
+                        <p className="text-lg md:text-xl font-sans font-normal leading-relaxed text-white/90">
                             Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
                         </p>
                     </div>
