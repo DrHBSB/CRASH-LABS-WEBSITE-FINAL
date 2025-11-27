@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 const CustomCursor: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [trailPosition, setTrailPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isButton, setIsButton] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -29,8 +28,6 @@ const CustomCursor: React.FC = () => {
 
   useEffect(() => {
     if (isTouchDevice) return;
-
-    let animationFrame: number;
     
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -43,16 +40,6 @@ const CustomCursor: React.FC = () => {
         setIsDarkBackground(isColorDark(bgColor));
       }
     };
-
-    // Smooth trail follow
-    const updateTrail = () => {
-      setTrailPosition(prev => ({
-        x: prev.x + (position.x - prev.x) * 0.15,
-        y: prev.y + (position.y - prev.y) * 0.15
-      }));
-      animationFrame = requestAnimationFrame(updateTrail);
-    };
-    animationFrame = requestAnimationFrame(updateTrail);
 
     const handleMouseLeave = () => {
       setIsVisible(false);
@@ -106,9 +93,8 @@ const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseout', handleMouseOut);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
-      cancelAnimationFrame(animationFrame);
     };
-  }, [isTouchDevice, isVisible, position.x, position.y]);
+  }, [isTouchDevice, isVisible]);
 
   // Get computed background color of element
   const getBackgroundColor = (element: HTMLElement): string => {
@@ -146,69 +132,37 @@ const CustomCursor: React.FC = () => {
         height: buttonRect.height + 12,
         borderRadius: buttonRect.height / 2 + 6,
         transform: 'translate(-50%, -50%)',
-        transition: 'all 0.2s ease-out',
       };
     }
     
     return {
       left: position.x,
       top: position.y,
-      width: isHovering ? 64 : 48,
-      height: isHovering ? 64 : 48,
+      width: isHovering ? 56 : 40,
+      height: isHovering ? 56 : 40,
       borderRadius: '50%',
       transform: 'translate(-50%, -50%)',
-      transition: 'width 0.2s ease-out, height 0.2s ease-out, border-radius 0.2s ease-out',
     };
   };
 
-  const cursorColor = isDarkBackground ? 'white' : '#0f172a';
-  const cursorColorLight = isDarkBackground ? 'rgba(255, 255, 255, 0.3)' : 'rgba(15, 23, 42, 0.15)';
+  const cursorColor = isDarkBackground ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.6)';
 
   return (
     <>
-      {/* Motion blur trail */}
+      {/* Main cursor ring - no lag, instant position */}
       <div
-        className={`fixed pointer-events-none z-[9998] rounded-full transition-opacity duration-300 ${
-          isVisible && !isButton ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          left: trailPosition.x,
-          top: trailPosition.y,
-          width: isHovering ? 80 : 60,
-          height: isHovering ? 80 : 60,
-          transform: 'translate(-50%, -50%)',
-          background: `radial-gradient(circle, ${cursorColorLight} 0%, transparent 70%)`,
-        }}
-      />
-
-      {/* Main cursor ring */}
-      <div
-        className={`fixed pointer-events-none z-[9999] transition-opacity duration-200 ${
+        className={`fixed pointer-events-none z-[9999] border-2 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
           ...getCursorStyle(),
-          border: `2px solid ${isButton ? '#2C3E96' : cursorColor}`,
+          borderColor: isButton ? '#2C3E96' : cursorColor,
           background: isButton ? 'rgba(44, 62, 150, 0.08)' : 'transparent',
+          transition: isButton 
+            ? 'left 0.15s ease-out, top 0.15s ease-out, width 0.15s ease-out, height 0.15s ease-out, border-radius 0.15s ease-out, opacity 0.2s' 
+            : 'width 0.15s ease-out, height 0.15s ease-out, opacity 0.2s',
         }}
       />
-
-      {/* Inner gradient glow */}
-      {!isButton && (
-        <div
-          className={`fixed pointer-events-none z-[9999] rounded-full transition-all duration-200 ${
-            isVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{
-            left: position.x,
-            top: position.y,
-            width: isHovering ? 24 : 16,
-            height: isHovering ? 24 : 16,
-            transform: 'translate(-50%, -50%)',
-            background: `radial-gradient(circle, ${cursorColor} 0%, ${cursorColorLight} 50%, transparent 70%)`,
-          }}
-        />
-      )}
 
       {/* Global style to hide default cursor */}
       <style>{`
