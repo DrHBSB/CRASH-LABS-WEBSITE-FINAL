@@ -178,7 +178,7 @@ const Card: React.FC<CardProps> = ({ title, description, features, theme, visual
 
             {/* Content Section */}
             <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-10">
-                <h3 className="text-3xl md:text-5xl font-serif font-medium mb-6 leading-tight tracking-tight">
+                <h3 className={`text-3xl md:text-5xl font-serif font-medium mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-navy-900'}`}>
                     {title}
                 </h3>
                 <p className={`text-base md:text-lg leading-relaxed mb-8 font-light ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -395,7 +395,7 @@ const DataCommonsIso = () => {
                         <span className="text-[8px] text-green-600 font-medium">All Synced</span>
                     </div>
                 </div>
-
+                
                 {/* Privacy Badge */}
                 <div className={`absolute -left-4 bottom-12 bg-navy-900 rounded-lg p-2.5 shadow-2xl border border-white/10 z-40 transition-all duration-500 ${isHovered ? '-translate-x-2' : ''} animate-[floatDelayed_6s_ease-in-out_infinite]`}>
                     <div className="flex items-center gap-2">
@@ -1061,14 +1061,14 @@ const HumanIso = () => {
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
                                 <Cpu size={16} className="text-white" />
-                            </div>
+                     </div>
                             <div>
                                 <div className="text-[9px] font-bold text-white">AI Copilot</div>
                                 <div className="text-[7px] text-white/60">Always Learning</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
 
                 {/* Workflow Indicator */}
                 <div className={`absolute top-1/2 -right-6 -translate-y-1/2 z-20 transition-all duration-500 ${isHovered ? 'translate-x-4' : ''}`}>
@@ -1080,8 +1080,8 @@ const HumanIso = () => {
                             </div>
                         ))}
                     </div>
-                </div>
-            </div>
+                 </div>
+             </div>
 
             {/* Custom Animations */}
             <style>{`
