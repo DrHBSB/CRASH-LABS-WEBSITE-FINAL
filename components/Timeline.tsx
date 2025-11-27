@@ -1,0 +1,62 @@
+import React from 'react';
+
+const timelineEvents = [
+  { date: "Q1 2024", title: "CRASH Lab Founded at Koita Centre for Digital Health", active: true },
+  { date: "Q3 2024", title: "First RSNA Research Cohort Launched", active: true },
+  { date: "Q4 2024", title: "15 Papers Accepted at Major Conferences", active: true, highlight: "(Highest from any Indian lab)" },
+  { date: "Q1 2025", title: "NeurIPS Research Cohort Initiated", active: false },
+  { date: "Q2 2025", title: "RSNA Cutting-Edge Track", active: false },
+  { date: "Q3 2025", title: "Radiology's Last Exam v1.0 Publication", active: false },
+];
+
+const Timeline: React.FC = () => {
+  return (
+    <section className="py-24 bg-paper border-t border-navy-900/5">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="grid md:grid-cols-12 gap-12">
+            
+            {/* Left Header */}
+            <div className="md:col-span-4">
+                <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 sticky top-32 tracking-tight">
+                    Journey & <br/> <span className="text-brand-blue italic">Outlook</span>
+                </h2>
+            </div>
+
+            {/* Right List */}
+            <div className="md:col-span-8">
+                <div className="space-y-12">
+                    {timelineEvents.map((event, index) => (
+                        <div key={index} className={`group flex flex-col md:flex-row gap-4 md:gap-12 items-baseline pb-12 border-b border-navy-900/10 ${!event.active ? 'opacity-50' : ''}`}>
+                            <div className="w-24 shrink-0">
+                                <span className="font-sans text-xs text-brand-blue uppercase tracking-[0.1em] font-bold">
+                                    {event.date}
+                                </span>
+                            </div>
+                            <div>
+                                <h3 className="text-2xl md:text-3xl font-serif font-normal text-navy-900 leading-tight group-hover:text-brand-blue transition-colors tracking-tight">
+                                    {event.title}
+                                </h3>
+                                {event.highlight && (
+                                    <p className="mt-2 font-serif text-sm text-navy-800/70 italic">
+                                        {event.highlight}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-24 bg-navy-900 text-paper p-10 md:p-16 rounded-xl">
+                    <h3 className="text-3xl font-serif font-medium mb-6">Future Outlook</h3>
+                    <p className="text-lg md:text-xl font-sans font-light leading-relaxed opacity-90">
+                        Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
+                    </p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Timeline;
