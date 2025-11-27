@@ -259,58 +259,47 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    
-    gsap.to(cardRef.current, {
-      rotateY: x * 10,
-      rotateX: -y * 10,
-      duration: 0.3,
-      ease: 'power2.out'
-    });
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (cardRef.current) {
+      gsap.to(cardRef.current, {
+        y: -8,
+        duration: 0.4,
+        ease: 'power3.out'
+      });
+    }
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
     if (cardRef.current) {
       gsap.to(cardRef.current, {
-        rotateY: 0,
-        rotateX: 0,
-        duration: 0.5,
-        ease: 'power2.out'
+        y: 0,
+        duration: 0.4,
+        ease: 'power3.out'
       });
     }
   };
 
   return (
     <div 
-      className="group cursor-pointer perspective-[1000px]"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseMove={handleMouseMove}
+      className="group cursor-pointer"
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div 
-        ref={cardRef}
-        className="relative transition-shadow duration-500"
-        style={{ transformStyle: 'preserve-3d' }}
-      >
+      <div ref={cardRef} className="relative">
         {/* Placeholder Container */}
         <div className="relative aspect-[3/4] overflow-hidden mb-5 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200">
-          {/* Gradient Overlay on Hover */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/20 to-transparent z-10 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
-          
           {/* Placeholder with Initials */}
-          <div className={`w-full h-full flex items-center justify-center transition-all duration-700 ease-out ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}>
-            <div className={`w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 ${
-              member.isLead 
-                ? 'bg-brand-blue text-white' 
-                : isHovered ? 'bg-navy-900 text-white' : 'bg-gray-300 text-gray-600'
-            }`}>
+          <div className="w-full h-full flex items-center justify-center">
+            <div 
+              className="w-24 h-24 rounded-full flex items-center justify-center bg-gray-300 text-gray-600"
+              style={{
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                backgroundColor: member.isLead ? '#2C3E96' : (isHovered ? '#0F172A' : '#D1D5DB'),
+                color: member.isLead || isHovered ? '#FFFFFF' : '#4B5563'
+              }}
+            >
               <span className="text-2xl font-bold font-serif tracking-tight">{member.initials}</span>
             </div>
           </div>
@@ -323,60 +312,26 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
               </div>
             </div>
           )}
-
-          {/* Hover Content */}
-          <div className={`absolute bottom-0 left-0 right-0 p-5 z-20 transition-all duration-500 ${
-            isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}>
-            {/* Social Links */}
-            <div className="flex gap-2">
-              <a href="#" className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-navy-900 transition-all duration-300">
-                <Linkedin size={16} />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-navy-900 transition-all duration-300">
-                <Mail size={16} />
-              </a>
-            </div>
-          </div>
-
-          {/* Shine Effect */}
-          <div 
-            className={`absolute inset-0 z-10 pointer-events-none transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-            style={{
-              background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.2) 55%, transparent 60%)',
-              transform: 'translateX(-100%)',
-              animation: isHovered ? 'shine 0.8s ease-out forwards' : 'none'
-            }}
-          />
         </div>
 
         {/* Info */}
-        <div className={`transition-all duration-300 ${isHovered ? 'translate-x-2' : ''}`}>
-          <h3 className={`text-lg font-bold font-serif leading-tight mb-1 transition-colors duration-300 ${
-            isHovered ? 'text-brand-blue' : 'text-navy-900'
-          }`}>
+        <div>
+          <h3 
+            className="text-lg font-bold font-serif leading-tight mb-1 text-navy-900"
+            style={{
+              transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              color: isHovered ? '#2C3E96' : '#0F172A'
+            }}
+          >
             {member.name}
           </h3>
-          <p className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-colors duration-300 ${
+          <p className={`text-[10px] uppercase tracking-[0.2em] font-bold ${
             member.isLead ? 'text-brand-blue' : 'text-gray-500'
           }`}>
             {member.role}
           </p>
         </div>
-
-        {/* Accent Line */}
-        <div className={`absolute -left-1 top-0 bottom-0 w-1 rounded-full bg-brand-blue transition-all duration-500 ${
-          isHovered ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
-        }`} style={{ transformOrigin: 'top' }} />
       </div>
-
-      {/* Custom Animation */}
-      <style>{`
-        @keyframes shine {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
     </div>
   );
 };

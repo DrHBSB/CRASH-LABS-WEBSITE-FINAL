@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FadeIn, AnimatedHeading } from './Animations';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const timelineEvents = [
   { date: "Q1 2024", title: "CRASH Lab Founded at Koita Centre for Digital Health", active: true },
@@ -11,6 +15,35 @@ const timelineEvents = [
 ];
 
 const Timeline: React.FC = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!timelineRef.current) return;
+
+    const items = timelineRef.current.querySelectorAll('.timeline-item');
+    
+    items.forEach((item, index) => {
+      gsap.fromTo(item,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 85%',
+            once: true
+          }
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
     <section className="py-24 bg-paper border-t border-navy-900/5">
       <div className="container mx-auto px-6 md:px-12">
@@ -28,28 +61,35 @@ const Timeline: React.FC = () => {
             </div>
 
             {/* Right List */}
-            <div className="md:col-span-8">
+            <div ref={timelineRef} className="md:col-span-8">
                 <div className="space-y-12">
                     {timelineEvents.map((event, index) => (
-                        <FadeIn key={index} delay={index * 100}>
-                            <div className={`group flex flex-col md:flex-row gap-4 md:gap-12 items-baseline pb-12 border-b border-navy-900/10 ${!event.active ? 'opacity-50' : ''}`}>
-                                <div className="w-24 shrink-0">
-                                    <span className="font-sans text-xs text-brand-blue uppercase tracking-[0.1em] font-bold">
-                                        {event.date}
-                                    </span>
-                                </div>
-                                <div>
-                                    <h3 className="text-2xl md:text-3xl font-serif font-normal text-navy-900 leading-tight group-hover:text-brand-blue transition-colors tracking-tight">
-                                        {event.title}
-                                    </h3>
-                                    {event.highlight && (
-                                        <p className="mt-2 font-serif text-sm text-navy-800/70 italic">
-                                            {event.highlight}
-                                        </p>
-                                    )}
-                                </div>
+                        <div 
+                          key={index} 
+                          className={`timeline-item group flex flex-col md:flex-row gap-4 md:gap-12 items-baseline pb-12 border-b border-navy-900/10 ${!event.active ? 'opacity-50' : ''}`}
+                          style={{ opacity: 0 }}
+                        >
+                            <div className="w-24 shrink-0">
+                                <span className="font-sans text-xs text-brand-blue uppercase tracking-[0.1em] font-bold">
+                                    {event.date}
+                                </span>
                             </div>
-                        </FadeIn>
+                            <div>
+                                <h3 
+                                  className="text-2xl md:text-3xl font-serif font-normal text-navy-900 leading-tight tracking-tight"
+                                  style={{ transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
+                                  onMouseEnter={(e) => e.currentTarget.style.color = '#2C3E96'}
+                                  onMouseLeave={(e) => e.currentTarget.style.color = '#0F172A'}
+                                >
+                                    {event.title}
+                                </h3>
+                                {event.highlight && (
+                                    <p className="mt-2 font-serif text-sm text-navy-800/70 italic">
+                                        {event.highlight}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
                     ))}
                 </div>
 
