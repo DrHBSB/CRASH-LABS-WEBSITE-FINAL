@@ -10,6 +10,7 @@ import Team from './components/Team';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
 import BlogPost from './components/BlogPost';
+import CustomCursor from './components/CustomCursor';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'home' | 'blog'>('home');
@@ -26,6 +27,7 @@ const App: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col font-sans bg-paper selection:bg-brand-blue selection:text-white">
+      <CustomCursor />
       <Navbar onNavigateHome={navigateToHome} />
       
       <main className="flex-grow pt-24">
