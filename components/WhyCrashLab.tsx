@@ -13,7 +13,7 @@ const WhyCrashLab: React.FC<WhyCrashLabProps> = ({ onReadMore }) => {
 
         {/* Featured Update Card */}
         <FadeIn className="mb-24">
-          <FeaturedUpdateCard />
+          <FeaturedUpdateCard onReadMore={onReadMore} />
         </FadeIn>
 
         {/* Content Split */}
@@ -68,7 +68,11 @@ const WhyCrashLab: React.FC<WhyCrashLabProps> = ({ onReadMore }) => {
 };
 
 // Featured Update Card with 3D Isometric Illustration
-const FeaturedUpdateCard: React.FC = () => {
+interface FeaturedUpdateCardProps {
+  onReadMore?: () => void;
+}
+
+const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -227,7 +231,10 @@ const FeaturedUpdateCard: React.FC = () => {
 
           {/* CTA */}
           <div className="flex items-center gap-4">
-            <button className="group/btn flex items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-white hover:text-brand-blue transition-colors">
+            <button 
+              onClick={onReadMore}
+              className="group/btn flex items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-white hover:text-brand-blue transition-colors"
+            >
               Read Full Analysis
               <span className="w-10 h-10 rounded-full border border-white/20 group-hover/btn:border-brand-blue group-hover/btn:bg-brand-blue flex items-center justify-center transition-all">
                 <ArrowRight size={16} className="group-hover/btn:translate-x-0.5 transition-transform" />
