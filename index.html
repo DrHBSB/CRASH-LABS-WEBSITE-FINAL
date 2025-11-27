@@ -31,23 +31,179 @@
       }
     </script>
     <style>
+      /* Base Styles */
       body {
         background-color: #F7F7F5;
         color: #0f172a;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
       }
+      
       /* Smooth scrolling */
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 100px; /* Offset for fixed navbar */
+        scroll-padding-top: 100px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
+      
       /* Custom selection color */
       ::selection {
         background: #2C3E96;
         color: white;
       }
+      
+      /* Typography - Headings */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Newsreader', serif;
+        font-weight: 500;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #0f172a;
+      }
+      
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+      }
+      
+      h2 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+      }
+      
+      h3 {
+        font-size: clamp(1.5rem, 4vw, 2.25rem);
+      }
+      
+      h4 {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+      }
+      
+      /* Body text */
+      p {
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(1rem, 2vw, 1.125rem);
+        line-height: 1.7;
+        color: #334155;
+      }
+      
+      /* Serif font settings */
       .font-serif {
         font-family: 'Newsreader', serif;
         font-feature-settings: "kern" 1, "liga" 1;
+      }
+      
+      /* Button Base Styles */
+      button, .btn, a.btn {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+        transition: all 0.3s ease;
+      }
+      
+      /* Primary Button */
+      .btn-primary {
+        background-color: #0f172a;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+      }
+      
+      .btn-primary:hover {
+        background-color: #2C3E96;
+      }
+      
+      /* Secondary Button */
+      .btn-secondary {
+        background-color: white;
+        color: #0f172a;
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+        border: 1px solid #e2e8f0;
+      }
+      
+      .btn-secondary:hover {
+        background-color: #f8fafc;
+      }
+      
+      /* Responsive Container */
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      
+      /* Mobile-first responsive adjustments */
+      @media (max-width: 640px) {
+        body {
+          font-size: 15px;
+        }
+        
+        section {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+      
+      @media (min-width: 641px) and (max-width: 1024px) {
+        body {
+          font-size: 16px;
+        }
+        
+        section {
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+        }
+      }
+      
+      @media (min-width: 1025px) {
+        body {
+          font-size: 16px;
+        }
+        
+        section {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+      
+      /* Ensure images are responsive */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Responsive text utilities */
+      .text-responsive-sm {
+        font-size: clamp(0.75rem, 2vw, 0.875rem);
+      }
+      
+      .text-responsive-base {
+        font-size: clamp(0.875rem, 2.5vw, 1rem);
+      }
+      
+      .text-responsive-lg {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+      }
+      
+      .text-responsive-xl {
+        font-size: clamp(1.25rem, 4vw, 1.5rem);
+      }
+      
+      /* Hide custom cursor on touch devices */
+      @media (pointer: coarse) {
+        .custom-cursor {
+          display: none !important;
+        }
+        * {
+          cursor: auto !important;
+        }
       }
     </style>
 </head>
