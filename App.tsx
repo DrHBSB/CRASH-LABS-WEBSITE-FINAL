@@ -7,6 +7,7 @@ import Commitment from './components/Commitment';
 import Pillars from './components/Pillars';
 import Timeline from './components/Timeline';
 import Team from './components/Team';
+import Blog from './components/Blog';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Pillars />
         <Timeline />
         <Team />
+        <Blog />
       </main>
       <Footer />
     </div>

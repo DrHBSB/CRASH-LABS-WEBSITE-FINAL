@@ -21,9 +21,21 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer z-50">
-          <span className="text-2xl md:text-3xl font-serif font-medium text-navy-900 tracking-tight">
-            Crash Lab<span className="text-brand-blue">.</span>
+        <div className="flex items-center gap-3 cursor-pointer z-50 group">
+          <div className="text-navy-900 group-hover:text-brand-blue transition-colors duration-300">
+            <svg viewBox="0 0 100 100" className="w-10 h-10 fill-none stroke-current" strokeWidth="10" strokeLinecap="square">
+              {/* Outer C */}
+              <path d="M 85 28 A 42 42 0 1 0 85 72" />
+              {/* Inner Square */}
+              <rect x="32" y="32" width="36" height="36" strokeWidth="8" />
+              {/* Center Line */}
+              <line x1="50" y1="50" x2="92" y2="50" strokeWidth="8" />
+              {/* Center Dot (Filled) */}
+              <circle cx="50" cy="50" r="8" className="fill-current stroke-none" />
+            </svg>
+          </div>
+          <span className="text-2xl font-sans font-bold text-navy-900 uppercase tracking-tight group-hover:text-brand-blue transition-colors duration-300">
+            Crash Lab
           </span>
         </div>
 

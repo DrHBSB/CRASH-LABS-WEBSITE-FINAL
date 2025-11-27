@@ -26,9 +26,23 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-white/20 pt-16 mb-24">
             
             <div className="md:col-span-5">
-                <span className="text-3xl font-serif font-medium tracking-tight block mb-2">
-                    CRASH LAB.
-                </span>
+                <div className="flex items-center gap-3 mb-4">
+                    <div className="text-white">
+                        <svg viewBox="0 0 100 100" className="w-12 h-12 fill-none stroke-current" strokeWidth="10" strokeLinecap="square">
+                        {/* Outer C */}
+                        <path d="M 85 28 A 42 42 0 1 0 85 72" />
+                        {/* Inner Square */}
+                        <rect x="32" y="32" width="36" height="36" strokeWidth="8" />
+                        {/* Center Line */}
+                        <line x1="50" y1="50" x2="92" y2="50" strokeWidth="8" />
+                        {/* Center Dot (Filled) */}
+                        <circle cx="50" cy="50" r="8" className="fill-current stroke-none" />
+                        </svg>
+                    </div>
+                    <span className="text-3xl font-sans font-bold text-white uppercase tracking-tight">
+                        Crash Lab
+                    </span>
+                </div>
                 <p className="text-white/60 text-sm font-sans">
                     Responsible AI for Indian Healthcare.
                 </p>

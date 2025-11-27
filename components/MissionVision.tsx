@@ -29,7 +29,7 @@ const MissionVision: React.FC = () => {
                 <ArrowUpRight className="w-8 h-8 text-navy-900 md:hidden" />
             </div>
             <div className="md:col-span-8">
-                <p className="text-lg md:text-xl text-navy-800 leading-relaxed font-sans max-w-2xl font-light">
+                <p className="text-2xl md:text-3xl font-serif text-navy-900 leading-snug tracking-tight font-normal">
                     To make CRASH Lab a global leader in responsible, clinician-driven healthcare AI — advancing ethical, transparent, and inclusive innovation that strengthens data infrastructure and makes high-quality care accessible to everyone.
                 </p>
             </div>

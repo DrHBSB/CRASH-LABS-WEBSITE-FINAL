@@ -19,12 +19,7 @@ const Hero: React.FC = () => {
             
             {/* Left Column: Text & CTA */}
             <div className="flex flex-col items-start max-w-2xl">
-                <div className="mb-8 flex items-center gap-2">
-                    <span className="px-3 py-1 bg-brand-blue/5 text-brand-blue text-[10px] font-bold uppercase tracking-[0.2em] rounded-full border border-brand-blue/10">
-                        New Research
-                    </span>
-                </div>
-
+                
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-medium text-navy-900 leading-[0.95] mb-8 tracking-tight">
                     Responsible AI <br/>
                     built for <span className="text-brand-blue">Healthcare.</span>
@@ -36,11 +31,11 @@ const Hero: React.FC = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                     <a href="#join" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
-                        Request Access
+                        Join the Team
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
-                    <a href="#research" className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200">
-                        Explore The Lab
+                    <a href="#partner" className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200">
+                        Industry Partners
                     </a>
                 </div>
 
