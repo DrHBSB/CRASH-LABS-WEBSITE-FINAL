@@ -61,12 +61,15 @@ const Pillars: React.FC = () => {
   };
 
   return (
-    <section id="research" className="py-24 bg-[#1a1a1a] relative overflow-hidden">
+    <section id="research" className="py-24 bg-navy-900 relative overflow-hidden">
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 pointer-events-none" />
+      
       {/* Background Grid for Technical Feel */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" 
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ 
              backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', 
-             backgroundSize: '40px 40px'
+             backgroundSize: '32px 32px'
            }}>
       </div>
 
@@ -75,23 +78,23 @@ const Pillars: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
              <FadeIn>
                 <h2 className="text-5xl md:text-7xl font-serif font-semibold text-white leading-tight tracking-tight">
-                    <AnimatedHeading text="Our" /> <span className="text-brand-blue italic"><AnimatedHeading text="Four Pillars" /></span>
+                    <AnimatedHeading text="Our" /> <span className="text-brand-blue"><AnimatedHeading text="Four Pillars" /></span>
                 </h2>
              </FadeIn>
             
             {/* Desktop Controls */}
-            <div className="hidden md:flex gap-4">
+            <div className="hidden md:flex gap-3">
                 <button 
                     onClick={prevSlide}
-                    className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"
+                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-navy-900 hover:border-white transition-all duration-300"
                 >
-                    <ChevronLeft size={24} />
+                    <ChevronLeft size={20} />
                 </button>
                 <button 
                     onClick={nextSlide}
-                    className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"
+                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-navy-900 hover:border-white transition-all duration-300"
                 >
-                    <ChevronRight size={24} />
+                    <ChevronRight size={20} />
                 </button>
             </div>
         </div>
@@ -119,33 +122,33 @@ const Pillars: React.FC = () => {
                     <button
                         key={idx}
                         onClick={() => setCurrentIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-brand-blue w-6' : 'bg-white/20'}`}
+                        className={`h-1 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-brand-blue w-6' : 'bg-white/10 w-3'}`}
                     />
                 ))}
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
                 <button 
                     onClick={prevSlide}
-                    className="p-3 rounded-full border border-white/20 text-white active:bg-white/10"
+                    className="p-2.5 rounded-full border border-white/10 text-white/70 active:bg-white/10 transition-colors"
                 >
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={18} />
                 </button>
                 <button 
                     onClick={nextSlide}
-                    className="p-3 rounded-full border border-white/20 text-white active:bg-white/10"
+                    className="p-2.5 rounded-full border border-white/10 text-white/70 active:bg-white/10 transition-colors"
                 >
-                    <ChevronRight size={20} />
+                    <ChevronRight size={18} />
                 </button>
             </div>
         </div>
 
          {/* Desktop Pagination Dots */}
-         <div className="hidden md:flex justify-center mt-12 gap-3">
+         <div className="hidden md:flex justify-center mt-10 gap-2">
              {pillars.map((_, idx) => (
                 <button
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-brand-blue w-12' : 'bg-white/20 w-8 hover:bg-white/40'}`}
+                    className={`h-1 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-brand-blue w-8' : 'bg-white/10 w-6 hover:bg-white/20'}`}
                 />
             ))}
          </div>
@@ -167,32 +170,32 @@ const Card: React.FC<CardProps> = ({ title, description, features, theme, visual
     const isDark = theme === 'dark';
     
     return (
-        <div className={`w-full mx-auto rounded-3xl overflow-hidden flex flex-col md:flex-row h-auto min-h-[550px] shadow-2xl transition-all duration-500 border ${isDark ? 'bg-navy-900 border-white/10 text-white' : 'bg-paper border-gray-200 text-navy-900'}`}>
+        <div className={`w-full mx-auto rounded-2xl overflow-hidden flex flex-col md:flex-row h-auto min-h-[520px] transition-all duration-500 ${isDark ? 'bg-[#0a0f1a] border border-white/5 text-white' : 'bg-white border border-gray-100 text-navy-900 shadow-xl'}`}>
             
             {/* Illustration Section */}
-            <div className={`w-full md:w-1/2 h-80 md:h-auto relative overflow-hidden flex items-center justify-center p-8 md:p-12 ${isDark ? 'bg-[#151c2d]' : 'bg-[#f0f0f0]'}`}>
+            <div className={`w-full md:w-1/2 h-72 md:h-auto relative overflow-hidden flex items-center justify-center p-6 md:p-10 ${isDark ? 'bg-[#0d1424]' : 'bg-gray-50'}`}>
                <div className="w-full h-full relative perspective-[1000px]">
                    {visual}
                </div>
             </div>
 
             {/* Content Section */}
-            <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-10">
-                <h3 className={`text-3xl md:text-5xl font-serif font-semibold mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-navy-900'}`}>
+            <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
+                <h3 className={`text-3xl md:text-4xl font-serif font-semibold mb-5 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-navy-900'}`}>
                     {title}
                 </h3>
-                <p className={`text-base md:text-lg leading-relaxed mb-8 font-light ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                <p className={`text-base leading-relaxed mb-8 font-normal ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                     {description}
                 </p>
                 <div className="mt-auto">
-                    <p className={`text-[10px] font-bold uppercase tracking-[0.2em] mb-4 border-b pb-2 inline-block ${isDark ? 'text-gray-500 border-gray-800' : 'text-gray-400 border-gray-200'}`}>
+                    <p className={`text-[9px] font-bold uppercase tracking-[0.2em] mb-4 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
                         Key Features
                     </p>
-                    <ul className="space-y-3">
+                    <ul className="space-y-2.5">
                         {features.map((feature, i) => (
-                            <li key={i} className="flex items-start gap-3 text-sm md:text-base font-medium">
-                                <ArrowRight size={16} className={`mt-1 shrink-0 ${isDark ? 'text-brand-blue' : 'text-brand-blue'}`} />
-                                <span className={isDark ? 'text-gray-200' : 'text-navy-800'}>{feature}</span>
+                            <li key={i} className="flex items-start gap-3 text-sm font-medium">
+                                <ArrowRight size={14} className={`mt-0.5 shrink-0 ${isDark ? 'text-brand-blue' : 'text-brand-blue'}`} />
+                                <span className={isDark ? 'text-gray-300' : 'text-navy-800'}>{feature}</span>
                             </li>
                         ))}
                     </ul>
