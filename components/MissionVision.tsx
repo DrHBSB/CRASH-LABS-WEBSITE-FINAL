@@ -6,17 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { number: '15+', label: 'Research Papers', sublabel: 'Published in 2024' },
-  { number: '50+', label: 'Hospitals', sublabel: 'Target by 2026' },
-  { number: '7', label: 'Researchers', sublabel: 'Core Team' },
-];
-
 const MissionVision: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const borderRef1 = useRef<HTMLDivElement>(null);
   const borderRef2 = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Animate border lines expanding on scroll
@@ -37,26 +30,6 @@ const MissionVision: React.FC = () => {
         );
       }
     });
-
-    // Animate stats numbers
-    if (statsRef.current) {
-      const statItems = statsRef.current.querySelectorAll('.stat-item');
-      gsap.fromTo(statItems,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: 'top 80%',
-            once: true
-          }
-        }
-      );
-    }
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -106,25 +79,6 @@ const MissionVision: React.FC = () => {
                     </p>
                 </FadeIn>
             </div>
-        </div>
-
-        {/* Stats Section */}
-        <div ref={statsRef} className="py-16 md:py-20 border-t border-navy-900/10">
-          <div className="grid grid-cols-3 gap-4 md:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-item text-center md:text-left" style={{ opacity: 0 }}>
-                <div className="text-4xl md:text-6xl font-serif font-semibold text-navy-900 tracking-tight mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-sm md:text-base font-medium text-navy-900 mb-1">
-                  {stat.label}
-                </div>
-                <div className="text-xs text-gray-500">
-                  {stat.sublabel}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
       </div>
