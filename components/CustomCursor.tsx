@@ -1,18 +1,58 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CustomCursor: React.FC = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [trailPosition, setTrailPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isButton, setIsButton] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isDarkBackground, setIsDarkBackground] = useState(false);
   const [buttonRect, setButtonRect] = useState<DOMRect | null>(null);
 
+  // Don't render on touch devices or small screens
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
+  
   useEffect(() => {
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window || 
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches ||
+        window.innerWidth < 1024
+      );
+    };
+    
+    checkTouchDevice();
+    window.addEventListener('resize', checkTouchDevice);
+    return () => window.removeEventListener('resize', checkTouchDevice);
+  }, []);
+
+  useEffect(() => {
+    if (isTouchDevice) return;
+
+    let animationFrame: number;
+    
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
+      
+      // Check background color at cursor position
+      const elementAtCursor = document.elementFromPoint(e.clientX, e.clientY);
+      if (elementAtCursor) {
+        const bgColor = getBackgroundColor(elementAtCursor as HTMLElement);
+        setIsDarkBackground(isColorDark(bgColor));
+      }
     };
+
+    // Smooth trail follow
+    const updateTrail = () => {
+      setTrailPosition(prev => ({
+        x: prev.x + (position.x - prev.x) * 0.15,
+        y: prev.y + (position.y - prev.y) * 0.15
+      }));
+      animationFrame = requestAnimationFrame(updateTrail);
+    };
+    animationFrame = requestAnimationFrame(updateTrail);
 
     const handleMouseLeave = () => {
       setIsVisible(false);
@@ -26,7 +66,6 @@ const CustomCursor: React.FC = () => {
     const handleElementHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       
-      // Check if hovering over interactive elements
       const interactiveElement = target.closest('a, button, [role="button"]');
       const isInteractive = target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer');
       
@@ -46,7 +85,6 @@ const CustomCursor: React.FC = () => {
       const target = e.target as HTMLElement;
       const relatedTarget = e.relatedTarget as HTMLElement;
       
-      // Check if we're leaving an interactive element
       const leavingInteractive = target.closest('a, button, [role="button"]');
       const enteringInteractive = relatedTarget?.closest?.('a, button, [role="button"]');
       
@@ -68,26 +106,31 @@ const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseout', handleMouseOut);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
+      cancelAnimationFrame(animationFrame);
     };
-  }, [isVisible]);
+  }, [isTouchDevice, isVisible, position.x, position.y]);
 
-  // Don't render on touch devices or small screens
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  
-  useEffect(() => {
-    const checkTouchDevice = () => {
-      setIsTouchDevice(
-        'ontouchstart' in window || 
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches ||
-        window.innerWidth < 1024
-      );
-    };
-    
-    checkTouchDevice();
-    window.addEventListener('resize', checkTouchDevice);
-    return () => window.removeEventListener('resize', checkTouchDevice);
-  }, []);
+  // Get computed background color of element
+  const getBackgroundColor = (element: HTMLElement): string => {
+    let el: HTMLElement | null = element;
+    while (el) {
+      const bg = window.getComputedStyle(el).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+        return bg;
+      }
+      el = el.parentElement;
+    }
+    return 'rgb(255, 255, 255)';
+  };
+
+  // Check if color is dark
+  const isColorDark = (color: string): boolean => {
+    const rgb = color.match(/\d+/g);
+    if (!rgb || rgb.length < 3) return false;
+    const [r, g, b] = rgb.map(Number);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance < 0.5;
+  };
 
   if (isTouchDevice) {
     return null;
@@ -96,68 +139,80 @@ const CustomCursor: React.FC = () => {
   // Calculate cursor styles based on state
   const getCursorStyle = (): React.CSSProperties => {
     if (isButton && buttonRect) {
-      // Merge with button - position at button center, match button size
       return {
         left: buttonRect.left + buttonRect.width / 2,
         top: buttonRect.top + buttonRect.height / 2,
-        width: buttonRect.width + 8,
-        height: buttonRect.height + 8,
-        borderRadius: buttonRect.height / 2 + 4,
+        width: buttonRect.width + 12,
+        height: buttonRect.height + 12,
+        borderRadius: buttonRect.height / 2 + 6,
         transform: 'translate(-50%, -50%)',
-        transition: 'all 0.15s ease-out',
+        transition: 'all 0.2s ease-out',
       };
     }
     
-    // Default circular cursor
     return {
       left: position.x,
       top: position.y,
-      width: isHovering ? 48 : 32,
-      height: isHovering ? 48 : 32,
+      width: isHovering ? 64 : 48,
+      height: isHovering ? 64 : 48,
       borderRadius: '50%',
       transform: 'translate(-50%, -50%)',
-      transition: 'width 0.15s ease-out, height 0.15s ease-out, border-radius 0.15s ease-out',
+      transition: 'width 0.2s ease-out, height 0.2s ease-out, border-radius 0.2s ease-out',
     };
   };
 
+  const cursorColor = isDarkBackground ? 'white' : '#0f172a';
+  const cursorColorLight = isDarkBackground ? 'rgba(255, 255, 255, 0.3)' : 'rgba(15, 23, 42, 0.15)';
+
   return (
     <>
-      {/* Main cursor */}
+      {/* Motion blur trail */}
       <div
-        ref={cursorRef}
-        className={`fixed pointer-events-none z-[9999] border-2 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        } ${
-          isButton 
-            ? 'border-brand-blue bg-brand-blue/10' 
-            : isHovering 
-              ? 'border-navy-900 bg-white mix-blend-difference' 
-              : 'border-navy-900/60'
+        className={`fixed pointer-events-none z-[9998] rounded-full transition-opacity duration-300 ${
+          isVisible && !isButton ? 'opacity-100' : 'opacity-0'
         }`}
-        style={getCursorStyle()}
+        style={{
+          left: trailPosition.x,
+          top: trailPosition.y,
+          width: isHovering ? 80 : 60,
+          height: isHovering ? 80 : 60,
+          transform: 'translate(-50%, -50%)',
+          background: `radial-gradient(circle, ${cursorColorLight} 0%, transparent 70%)`,
+        }}
       />
 
-      {/* Center dot - only show when not on button */}
+      {/* Main cursor ring */}
+      <div
+        className={`fixed pointer-events-none z-[9999] transition-opacity duration-200 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          ...getCursorStyle(),
+          border: `2px solid ${isButton ? '#2C3E96' : cursorColor}`,
+          background: isButton ? 'rgba(44, 62, 150, 0.08)' : 'transparent',
+        }}
+      />
+
+      {/* Inner gradient glow */}
       {!isButton && (
         <div
-          className={`fixed pointer-events-none z-[9999] rounded-full transition-all duration-100 ${
+          className={`fixed pointer-events-none z-[9999] rounded-full transition-all duration-200 ${
             isVisible ? 'opacity-100' : 'opacity-0'
-          } ${
-            isHovering 
-              ? 'w-1.5 h-1.5 bg-white mix-blend-difference' 
-              : 'w-1 h-1 bg-navy-900'
           }`}
           style={{
             left: position.x,
             top: position.y,
+            width: isHovering ? 24 : 16,
+            height: isHovering ? 24 : 16,
             transform: 'translate(-50%, -50%)',
+            background: `radial-gradient(circle, ${cursorColor} 0%, ${cursorColorLight} 50%, transparent 70%)`,
           }}
         />
       )}
 
       {/* Global style to hide default cursor */}
       <style>{`
-        @media (pointer: fine) {
+        @media (pointer: fine) and (min-width: 1024px) {
           * {
             cursor: none !important;
           }
