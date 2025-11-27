@@ -7,43 +7,43 @@ const teamMembers = [
   { 
     name: "Dr. Suvrankar Datta", 
     role: "Group Lead", 
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "SD",
     isLead: true
   },
   { 
     name: "Dr. Hakikat Bir Singh Bhatti", 
     role: "Researcher", 
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "HB",
     isLead: false
   },
   { 
     name: "Kautik Singh", 
     role: "Researcher", 
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "KS",
     isLead: false
   },
   { 
     name: "Dr. Mrudula Bhalke", 
     role: "Researcher", 
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "MB",
     isLead: false
   },
   { 
     name: "Dr. Lakshmi Vennela Chowdary Kaza", 
     role: "Researcher", 
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "LK",
     isLead: false
   },
   { 
     name: "Siddharth Reddy Anthireddy", 
     role: "Researcher", 
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "SA",
     isLead: false
   },
   { 
     name: "Upasana Karnwal", 
     role: "Researcher", 
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initials: "UK",
     isLead: false
   },
 ];
@@ -297,19 +297,23 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
         className="relative transition-shadow duration-500"
         style={{ transformStyle: 'preserve-3d' }}
       >
-        {/* Image Container */}
-        <div className="relative aspect-[3/4] overflow-hidden mb-5 rounded-2xl bg-gray-100">
-          {/* Gradient Overlay */}
+        {/* Placeholder Container */}
+        <div className="relative aspect-[3/4] overflow-hidden mb-5 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200">
+          {/* Gradient Overlay on Hover */}
           <div className={`absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/20 to-transparent z-10 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
           
-          {/* Image */}
-          <img 
-            src={member.image} 
-            alt={member.name}
-            className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-              isHovered ? 'scale-110 grayscale-0' : 'scale-100 grayscale'
-            }`}
-          />
+          {/* Placeholder with Initials */}
+          <div className={`w-full h-full flex items-center justify-center transition-all duration-700 ease-out ${
+            isHovered ? 'scale-110' : 'scale-100'
+          }`}>
+            <div className={`w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 ${
+              member.isLead 
+                ? 'bg-brand-blue text-white' 
+                : isHovered ? 'bg-navy-900 text-white' : 'bg-gray-300 text-gray-600'
+            }`}>
+              <span className="text-2xl font-bold font-serif tracking-tight">{member.initials}</span>
+            </div>
+          </div>
           
           {/* Lead Badge */}
           {member.isLead && (
