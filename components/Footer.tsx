@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+    onNavigateHome?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
   return (
     <footer id="contact" className="bg-brand-blue pt-24 pb-12 text-white overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
@@ -26,7 +30,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-white/20 pt-16 mb-24">
             
             <div className="md:col-span-5">
-                <div className="flex items-center gap-3 mb-4">
+                <div 
+                    className="flex items-center gap-3 mb-4 cursor-pointer"
+                    onClick={() => { if(onNavigateHome) onNavigateHome(); }}
+                >
                     <div className="text-white">
                         <svg viewBox="0 0 100 100" className="w-12 h-12 fill-none stroke-current" strokeWidth="10" strokeLinecap="square">
                         {/* Outer C */}
@@ -49,7 +56,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="md:col-span-4">
-                <a href="mailto:hola@crashlab.in" className="text-2xl md:text-3xl font-sans font-medium hover:opacity-70 transition-opacity block mb-2 tracking-tight">
+                <a href="mailto:contact@crashlab.in" className="text-2xl md:text-3xl font-sans font-medium hover:opacity-70 transition-opacity block mb-2 tracking-tight">
                     contact@crashlab.in
                 </a>
                 <p className="text-white/60 text-lg">

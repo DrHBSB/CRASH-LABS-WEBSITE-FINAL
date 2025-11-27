@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight, Database, Shield, Cpu, Users } from 'lucide-react';
+import { FadeIn, AnimatedHeading } from './Animations';
 
 const Pillars: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,7 +61,7 @@ const Pillars: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-[#1a1a1a] relative overflow-hidden">
+    <section id="research" className="py-24 bg-[#1a1a1a] relative overflow-hidden">
       {/* Background Grid for Technical Feel */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" 
            style={{ 
@@ -73,9 +73,11 @@ const Pillars: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-             <h2 className="text-5xl md:text-7xl font-serif font-medium text-white leading-tight tracking-tight">
-                Our <span className="text-brand-blue italic">Four Pillars</span>
-            </h2>
+             <FadeIn>
+                <h2 className="text-5xl md:text-7xl font-serif font-medium text-white leading-tight tracking-tight">
+                    <AnimatedHeading text="Our" /> <span className="text-brand-blue italic"><AnimatedHeading text="Four Pillars" /></span>
+                </h2>
+             </FadeIn>
             
             {/* Desktop Controls */}
             <div className="hidden md:flex gap-4">
@@ -95,18 +97,20 @@ const Pillars: React.FC = () => {
         </div>
 
         {/* Slider Track */}
-        <div className="relative w-full overflow-hidden">
-            <div 
-                className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-                {pillars.map((pillar, index) => (
-                    <div key={index} className="w-full shrink-0 px-2 md:px-4 box-border">
-                        <Card {...pillar} />
-                    </div>
-                ))}
+        <FadeIn delay={200} className="w-full">
+            <div className="relative w-full overflow-hidden">
+                <div 
+                    className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                >
+                    {pillars.map((pillar, index) => (
+                        <div key={index} className="w-full shrink-0 px-2 md:px-4 box-border">
+                            <Card {...pillar} />
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+        </FadeIn>
 
         {/* Mobile Controls / Pagination */}
         <div className="flex justify-between items-center mt-8 md:hidden">
@@ -225,7 +229,7 @@ const DataCommonsIso = () => {
                     </div>
                 </div>
 
-                {/* Connection Lines (Simulated with absolute divs) */}
+                {/* Connection Lines */}
                 <div className="absolute top-1/2 left-1/2 w-32 h-[1px] bg-gradient-to-r from-brand-blue to-transparent transform -translate-x-1/2 -rotate-45 -z-10"></div>
             </div>
         </div>

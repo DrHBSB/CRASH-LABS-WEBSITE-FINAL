@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { FadeIn, AnimatedHeading } from './Animations';
 
 const posts = [
   {
@@ -30,66 +31,71 @@ const posts = [
 
 const Blog: React.FC = () => {
   return (
-    <section id="blog" className="py-24 bg-paper border-t border-navy-900/5">
+    <section id="publications" className="py-24 bg-paper border-t border-navy-900/5">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
-            Latest <span className="italic text-brand-blue">Updates</span>
-          </h2>
-          <a href="#" className="hidden md:flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-navy-900 hover:text-brand-blue transition-colors pb-2 border-b border-gray-200 hover:border-brand-blue">
-            View all articles <ArrowRight size={16} />
-          </a>
+          <FadeIn>
+            <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
+                <AnimatedHeading text="Latest" /> <span className="italic text-brand-blue"><AnimatedHeading text="Updates" delay={200} /></span>
+            </h2>
+          </FadeIn>
+          <FadeIn delay={300}>
+            <a href="#" className="hidden md:flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-navy-900 hover:text-brand-blue transition-colors pb-2 border-b border-gray-200 hover:border-brand-blue">
+                View all articles <ArrowRight size={16} />
+            </a>
+          </FadeIn>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <div key={post.id} className="group relative bg-navy-900 rounded-2xl overflow-hidden flex flex-col h-full shadow-xl transition-transform duration-500 hover:-translate-y-2">
-              
-              {/* Image Container */}
-              <div className="h-48 overflow-hidden relative">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-60"></div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8 flex-grow flex flex-col relative">
+          {posts.map((post, index) => (
+            <FadeIn key={post.id} delay={index * 150} className="h-full">
+                <div className="group relative bg-navy-900 rounded-2xl overflow-hidden flex flex-col h-full shadow-xl transition-transform duration-500 hover:-translate-y-2">
                 
-                {/* Meta */}
-                <div className="flex items-center gap-3 mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                  <span className="text-brand-blue">{post.category}</span>
-                  <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-                  <span>{post.date}</span>
+                {/* Image Container */}
+                <div className="h-48 overflow-hidden relative">
+                    <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-60"></div>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl font-serif font-medium text-white leading-tight mb-8 group-hover:text-blue-200 transition-colors">
-                  {post.title}
-                </h3>
+                {/* Content */}
+                <div className="p-8 flex-grow flex flex-col relative">
+                    
+                    {/* Meta */}
+                    <div className="flex items-center gap-3 mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                    <span className="text-brand-blue">{post.category}</span>
+                    <span className="w-1 h-1 rounded-full bg-gray-600"></span>
+                    <span>{post.date}</span>
+                    </div>
 
-                {/* Bottom Area */}
-                <div className="mt-auto flex items-end justify-between">
-                   <span className="text-xs text-gray-500 font-sans tracking-wider uppercase mb-2">
-                      By {post.author}
-                   </span>
-                   <span className="text-sm text-white font-medium border-b border-white/30 pb-0.5 group-hover:border-white transition-all mb-2">
-                      Read more
-                   </span>
+                    {/* Title */}
+                    <h3 className="text-2xl font-serif font-medium text-white leading-tight mb-8 group-hover:text-blue-200 transition-colors">
+                    {post.title}
+                    </h3>
+
+                    {/* Bottom Area */}
+                    <div className="mt-auto flex items-end justify-between">
+                    <span className="text-xs text-gray-500 font-sans tracking-wider uppercase mb-2">
+                        By {post.author}
+                    </span>
+                    <span className="text-sm text-white font-medium border-b border-white/30 pb-0.5 group-hover:border-white transition-all mb-2">
+                        Read more
+                    </span>
+                    </div>
                 </div>
-              </div>
 
-              {/* Cutout Corner Button Effect */}
-              {/* This mimics the reference by placing a 'paper' colored block in the corner with a rounded top-left */}
-              <div className="absolute bottom-0 right-0 w-16 h-16 bg-paper rounded-tl-3xl z-10 flex items-center justify-center pl-2 pt-2">
-                  <div className="w-10 h-10 rounded-full bg-navy-900 group-hover:bg-brand-blue text-white flex items-center justify-center transition-colors shadow-lg -rotate-45 group-hover:rotate-0 duration-300">
-                      <ArrowRight size={18} />
-                  </div>
-              </div>
+                {/* Cutout Corner Button Effect */}
+                <div className="absolute bottom-0 right-0 w-16 h-16 bg-paper rounded-tl-3xl z-10 flex items-center justify-center pl-2 pt-2">
+                    <div className="w-10 h-10 rounded-full bg-navy-900 group-hover:bg-brand-blue text-white flex items-center justify-center transition-colors shadow-lg -rotate-45 group-hover:rotate-0 duration-300">
+                        <ArrowRight size={18} />
+                    </div>
+                </div>
 
-            </div>
+                </div>
+            </FadeIn>
           ))}
         </div>
 

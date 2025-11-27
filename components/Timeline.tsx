@@ -1,4 +1,5 @@
 import React from 'react';
+import { FadeIn, AnimatedHeading } from './Animations';
 
 const timelineEvents = [
   { date: "Q1 2024", title: "CRASH Lab Founded at Koita Centre for Digital Health", active: true },
@@ -17,41 +18,49 @@ const Timeline: React.FC = () => {
             
             {/* Left Header */}
             <div className="md:col-span-4">
-                <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 sticky top-32 tracking-tight">
-                    Journey & <br/> <span className="text-brand-blue italic">Outlook</span>
-                </h2>
+                <div className="sticky top-32">
+                    <FadeIn>
+                        <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
+                            <AnimatedHeading text="Journey &" /> <br/> <span className="text-brand-blue italic"><AnimatedHeading text="Outlook" delay={200} /></span>
+                        </h2>
+                    </FadeIn>
+                </div>
             </div>
 
             {/* Right List */}
             <div className="md:col-span-8">
                 <div className="space-y-12">
                     {timelineEvents.map((event, index) => (
-                        <div key={index} className={`group flex flex-col md:flex-row gap-4 md:gap-12 items-baseline pb-12 border-b border-navy-900/10 ${!event.active ? 'opacity-50' : ''}`}>
-                            <div className="w-24 shrink-0">
-                                <span className="font-sans text-xs text-brand-blue uppercase tracking-[0.1em] font-bold">
-                                    {event.date}
-                                </span>
+                        <FadeIn key={index} delay={index * 100}>
+                            <div className={`group flex flex-col md:flex-row gap-4 md:gap-12 items-baseline pb-12 border-b border-navy-900/10 ${!event.active ? 'opacity-50' : ''}`}>
+                                <div className="w-24 shrink-0">
+                                    <span className="font-sans text-xs text-brand-blue uppercase tracking-[0.1em] font-bold">
+                                        {event.date}
+                                    </span>
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl md:text-3xl font-serif font-normal text-navy-900 leading-tight group-hover:text-brand-blue transition-colors tracking-tight">
+                                        {event.title}
+                                    </h3>
+                                    {event.highlight && (
+                                        <p className="mt-2 font-serif text-sm text-navy-800/70 italic">
+                                            {event.highlight}
+                                        </p>
+                                    )}
+                                </div>
                             </div>
-                            <div>
-                                <h3 className="text-2xl md:text-3xl font-serif font-normal text-navy-900 leading-tight group-hover:text-brand-blue transition-colors tracking-tight">
-                                    {event.title}
-                                </h3>
-                                {event.highlight && (
-                                    <p className="mt-2 font-serif text-sm text-navy-800/70 italic">
-                                        {event.highlight}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
+                        </FadeIn>
                     ))}
                 </div>
 
-                <div className="mt-24 bg-navy-900 text-paper p-10 md:p-16 rounded-xl">
-                    <h3 className="text-3xl font-serif font-medium mb-6">Future Outlook</h3>
-                    <p className="text-lg md:text-xl font-sans font-light leading-relaxed opacity-90">
-                        Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
-                    </p>
-                </div>
+                <FadeIn delay={600}>
+                    <div className="mt-24 bg-navy-900 text-paper p-10 md:p-16 rounded-xl">
+                        <h3 className="text-3xl font-serif font-medium mb-6">Future Outlook</h3>
+                        <p className="text-lg md:text-xl font-sans font-light leading-relaxed opacity-90">
+                            Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
+                        </p>
+                    </div>
+                </FadeIn>
             </div>
         </div>
       </div>
