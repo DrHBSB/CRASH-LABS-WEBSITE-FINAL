@@ -7,15 +7,11 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showLogo, setShowLogo] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 20);
-      // Show logo after scrolling past ~80% of viewport height
-      setShowLogo(scrollY > window.innerHeight * 0.6);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -37,14 +33,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Logo - Hidden initially, appears after scroll */}
-        <a 
-          href="#home" 
-          onClick={handleLogoClick} 
-          className={`flex items-center gap-3 cursor-pointer z-50 group transition-all duration-500 ${
-            showLogo ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
-          }`}
-        >
+        {/* Logo */}
+        <a href="#home" onClick={handleLogoClick} className="flex items-center gap-3 cursor-pointer z-50 group">
           <div className="text-navy-900 group-hover:text-brand-blue transition-colors duration-300">
             <svg viewBox="0 0 100 100" className="w-10 h-10 fill-none stroke-current" strokeWidth="10" strokeLinecap="square">
               {/* Outer C */}

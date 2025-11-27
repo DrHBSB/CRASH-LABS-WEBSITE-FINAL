@@ -5,7 +5,9 @@ import gsap from 'gsap';
 
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper">
+    <>
+    {/* Hero Section - Full Screen */}
+    <section id="home" className="w-full relative h-screen flex flex-col overflow-hidden bg-paper">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
@@ -26,8 +28,8 @@ const Hero: React.FC = () => {
          />
       </div>
 
-      {/* Main Hero Content - Takes up available space */}
-      <div className="flex-1 flex items-center container mx-auto px-6 md:px-12 relative z-10 pt-24 lg:pt-0">
+      {/* Main Hero Content - Takes up full screen */}
+      <div className="flex-1 flex items-center container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             
             {/* Left Column: Text & CTA */}
@@ -227,10 +229,11 @@ const Hero: React.FC = () => {
             }
         `}</style>
       </div>
-
-      {/* Logo Slider Section - At bottom of hero */}
-      <LogoSlider />
     </section>
+
+    {/* Logo Slider Section - Below hero, not part of full screen */}
+    <LogoSlider />
+    </>
   );
 };
 
