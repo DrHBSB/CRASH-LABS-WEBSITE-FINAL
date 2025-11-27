@@ -1,9 +1,56 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, ShieldCheck, BarChart3, Settings2, CheckCircle2 } from 'lucide-react';
-import { FadeIn, AnimatedHeading, ParallaxImage } from './Animations';
+import { ParallaxImage } from './Animations';
 import gsap from 'gsap';
 
 const Hero: React.FC = () => {
+  const heroTextRef = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<HTMLSpanElement>(null);
+  const line2Ref = useRef<HTMLSpanElement>(null);
+  const line3Ref = useRef<HTMLSpanElement>(null);
+  const line4Ref = useRef<HTMLSpanElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // Staggered text reveal with smooth GSAP animation
+    tl.fromTo(line1Ref.current, 
+      { opacity: 0, y: 40 }, 
+      { opacity: 1, y: 0, duration: 0.8 }
+    )
+    .fromTo(line2Ref.current, 
+      { opacity: 0, y: 40 }, 
+      { opacity: 1, y: 0, duration: 0.8 }, 
+      '-=0.6'
+    )
+    .fromTo(line3Ref.current, 
+      { opacity: 0, y: 40 }, 
+      { opacity: 1, y: 0, duration: 0.8 }, 
+      '-=0.6'
+    )
+    .fromTo(line4Ref.current, 
+      { opacity: 0, y: 40 }, 
+      { opacity: 1, y: 0, duration: 0.8 }, 
+      '-=0.6'
+    )
+    .fromTo(descRef.current, 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 0.7 }, 
+      '-=0.4'
+    )
+    .fromTo(ctaRef.current, 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 0.7 }, 
+      '-=0.5'
+    );
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
   return (
     <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper">
       
@@ -31,40 +78,36 @@ const Hero: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             
             {/* Left Column: Text & CTA */}
-            <div className="flex flex-col items-start max-w-xl relative z-10">
+            <div ref={heroTextRef} className="flex flex-col items-start max-w-xl relative z-10">
                 
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium text-navy-900 leading-[0.95] mb-8 tracking-tight">
-                    <AnimatedHeading text="Responsible" delay={0} className="block" />
-                    <AnimatedHeading text="AI" delay={150} className="block" />
-                    <span className="block mt-1">
-                        <AnimatedHeading text="built for" delay={300} wordMode={true} />
-                    </span>
-                    <span className="block text-brand-blue">
-                        <AnimatedHeading text="Healthcare." delay={450} />
-                    </span>
+                    <span ref={line1Ref} className="block" style={{ opacity: 0 }}>Responsible</span>
+                    <span ref={line2Ref} className="block" style={{ opacity: 0 }}>AI</span>
+                    <span ref={line3Ref} className="block mt-1" style={{ opacity: 0 }}>built for</span>
+                    <span ref={line4Ref} className="block text-brand-blue" style={{ opacity: 0 }}>Healthcare.</span>
                 </h1>
                 
-                <FadeIn delay={600}>
-                    <p className="text-lg md:text-xl text-navy-800/80 leading-relaxed font-sans mb-10 max-w-lg font-normal">
-                        CRASH Lab builds context-aware foundation models and federated data platforms that automate clinical workflows while ensuring safety, equity, and privacy.
-                    </p>
-                </FadeIn>
+                <p 
+                  ref={descRef}
+                  className="text-lg md:text-xl text-navy-800/80 leading-relaxed font-sans mb-10 max-w-lg font-normal"
+                  style={{ opacity: 0 }}
+                >
+                    CRASH Lab builds context-aware foundation models and federated data platforms that automate clinical workflows while ensuring safety, equity, and privacy.
+                </p>
 
-                <FadeIn delay={700}>
-                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <a href="#contact" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
-                            Join the Team
-                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                        </a>
-                        <a href="#contact" className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200">
-                            Industry Partners
-                        </a>
-                    </div>
-                </FadeIn>
+                <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" style={{ opacity: 0 }}>
+                    <a href="#contact" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
+                        Join the Team
+                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </a>
+                    <a href="#contact" className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200">
+                        Industry Partners
+                    </a>
+                </div>
             </div>
 
             {/* Right Column: Isometric Illustration - AI Eval Console */}
-            <FadeIn delay={400} className="hidden lg:flex justify-end w-full">
+            <div className="hidden lg:flex justify-end w-full">
                 <div className="relative h-[480px] w-full max-w-[520px] perspective-[2000px] group">
                     {/* Main Transform Container */}
                     <div className="relative w-full h-full transform rotate-x-6 -rotate-y-6 transition-transform duration-1000 ease-out group-hover:rotate-x-0 group-hover:rotate-y-0">
@@ -204,7 +247,7 @@ const Hero: React.FC = () => {
 
                     </div>
                 </div>
-            </FadeIn>
+            </div>
 
         </div>
         
