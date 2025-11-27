@@ -8,6 +8,7 @@ import Pillars from './components/Pillars';
 import Timeline from './components/Timeline';
 import Team from './components/Team';
 import Blog from './components/Blog';
+import CTA from './components/CTA';
 import Footer from './components/Footer';
 import BlogPost from './components/BlogPost';
 import CustomCursor from './components/CustomCursor';
@@ -49,6 +50,7 @@ const App: React.FC = () => {
             <Timeline />
             <Team />
             <Blog />
+            <CTA />
           </>
         ) : (
           <BlogPost onBack={navigateToHome} />
