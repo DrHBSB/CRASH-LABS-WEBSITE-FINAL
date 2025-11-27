@@ -28,7 +28,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.DS_Store
 
 # Environment files
 .env
