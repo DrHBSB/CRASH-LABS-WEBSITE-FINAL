@@ -4,8 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CRASH Lab</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -89,8 +94,7 @@
       
       /* Display font settings (Space Grotesk) */
       .font-serif {
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 500;
+        font-family: 'Space Grotesk', sans-serif !important;
         letter-spacing: -0.02em;
       }
       
