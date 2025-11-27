@@ -119,7 +119,6 @@ const Team: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
           <FadeIn>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">The People Behind CRASH Lab</p>
             <h2 className="text-4xl md:text-6xl font-serif font-medium text-navy-900 tracking-tight">
               <AnimatedHeading text="Our Team" />
             </h2>
@@ -200,6 +199,37 @@ const Team: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* Join the Team Section */}
+        <FadeIn delay={400}>
+          <div className="mt-20 p-8 md:p-12 bg-navy-900 rounded-3xl relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                backgroundSize: '32px 32px'
+              }} />
+            </div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-serif font-medium text-white mb-3">
+                  Join the Team
+                </h3>
+                <p className="text-gray-400 max-w-lg">
+                  We're always looking for passionate researchers, engineers, and clinicians to help shape the future of healthcare AI.
+                </p>
+              </div>
+              <a 
+                href="#contact" 
+                className="group flex items-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-bold uppercase tracking-wider rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
+              >
+                Get in Touch
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+        </FadeIn>
 
         {/* As Seen In Section */}
         <FadeIn delay={600}>
