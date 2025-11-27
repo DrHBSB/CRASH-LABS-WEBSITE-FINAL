@@ -99,7 +99,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
           <a
             key={item}
             href={`#${item.toLowerCase()}`}
-            className="text-4xl font-serif font-medium text-navy-900 tracking-tight hover:text-brand-blue"
+            className="text-4xl font-serif font-semibold text-navy-900 tracking-tight hover:text-brand-blue"
             onClick={() => {
                 setIsMobileMenuOpen(false);
                 if (onNavigateHome) onNavigateHome();

@@ -58,7 +58,7 @@ const MissionVision: React.FC = () => {
             <div ref={borderRef1} className="absolute top-0 left-0 right-0 h-px bg-navy-900/10" />
             <div className="md:col-span-4">
                 <FadeIn>
-                  <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
+                  <h2 className="text-4xl md:text-5xl font-serif font-semibold text-navy-900 tracking-tight">
                       <AnimatedHeading text="Our Mission" />
                   </h2>
                 </FadeIn>
@@ -77,7 +77,7 @@ const MissionVision: React.FC = () => {
             <div ref={borderRef2} className="absolute top-0 left-0 right-0 h-px bg-navy-900/10" />
             <div className="md:col-span-4 flex justify-between items-start">
                  <FadeIn>
-                    <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-serif font-semibold text-navy-900 tracking-tight">
                         <AnimatedHeading text="Our Vision" />
                     </h2>
                  </FadeIn>

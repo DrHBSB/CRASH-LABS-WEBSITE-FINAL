@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CRASH Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
-              serif: ['Newsreader', 'serif'],
-              display: ['Newsreader', 'serif'],
+              serif: ['Space Grotesk', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
             },
             colors: {
               paper: '#FAF9F6',
@@ -56,10 +56,10 @@
       
       /* Typography - Headings */
       h1, h2, h3, h4, h5, h6 {
-        font-family: 'Newsreader', serif;
-        font-weight: 500;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
         color: #0f172a;
       }
       
@@ -87,10 +87,11 @@
         color: #334155;
       }
       
-      /* Serif font settings */
+      /* Display font settings (Space Grotesk) */
       .font-serif {
-        font-family: 'Newsreader', serif;
-        font-feature-settings: "kern" 1, "liga" 1;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.02em;
       }
       
       /* Button Base Styles */

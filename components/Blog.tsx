@@ -35,7 +35,7 @@ const Blog: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <FadeIn>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-serif font-semibold text-navy-900 tracking-tight">
                 <AnimatedHeading text="Latest" /> <span className="italic text-brand-blue"><AnimatedHeading text="Updates" delay={200} /></span>
             </h2>
           </FadeIn>
@@ -73,7 +73,7 @@ const Blog: React.FC = () => {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl font-serif font-medium text-white leading-tight mb-8 group-hover:text-blue-200 transition-colors">
+                    <h3 className="text-2xl font-serif font-semibold text-white leading-tight mb-8 group-hover:text-blue-200 transition-colors">
                     {post.title}
                     </h3>
 

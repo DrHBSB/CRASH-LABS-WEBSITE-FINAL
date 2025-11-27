@@ -119,7 +119,7 @@ const Team: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
           <FadeIn>
-            <h2 className="text-4xl md:text-6xl font-serif font-medium text-navy-900 tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-serif font-semibold text-navy-900 tracking-tight">
               <AnimatedHeading text="Our Team" />
             </h2>
           </FadeIn>
@@ -213,7 +213,7 @@ const Team: React.FC = () => {
             
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
-                <h3 className="text-2xl md:text-3xl font-serif font-medium text-white mb-3">
+                <h3 className="text-2xl md:text-3xl font-serif font-semibold text-white mb-3">
                   Join the Team
                 </h3>
                 <p className="text-gray-400 max-w-lg">

@@ -80,7 +80,7 @@ const Hero: React.FC = () => {
             {/* Left Column: Text & CTA */}
             <div ref={heroTextRef} className="flex flex-col items-start max-w-xl relative z-10">
                 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium text-navy-900 leading-[0.95] mb-8 tracking-tight">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-semibold text-navy-900 leading-[0.95] mb-8 tracking-tight">
                     <span ref={line1Ref} className="block" style={{ opacity: 0 }}>Responsible</span>
                     <span ref={line2Ref} className="block" style={{ opacity: 0 }}>AI</span>
                     <span ref={line3Ref} className="block mt-1" style={{ opacity: 0 }}>built for</span>
@@ -282,11 +282,11 @@ const LogoSlider: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const logos = [
-    { name: 'Koita Foundation', style: 'font-serif font-medium text-xl' },
+    { name: 'Koita Foundation', style: 'font-serif font-semibold text-xl' },
     { name: 'IIT Bombay', style: 'font-bold font-sans text-lg' },
     { name: 'The Lancet', style: 'font-serif italic text-xl' },
     { name: 'RSNA', style: 'font-mono font-bold text-xl' },
-    { name: 'Stanford Medicine', style: 'font-serif font-medium text-lg' },
+    { name: 'Stanford Medicine', style: 'font-serif font-semibold text-lg' },
     { name: 'MIT CSAIL', style: 'font-mono font-bold text-lg' },
     { name: 'Mayo Clinic', style: 'font-serif text-xl' },
     { name: 'Johns Hopkins', style: 'font-sans font-semibold text-lg' },

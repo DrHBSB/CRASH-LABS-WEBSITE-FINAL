@@ -38,10 +38,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
                   <circle cx="50" cy="50" r="6" className="fill-current stroke-none" />
                 </svg>
                 <div>
-                  <span className="text-5xl md:text-7xl font-serif font-medium text-white tracking-tight block leading-none">
+                  <span className="text-5xl md:text-7xl font-serif font-semibold text-white tracking-tight block leading-none">
                     Crash
                   </span>
-                  <span className="text-5xl md:text-7xl font-serif font-medium text-white tracking-tight block leading-none">
+                  <span className="text-5xl md:text-7xl font-serif font-semibold text-white tracking-tight block leading-none">
                     Lab
                   </span>
                 </div>

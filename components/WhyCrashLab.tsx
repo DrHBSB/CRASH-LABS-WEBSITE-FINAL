@@ -20,7 +20,7 @@ const WhyCrashLab: React.FC<WhyCrashLabProps> = ({ onReadMore }) => {
         <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
                 <FadeIn>
-                    <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 mb-8 tracking-tight leading-tight">
+                    <h2 className="text-4xl md:text-5xl font-serif font-semibold text-navy-900 mb-8 tracking-tight leading-tight">
                         <AnimatedHeading text="The challenges," wordMode={true} /> <br/>
                         <AnimatedHeading text="and why they chose" wordMode={true} /> <span className="text-brand-blue"><AnimatedHeading text="Crash Lab." wordMode={true} /></span>
                     </h2>
@@ -53,7 +53,7 @@ const WhyCrashLab: React.FC<WhyCrashLabProps> = ({ onReadMore }) => {
                   ].map((item, index) => (
                     <FadeIn key={index} delay={400 + (index * 100)}>
                         <li className="flex items-start gap-4 group">
-                            <span className="text-brand-blue font-serif font-medium text-xl">0{index + 1}</span>
+                            <span className="text-brand-blue font-serif font-semibold text-xl">0{index + 1}</span>
                             <span className="text-navy-900 font-medium group-hover:text-brand-blue transition-colors">{item}</span>
                         </li>
                     </FadeIn>
@@ -220,7 +220,7 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
           </div>
 
           {/* Title */}
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-medium text-white leading-[1.1] mb-6 group-hover:text-blue-100 transition-colors">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white leading-[1.1] mb-6 group-hover:text-blue-100 transition-colors">
             Gemini 3.0 Pro Surpasses Radiology Trainees on Radiology's Last Exam (RadLE)
           </h3>
 

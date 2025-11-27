@@ -19,7 +19,7 @@ const Commitment: React.FC = () => {
                 
                 <div className="relative z-10 max-w-4xl">
                     <FadeIn delay={200}>
-                        <p className="font-serif font-medium text-3xl md:text-5xl lg:text-6xl leading-[1.1] mb-8 text-white tracking-tight">
+                        <p className="font-serif font-semibold text-3xl md:text-5xl lg:text-6xl leading-[1.1] mb-8 text-white tracking-tight">
                             “We believe in open science, ethical AI development, and radical collaboration. Every tool we build is designed with safety, fairness, and real-world impact at its core.”
                         </p>
                     </FadeIn>

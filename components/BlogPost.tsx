@@ -66,7 +66,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
                 <span>5 Min Read</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-navy-900 leading-[1.1] mb-8 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-semibold text-navy-900 leading-[1.1] mb-8 tracking-tight">
                 Gemini 3.0 Pro Surpasses Radiology Trainees on Radiology's Last Exam (RadLE)
             </h1>
 
@@ -106,7 +106,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
             </FadeIn>
 
             <FadeIn delay={200}>
-                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">Background</h2>
+                <h2 className="text-3xl font-serif font-semibold text-navy-900 mt-12 mb-6 tracking-tight">Background</h2>
                 <p className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6">
                     Over the last few months, at the Centre for Responsible Autonomous Systems in Healthcare (CRASH Lab), we have been systematically benchmarking frontier AI models on Radiology's Last Exam (RadLE v1), a spectrum biased diagnostic dataset designed to reflect the kind of complex, multi-system cases radiologists routinely struggle with. In our previous analysis done on September 2025, every major model: GPT-5, Gemini 2.5 Pro, o3, Claude Opus 4.1, had performed below radiology trainees.
                 </p>
@@ -116,7 +116,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
             </FadeIn>
 
             <FadeIn delay={300}>
-                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">Benchmarking Setup</h2>
+                <h2 className="text-3xl font-serif font-semibold text-navy-900 mt-12 mb-6 tracking-tight">Benchmarking Setup</h2>
                 <ul className="list-disc pl-5 space-y-3 text-lg font-sans font-light text-navy-800 leading-relaxed marker:text-brand-blue">
                     <li><strong className="font-medium">Dataset:</strong> RadLE v1 (50 difficult radiology cases; CT, MRI, radiographs).</li>
                     <li><strong className="font-medium">New Models tested:</strong>
@@ -130,7 +130,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
             </FadeIn>
 
             <FadeIn delay={400}>
-                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-8 tracking-tight">Results</h2>
+                <h2 className="text-3xl font-serif font-semibold text-navy-900 mt-12 mb-8 tracking-tight">Results</h2>
                 
                 <div className="overflow-hidden rounded-xl border border-gray-200 shadow-sm mb-12">
                     <table className="w-full text-left border-collapse">
@@ -180,7 +180,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
             </FadeIn>
 
             <FadeIn delay={500}>
-                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">An Example where Gemini 3.0 outperformed prior SOTA</h2>
+                <h2 className="text-3xl font-serif font-semibold text-navy-900 mt-12 mb-6 tracking-tight">An Example where Gemini 3.0 outperformed prior SOTA</h2>
                 <p className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6">
                     One of the clearest improvements appeared in an acute appendicitis case. This was a case that earlier frontier models, including GPT-5 (reasoning-high), had not been able to diagnose. In our prior experiment GPT-5 had shown poor anatomical localisation and premature diagnostic closure.
                 </p>
@@ -206,7 +206,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
             </FadeIn>
 
             <FadeIn delay={600}>
-                <h2 className="text-3xl font-serif font-medium text-navy-900 mt-12 mb-6 tracking-tight">Conclusion</h2>
+                <h2 className="text-3xl font-serif font-semibold text-navy-900 mt-12 mb-6 tracking-tight">Conclusion</h2>
                 <p className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6">
                     We update the results on the Radiology's Last Exam (RadLE v1) dataset. We show significant progress of generalist models but still short of readiness for deployment, autonomy or diagnostic replacement.
                 </p>
@@ -215,7 +215,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
                 </p>
 
                 <div className="mt-16 p-8 bg-brand-blue text-white rounded-2xl">
-                    <h3 className="text-2xl font-serif font-medium mb-4">Join Us to shape India's Healthcare AI Story</h3>
+                    <h3 className="text-2xl font-serif font-semibold mb-4">Join Us to shape India's Healthcare AI Story</h3>
                     <p className="text-white/80 font-sans font-light mb-6">
                         If you're a physician, resident or medical student who wants hands-on experience with responsible AI in real clinical workflows, feel free to reach out. We have spots for motivated trainees who want to shape how healthcare evolves.
                     </p>
@@ -248,7 +248,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
 
                 <FadeIn delay={300}>
                     <div className="bg-navy-900 text-white p-6 rounded-xl shadow-lg">
-                        <h4 className="text-xl font-serif font-medium mb-2">CRASH Lab</h4>
+                        <h4 className="text-xl font-serif font-semibold mb-2">CRASH Lab</h4>
                         <p className="text-sm text-white/60 mb-4">Koita Centre for Digital Health, Ashoka University</p>
                         <div className="h-px bg-white/20 w-full mb-4"></div>
                         <p className="text-xs leading-relaxed text-white/70">

@@ -53,7 +53,7 @@ const Timeline: React.FC = () => {
             <div className="md:col-span-4">
                 <div className="sticky top-32">
                     <FadeIn>
-                        <h2 className="text-4xl md:text-5xl font-serif font-medium text-navy-900 tracking-tight">
+                        <h2 className="text-4xl md:text-5xl font-serif font-semibold text-navy-900 tracking-tight">
                             <AnimatedHeading text="Journey &" /> <br/> <span className="text-brand-blue italic"><AnimatedHeading text="Outlook" delay={200} /></span>
                         </h2>
                     </FadeIn>
@@ -95,7 +95,7 @@ const Timeline: React.FC = () => {
 
                 <FadeIn delay={600}>
                     <div className="mt-24 bg-navy-900 text-white p-10 md:p-16 rounded-2xl">
-                        <h3 className="text-3xl md:text-4xl font-serif font-medium mb-6 text-white">Future Outlook</h3>
+                        <h3 className="text-3xl md:text-4xl font-serif font-semibold mb-6 text-white">Future Outlook</h3>
                         <p className="text-lg md:text-xl font-sans font-normal leading-relaxed text-white/90">
                             Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
                         </p>

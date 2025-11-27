@@ -74,7 +74,7 @@ const Pillars: React.FC = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
              <FadeIn>
-                <h2 className="text-5xl md:text-7xl font-serif font-medium text-white leading-tight tracking-tight">
+                <h2 className="text-5xl md:text-7xl font-serif font-semibold text-white leading-tight tracking-tight">
                     <AnimatedHeading text="Our" /> <span className="text-brand-blue italic"><AnimatedHeading text="Four Pillars" /></span>
                 </h2>
              </FadeIn>
@@ -178,7 +178,7 @@ const Card: React.FC<CardProps> = ({ title, description, features, theme, visual
 
             {/* Content Section */}
             <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-10">
-                <h3 className={`text-3xl md:text-5xl font-serif font-medium mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-navy-900'}`}>
+                <h3 className={`text-3xl md:text-5xl font-serif font-semibold mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-navy-900'}`}>
                     {title}
                 </h3>
                 <p className={`text-base md:text-lg leading-relaxed mb-8 font-light ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
