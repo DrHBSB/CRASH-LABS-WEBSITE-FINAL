@@ -280,7 +280,7 @@ const LogoSlider: React.FC = () => {
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-paper to-transparent z-10 pointer-events-none"></div>
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-paper to-transparent z-10 pointer-events-none"></div>
       
-      <div className="container mx-auto px-6 md:px-12 mb-6">
+      <div className="container mx-auto px-6 md:px-12 mb-6 text-center">
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
           Collaborations
         </p>
