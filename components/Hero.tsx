@@ -5,9 +5,7 @@ import gsap from 'gsap';
 
 const Hero: React.FC = () => {
   return (
-    <>
-    {/* Hero Section - Full Screen */}
-    <section id="home" className="w-full relative h-screen flex flex-col overflow-hidden bg-paper">
+    <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
@@ -229,11 +227,9 @@ const Hero: React.FC = () => {
             }
         `}</style>
       </div>
+      {/* Logo Slider Section - At bottom of hero */}
+      <LogoSlider />
     </section>
-
-    {/* Logo Slider Section - Below hero, not part of full screen */}
-    <LogoSlider />
-    </>
   );
 };
 
@@ -279,16 +275,10 @@ const LogoSlider: React.FC = () => {
   }, [logos.length]);
 
   return (
-    <div className="w-full py-8 border-t border-gray-200/60 overflow-hidden bg-paper relative">
+    <div className="w-full py-6 border-t border-gray-200/60 overflow-hidden bg-paper relative">
       {/* Gradient Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-paper to-transparent z-10 pointer-events-none"></div>
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-paper to-transparent z-10 pointer-events-none"></div>
-      
-      <div className="container mx-auto px-6 md:px-12 mb-6 text-center">
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-          Collaborations
-        </p>
-      </div>
       
       <div ref={sliderRef} className="relative overflow-hidden">
         <div ref={trackRef} className="flex items-center gap-16 whitespace-nowrap">
