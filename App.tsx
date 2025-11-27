@@ -30,7 +30,7 @@ const App: React.FC = () => {
       <CustomCursor />
       <Navbar onNavigateHome={navigateToHome} />
       
-      <main className="flex-grow pt-24">
+      <main className="flex-grow pt-16">
         {currentView === 'home' ? (
           <>
             <Hero />
