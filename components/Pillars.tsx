@@ -206,32 +206,241 @@ const Card: React.FC<CardProps> = ({ title, description, features, theme, visual
 // --- CSS 3D Isometric Components (Matching Hero Style) ---
 
 const DataCommonsIso = () => {
-    return (
-        <div className="relative w-full h-full flex items-center justify-center">
-            {/* Main Container rotated */}
-            <div className="relative w-48 h-48 transform rotate-x-12 rotate-y-12 rotate-z-0 transition-transform hover:rotate-y-0 duration-700">
-                
-                {/* Central Server Block */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-blue to-navy-900 rounded-xl shadow-2xl border border-white/10 z-10 flex items-center justify-center flex-col">
-                    <Database className="text-white w-12 h-12 mb-2 opacity-90" strokeWidth={1.5} />
-                    <div className="text-[10px] font-mono text-blue-200 uppercase tracking-widest">Federated</div>
-                </div>
+    const [hoveredNode, setHoveredNode] = React.useState<number | null>(null);
+    const [isHovered, setIsHovered] = React.useState(false);
 
-                {/* Satellite Nodes */}
-                <div className="absolute -top-12 -right-12 w-24 h-24 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 shadow-lg animate-[float_4s_ease-in-out_infinite] z-20 flex items-center justify-center">
-                     <div className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
-                </div>
+    const nodes = [
+        { label: 'Hospital A', position: 'top-left', delay: 0 },
+        { label: 'Hospital B', position: 'top-right', delay: 0.5 },
+        { label: 'Clinic C', position: 'bottom-left', delay: 1 },
+        { label: 'Lab D', position: 'bottom-right', delay: 1.5 },
+    ];
+
+    return (
+        <div 
+            className="relative w-full h-full flex items-center justify-center group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => { setIsHovered(false); setHoveredNode(null); }}
+        >
+            {/* Animated Data Particles Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {[...Array(15)].map((_, i) => (
+                    <div 
+                        key={i}
+                        className="absolute w-1.5 h-1.5 bg-brand-blue/60 rounded-full"
+                        style={{
+                            left: `${15 + (i % 5) * 18}%`,
+                            animation: `dataParticle ${4 + (i * 0.3)}s ease-in-out infinite`,
+                            animationDelay: `${i * 0.2}s`
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* Main Container */}
+            <div className={`relative w-72 h-72 transform transition-all duration-700 ${isHovered ? 'rotate-x-0 rotate-y-0 scale-105' : 'rotate-x-12 rotate-y-12'}`}>
                 
-                <div className="absolute -bottom-8 -left-8 w-28 h-20 bg-navy-800/80 backdrop-blur-md rounded-lg border border-white/10 shadow-lg animate-[float_5s_ease-in-out_infinite_reverse] z-20 p-3">
-                    <div className="space-y-2">
-                        <div className="h-1.5 w-full bg-white/20 rounded-full"></div>
-                        <div className="h-1.5 w-2/3 bg-white/20 rounded-full"></div>
+                {/* Central Hub */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div className={`relative w-28 h-28 transition-all duration-500 ${isHovered ? 'scale-110' : ''}`}>
+                        
+                        {/* Outer Glow */}
+                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-blue to-purple-600 blur-xl transition-all duration-500 ${isHovered ? 'opacity-50 scale-125' : 'opacity-30'}`}></div>
+                        
+                        {/* Hub Body */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-indigo-600 to-navy-900 rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+                            
+                            {/* Inner Pattern */}
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_60%)]"></div>
+                            
+                            {/* Rotating Ring */}
+                            <div className="absolute inset-2 border-2 border-dashed border-white/20 rounded-xl animate-[spinSlow_20s_linear_infinite]"></div>
+                            
+                            {/* Center Icon */}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <Database className={`w-10 h-10 mb-1 transition-all duration-300 ${isHovered ? 'text-white scale-110' : 'text-white/90'}`} strokeWidth={1.5} />
+                                <div className="text-[8px] font-mono text-blue-200 uppercase tracking-widest">Federated</div>
+                            </div>
+                            
+                            {/* Pulse Effect */}
+                            <div className="absolute inset-0 rounded-2xl border-2 border-white/30 animate-[hubPulse_2s_ease-out_infinite]"></div>
+                        </div>
                     </div>
                 </div>
 
+                {/* Satellite Nodes */}
+                {nodes.map((node, index) => {
+                    const positions = [
+                        { x: -80, y: -80 },  // top-left
+                        { x: 80, y: -80 },   // top-right
+                        { x: -80, y: 80 },   // bottom-left
+                        { x: 80, y: 80 },    // bottom-right
+                    ];
+                    const pos = positions[index];
+                    
+                    return (
+                        <div
+                            key={index}
+                            className={`absolute left-1/2 top-1/2 z-30 cursor-pointer transition-all duration-500`}
+                            style={{
+                                transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) ${hoveredNode === index ? 'scale(1.15)' : 'scale(1)'}`,
+                                animation: isHovered ? 'none' : `nodeFloat ${3 + index * 0.5}s ease-in-out infinite`,
+                                animationDelay: `${node.delay}s`
+                            }}
+                            onMouseEnter={() => setHoveredNode(index)}
+                            onMouseLeave={() => setHoveredNode(null)}
+                        >
+                            {/* Node Glow */}
+                            <div className={`absolute inset-0 rounded-xl bg-white blur-md transition-opacity duration-300 ${hoveredNode === index ? 'opacity-40' : 'opacity-0'}`}></div>
+                            
+                            {/* Node Body */}
+                            <div className={`relative w-16 h-16 rounded-xl shadow-xl border-2 transition-all duration-300 flex flex-col items-center justify-center ${
+                                hoveredNode === index 
+                                    ? 'bg-white border-brand-blue' 
+                                    : 'bg-white/10 backdrop-blur-md border-white/20'
+                            }`}>
+                                {/* Status Indicator */}
+                                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full transition-all duration-300 ${hoveredNode === index ? 'bg-green-500' : 'bg-green-400'}`}>
+                                    <div className="absolute inset-0 rounded-full bg-green-400 animate-ping"></div>
+                                </div>
+                                
+                                {/* Icon */}
+                                <Database size={16} className={`transition-colors duration-300 ${hoveredNode === index ? 'text-brand-blue' : 'text-white/80'}`} />
+                                
+                                {/* Label */}
+                                <span className={`text-[7px] font-bold uppercase tracking-wider mt-1 transition-colors duration-300 ${hoveredNode === index ? 'text-navy-900' : 'text-white/60'}`}>
+                                    {node.label}
+                                </span>
+                            </div>
+                            
+                            {/* Tooltip */}
+                            <div className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-1 bg-navy-900 text-white text-[8px] font-mono rounded transition-all duration-300 ${
+                                hoveredNode === index ? 'opacity-100 -bottom-7' : 'opacity-0 -bottom-5 pointer-events-none'
+                            }`}>
+                                Connected • Secure
+                            </div>
+                        </div>
+                    );
+                })}
+
                 {/* Connection Lines */}
-                <div className="absolute top-1/2 left-1/2 w-32 h-[1px] bg-gradient-to-r from-brand-blue to-transparent transform -translate-x-1/2 -rotate-45 -z-10"></div>
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
+                    <defs>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#2C3E96" stopOpacity="0.8" />
+                            <stop offset="50%" stopColor="#8B5CF6" stopOpacity="1" />
+                            <stop offset="100%" stopColor="#2C3E96" stopOpacity="0.8" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    {/* Lines from center to nodes */}
+                    {nodes.map((_, index) => {
+                        const positions = [
+                            { x: -80, y: -80 },
+                            { x: 80, y: -80 },
+                            { x: -80, y: 80 },
+                            { x: 80, y: 80 },
+                        ];
+                        const pos = positions[index];
+                        const centerX = 144;
+                        const centerY = 144;
+                        
+                        return (
+                            <g key={index}>
+                                <line
+                                    x1={centerX}
+                                    y1={centerY}
+                                    x2={centerX + pos.x}
+                                    y2={centerY + pos.y}
+                                    stroke="url(#lineGradient)"
+                                    strokeWidth={hoveredNode === index ? "3" : "2"}
+                                    strokeDasharray={hoveredNode === index ? "0" : "8 4"}
+                                    filter={hoveredNode === index ? "url(#glow)" : ""}
+                                    className={`transition-all duration-300 ${hoveredNode === index ? 'opacity-100' : 'opacity-50'}`}
+                                    style={{
+                                        animation: hoveredNode !== index ? `dashFlow ${2 + index * 0.3}s linear infinite` : 'none'
+                                    }}
+                                />
+                                {/* Data packet animation */}
+                                <circle
+                                    r="3"
+                                    fill="#2C3E96"
+                                    className="animate-[packetMove_2s_linear_infinite]"
+                                    style={{ animationDelay: `${index * 0.5}s` }}
+                                >
+                                    <animateMotion
+                                        dur={`${2 + index * 0.2}s`}
+                                        repeatCount="indefinite"
+                                        path={`M ${centerX} ${centerY} L ${centerX + pos.x} ${centerY + pos.y}`}
+                                    />
+                                </circle>
+                            </g>
+                        );
+                    })}
+                </svg>
+
+                {/* Floating Stats Badge */}
+                <div className={`absolute -right-4 top-8 bg-white rounded-lg p-3 shadow-2xl border border-gray-100 z-40 transition-all duration-500 ${isHovered ? 'translate-x-2' : ''} animate-[float_5s_ease-in-out_infinite]`}>
+                    <div className="text-[9px] text-gray-500 uppercase tracking-wider mb-1">Data Sources</div>
+                    <div className="text-xl font-bold text-navy-900">47<span className="text-brand-blue text-sm">+</span></div>
+                    <div className="flex items-center gap-1 mt-1">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                        <span className="text-[8px] text-green-600 font-medium">All Synced</span>
+                    </div>
+                </div>
+
+                {/* Privacy Badge */}
+                <div className={`absolute -left-4 bottom-12 bg-navy-900 rounded-lg p-2.5 shadow-2xl border border-white/10 z-40 transition-all duration-500 ${isHovered ? '-translate-x-2' : ''} animate-[floatDelayed_6s_ease-in-out_infinite]`}>
+                    <div className="flex items-center gap-2">
+                        <Shield size={14} className="text-green-400" />
+                        <div>
+                            <div className="text-[9px] font-bold text-white">Privacy Safe</div>
+                            <div className="text-[7px] text-white/60">End-to-End Encrypted</div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            {/* Custom Animations */}
+            <style>{`
+                @keyframes dataParticle {
+                    0%, 100% { top: 100%; opacity: 0; }
+                    10% { opacity: 0.6; }
+                    90% { opacity: 0.6; }
+                    50% { top: 0%; }
+                }
+                @keyframes spinSlow {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes hubPulse {
+                    0% { transform: scale(1); opacity: 0.5; }
+                    100% { transform: scale(1.5); opacity: 0; }
+                }
+                @keyframes nodeFloat {
+                    0%, 100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) translateY(0); }
+                    50% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) translateY(-8px); }
+                }
+                @keyframes dashFlow {
+                    from { stroke-dashoffset: 0; }
+                    to { stroke-dashoffset: 24; }
+                }
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-8px); }
+                }
+                @keyframes floatDelayed {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(8px); }
+                }
+            `}</style>
         </div>
     );
 };
@@ -708,34 +917,189 @@ const ModelsIso = () => {
 };
 
 const HumanIso = () => {
-    return (
-        <div className="relative w-full h-full flex items-center justify-center">
-             <div className="relative w-64 h-48 transform rotate-x-20 rotate-y-0 rotate-z-2 hover:rotate-x-0 transition-transform duration-700">
-                 
-                 {/* Interface Panel */}
-                 <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden flex flex-col">
-                     <div className="h-8 border-b border-white/5 bg-white/5 flex items-center px-3 gap-2">
-                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                         <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                         <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                     </div>
-                     <div className="p-4 flex gap-4 h-full">
-                         <div className="w-1/3 h-full bg-white/5 rounded"></div>
-                         <div className="w-2/3 space-y-3">
-                             <div className="h-8 bg-white/10 rounded w-full"></div>
-                             <div className="h-20 bg-brand-blue/20 border border-brand-blue/30 rounded w-full flex items-center justify-center">
-                                 <span className="text-[10px] text-brand-blue font-mono">ASSISTANT ACTIVE</span>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
+    const [activeTab, setActiveTab] = React.useState(0);
+    const [isHovered, setIsHovered] = React.useState(false);
+    const [isTyping, setIsTyping] = React.useState(true);
 
-                 {/* Interaction Cursor */}
-                 <div className="absolute -bottom-6 -right-6 bg-white text-navy-900 px-4 py-2 rounded-full shadow-xl flex items-center gap-2 animate-bounce z-20">
-                     <Users size={14} />
-                     <span className="text-xs font-bold uppercase tracking-wider">Clinician</span>
-                 </div>
-             </div>
+    const tabs = ['Notes', 'Diagnosis', 'Rx'];
+    const messages = [
+        { type: 'user', text: 'Patient reports chest pain...' },
+        { type: 'ai', text: 'Analyzing symptoms. Recommend ECG and cardiac enzymes.' },
+    ];
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setIsTyping(prev => !prev);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div 
+            className="relative w-full h-full flex items-center justify-center group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Ambient Particles */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
+                {[...Array(6)].map((_, i) => (
+                    <div 
+                        key={i}
+                        className="absolute w-2 h-2 bg-brand-blue/40 rounded-full blur-sm"
+                        style={{
+                            left: `${20 + i * 15}%`,
+                            animation: `ambientFloat ${5 + i}s ease-in-out infinite`,
+                            animationDelay: `${i * 0.5}s`
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* Main Container */}
+            <div className={`relative w-72 h-64 transform transition-all duration-700 ${isHovered ? 'rotate-x-0 rotate-y-0 scale-105' : 'rotate-x-12 -rotate-y-6 rotate-z-1'}`}>
+                
+                {/* Main Interface Panel */}
+                <div className="absolute inset-0 bg-navy-900 rounded-2xl shadow-2xl border border-white/10 overflow-hidden flex flex-col">
+                    
+                    {/* Window Header */}
+                    <div className="h-10 border-b border-white/10 bg-navy-950/50 flex items-center px-4 justify-between">
+                        <div className="flex gap-2">
+                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/30 border border-red-500/50 hover:bg-red-500 transition-colors cursor-pointer"></div>
+                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30 border border-yellow-500/50 hover:bg-yellow-500 transition-colors cursor-pointer"></div>
+                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/30 border border-green-500/50 hover:bg-green-500 transition-colors cursor-pointer"></div>
+                        </div>
+                        <div className="text-[9px] font-mono text-white/40 tracking-wider">CRASH Assistant v2.0</div>
+                        <div className="w-12"></div>
+                    </div>
+
+                    {/* Tab Bar */}
+                    <div className="flex border-b border-white/5">
+                        {tabs.map((tab, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setActiveTab(index)}
+                                className={`flex-1 py-2 text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
+                                    activeTab === index 
+                                        ? 'text-brand-blue border-b-2 border-brand-blue bg-white/5' 
+                                        : 'text-white/40 hover:text-white/60'
+                                }`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Content Area */}
+                    <div className="flex-1 p-3 flex flex-col gap-2 overflow-hidden relative">
+                        
+                        {/* Chat Messages */}
+                        {messages.map((msg, index) => (
+                            <div 
+                                key={index}
+                                className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                            >
+                                <div className={`max-w-[85%] px-3 py-2 rounded-xl text-[9px] leading-relaxed ${
+                                    msg.type === 'user' 
+                                        ? 'bg-white/10 text-white/80 rounded-br-none' 
+                                        : 'bg-brand-blue/20 text-brand-blue border border-brand-blue/30 rounded-bl-none'
+                                }`}>
+                                    {msg.type === 'ai' && (
+                                        <div className="flex items-center gap-1 mb-1">
+                                            <Cpu size={8} className="text-brand-blue" />
+                                            <span className="text-[7px] font-bold uppercase tracking-wider text-brand-blue/60">AI Assistant</span>
+                                        </div>
+                                    )}
+                                    {msg.text}
+                                </div>
+                            </div>
+                        ))}
+
+                        {/* Typing Indicator */}
+                        <div className={`flex justify-start transition-opacity duration-300 ${isTyping ? 'opacity-100' : 'opacity-0'}`}>
+                            <div className="bg-brand-blue/10 border border-brand-blue/20 px-3 py-2 rounded-xl rounded-bl-none">
+                                <div className="flex gap-1">
+                                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Grid Overlay */}
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:12px_12px] pointer-events-none"></div>
+                    </div>
+
+                    {/* Input Bar */}
+                    <div className="h-12 border-t border-white/10 bg-navy-950/30 flex items-center px-3 gap-2">
+                        <div className="flex-1 h-7 bg-white/5 rounded-full px-3 flex items-center">
+                            <span className="text-[9px] text-white/30">Type a message...</span>
+                        </div>
+                        <button className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center hover:bg-brand-blue/80 transition-colors">
+                            <ArrowRight size={12} className="text-white" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Floating Clinician Avatar */}
+                <div className={`absolute -bottom-4 -right-4 z-30 transition-all duration-500 ${isHovered ? 'translate-x-2 translate-y-2' : ''} animate-[floatAvatar_4s_ease-in-out_infinite]`}>
+                    <div className="relative">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 shadow-xl border-3 border-white flex items-center justify-center">
+                            <Users size={20} className="text-white" />
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-white flex items-center justify-center">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        </div>
+                    </div>
+                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white px-2 py-1 rounded-full shadow-lg">
+                        <span className="text-[8px] font-bold text-navy-900 uppercase tracking-wider">Dr. Sharma</span>
+                    </div>
+                </div>
+
+                {/* Floating AI Badge */}
+                <div className={`absolute -top-3 -left-3 z-30 transition-all duration-500 ${isHovered ? '-translate-x-2 -translate-y-2' : ''} animate-[floatBadge_5s_ease-in-out_infinite]`}>
+                    <div className="bg-gradient-to-r from-brand-blue to-purple-600 rounded-xl p-3 shadow-xl">
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+                                <Cpu size={16} className="text-white" />
+                            </div>
+                            <div>
+                                <div className="text-[9px] font-bold text-white">AI Copilot</div>
+                                <div className="text-[7px] text-white/60">Always Learning</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Workflow Indicator */}
+                <div className={`absolute top-1/2 -right-6 -translate-y-1/2 z-20 transition-all duration-500 ${isHovered ? 'translate-x-4' : ''}`}>
+                    <div className="flex flex-col gap-2">
+                        {['Input', 'Process', 'Output'].map((step, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                                <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-brand-blue animate-pulse' : 'bg-white/30'}`}></div>
+                                <span className={`text-[7px] font-bold uppercase tracking-wider ${i === 1 ? 'text-brand-blue' : 'text-white/30'}`}>{step}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Custom Animations */}
+            <style>{`
+                @keyframes ambientFloat {
+                    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+                    25% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+                    50% { transform: translateY(-10px) translateX(-5px); opacity: 0.4; }
+                    75% { transform: translateY(-30px) translateX(5px); opacity: 0.6; }
+                }
+                @keyframes floatAvatar {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-6px); }
+                }
+                @keyframes floatBadge {
+                    0%, 100% { transform: translateY(0) rotate(-2deg); }
+                    50% { transform: translateY(-8px) rotate(2deg); }
+                }
+            `}</style>
         </div>
     );
 };

@@ -282,7 +282,7 @@ const LogoSlider: React.FC = () => {
       
       <div className="container mx-auto px-6 md:px-12 mb-6">
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-          Collaborating with leading institutions
+          Collaborations
         </p>
       </div>
       
