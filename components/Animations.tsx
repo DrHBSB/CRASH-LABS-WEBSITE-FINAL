@@ -35,10 +35,10 @@ export const FadeIn: React.FC<FadeInProps> = ({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] transform ${
+      className={`transition-all duration-700 ease-out transform ${
         isVisible 
           ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-12'
+          : 'opacity-0 translate-y-4'
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -134,26 +134,17 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  const items = wordMode ? text.split(" ") : text.split("");
-
+  // Simplified: just fade in the whole text, no per-letter/word animation
   return (
-    <span ref={ref} className={`inline-block ${className}`} aria-label={text}>
-      {items.map((item, i) => (
-        <span
-          key={i}
-          className={`inline-block transition-all duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] ${
-            isVisible 
-              ? 'opacity-100 translate-y-0 tracking-normal blur-0' 
-              : 'opacity-0 translate-y-8 tracking-widest blur-sm'
-          }`}
-          style={{ 
-            transitionDelay: `${delay + (i * (wordMode ? 50 : 30))}ms`,
-            marginRight: wordMode ? '0.25em' : (item === " " ? '0.25em' : '0')
-          }}
-        >
-          {item === " " && !wordMode ? "\u00A0" : item}
-        </span>
-      ))}
+    <span 
+      ref={ref} 
+      className={`inline-block transition-opacity duration-500 ease-out ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+      aria-label={text}
+    >
+      {text}
     </span>
   );
 };
