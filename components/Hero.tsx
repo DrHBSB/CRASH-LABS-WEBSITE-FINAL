@@ -1,10 +1,11 @@
-import React from 'react';
-import { ArrowRight, FileText, ShieldCheck, BarChart3, Settings2, CheckCircle2 } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { ArrowRight, ShieldCheck, BarChart3, Settings2, CheckCircle2 } from 'lucide-react';
 import { FadeIn, AnimatedHeading, ParallaxImage } from './Animations';
+import gsap from 'gsap';
 
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="w-full relative pt-12 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-paper">
+    <section id="home" className="w-full relative pt-12 pb-0 lg:pt-24 lg:pb-0 overflow-hidden bg-paper">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
@@ -26,15 +27,19 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
             {/* Left Column: Text & CTA */}
-            <div className="flex flex-col items-start max-w-2xl relative z-10">
+            <div className="flex flex-col items-start max-w-xl relative z-10">
                 
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-medium text-navy-900 leading-[0.95] mb-8 tracking-tight">
-                    <AnimatedHeading text="Responsible AI" delay={0} className="block" />
-                    <span className="block mt-2">
-                        <AnimatedHeading text="built for" delay={300} wordMode={true} /> <span className="text-brand-blue"><AnimatedHeading text="Healthcare." delay={500} /></span>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium text-navy-900 leading-[0.95] mb-8 tracking-tight">
+                    <AnimatedHeading text="Responsible" delay={0} className="block" />
+                    <AnimatedHeading text="AI" delay={150} className="block" />
+                    <span className="block mt-1">
+                        <AnimatedHeading text="built for" delay={300} wordMode={true} />
+                    </span>
+                    <span className="block text-brand-blue">
+                        <AnimatedHeading text="Healthcare." delay={450} />
                     </span>
                 </h1>
                 
@@ -55,30 +60,16 @@ const Hero: React.FC = () => {
                         </a>
                     </div>
                 </FadeIn>
-
-                <FadeIn delay={800} className="w-full">
-                    <div className="mt-20 pt-8 border-t border-gray-200/60 w-full">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">
-                            Collaborating with leading institutions
-                        </p>
-                        <div className="flex flex-wrap gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                            <span className="text-xl font-serif font-medium text-navy-900 tracking-tight">Koita Foundation</span>
-                            <span className="text-lg font-bold font-sans text-navy-900 tracking-tight">IIT Bombay</span>
-                            <span className="text-lg font-serif italic text-navy-900">The Lancet</span>
-                            <span className="text-xl font-mono font-bold text-navy-900">RSNA</span>
-                        </div>
-                    </div>
-                </FadeIn>
             </div>
 
             {/* Right Column: Isometric Illustration - AI Eval Console */}
-            <FadeIn delay={400} className="hidden lg:block w-full">
-                <div className="relative h-[500px] w-full perspective-[2000px] group">
+            <FadeIn delay={400} className="hidden lg:flex justify-end w-full">
+                <div className="relative h-[480px] w-full max-w-[520px] perspective-[2000px] group">
                     {/* Main Transform Container */}
-                    <div className="relative w-full h-full transform rotate-x-12 -rotate-y-12 rotate-z-2 transition-transform duration-1000 ease-out group-hover:rotate-x-0 group-hover:rotate-y-0 group-hover:rotate-z-0">
+                    <div className="relative w-full h-full transform rotate-x-6 -rotate-y-6 transition-transform duration-1000 ease-out group-hover:rotate-x-0 group-hover:rotate-y-0">
                         
                         {/* Floating Plane 1: Eval Dashboard Console */}
-                        <div className="absolute top-10 left-10 right-10 bottom-10 bg-navy-900 rounded-xl border border-white/10 shadow-2xl overflow-hidden z-10 flex flex-col transition-all duration-500 group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]">
+                        <div className="absolute inset-0 bg-navy-900 rounded-xl border border-white/10 shadow-2xl overflow-hidden z-10 flex flex-col transition-all duration-500 group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]">
                             
                             {/* Window Header */}
                             <div className="h-10 border-b border-white/10 flex items-center px-4 justify-between bg-navy-950/50 backdrop-blur-sm relative z-20">
@@ -92,15 +83,15 @@ const Hero: React.FC = () => {
                             </div>
 
                             {/* Dashboard Content */}
-                            <div className="p-8 relative h-full">
+                            <div className="p-6 relative h-full">
                                 {/* Header Section */}
-                                <div className="flex justify-between items-end mb-8 relative z-10">
+                                <div className="flex justify-between items-end mb-6 relative z-10">
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
                                             <BarChart3 size={14} className="text-brand-blue" />
                                             <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest">Benchmark Suite</span>
                                         </div>
-                                        <div className="text-2xl font-serif text-white">RadLE v1.0 <span className="text-white/40 font-sans font-light text-sm ml-2">Clinical Reasoning</span></div>
+                                        <div className="text-xl font-serif text-white">RadLE v1.0 <span className="text-white/40 font-sans font-light text-sm ml-2">Clinical Reasoning</span></div>
                                     </div>
                                     <div className="px-2 py-1 bg-green-500/10 border border-green-500/20 rounded text-[10px] text-green-400 font-mono flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.2)]">
                                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-[pulse_2s_infinite]"></div>
@@ -115,7 +106,7 @@ const Hero: React.FC = () => {
                                         <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-blue to-purple-600 rounded-lg opacity-30 blur group-hover/row:opacity-50 transition duration-500"></div>
                                         <div className="relative flex items-center gap-4 p-4 bg-navy-800 border border-brand-blue/30 rounded-lg shadow-lg">
                                             <div className="w-8 h-8 rounded-lg bg-brand-blue flex items-center justify-center text-white font-bold text-xs shadow-inner">01</div>
-                                            <div className="w-32">
+                                            <div className="w-28">
                                                 <div className="text-sm font-bold text-white">Gemini 3.0</div>
                                                 <div className="text-[10px] text-blue-200">Google DeepMind</div>
                                             </div>
@@ -137,7 +128,7 @@ const Hero: React.FC = () => {
                                     {/* Row 2 */}
                                      <div className="flex items-center gap-4 p-3 bg-white/5 border border-white/5 rounded-lg opacity-80 hover:opacity-100 transition-opacity">
                                         <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-white/60 font-bold text-[10px]">02</div>
-                                        <div className="w-32">
+                                        <div className="w-28">
                                             <div className="text-sm font-medium text-gray-300">GPT-5 Pre</div>
                                             <div className="text-[10px] text-gray-500">OpenAI</div>
                                         </div>
@@ -150,7 +141,7 @@ const Hero: React.FC = () => {
                                     {/* Row 3 */}
                                      <div className="flex items-center gap-4 p-3 bg-white/5 border border-white/5 rounded-lg opacity-60 hover:opacity-100 transition-opacity">
                                         <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-white/60 font-bold text-[10px]">03</div>
-                                        <div className="w-32">
+                                        <div className="w-28">
                                             <div className="text-sm font-medium text-gray-300">Claude 3.5</div>
                                             <div className="text-[10px] text-gray-500">Anthropic</div>
                                         </div>
@@ -170,12 +161,12 @@ const Hero: React.FC = () => {
                         </div>
 
                         {/* Floating Element 2: Rubric Config Panel */}
-                        <div className="absolute -right-8 top-16 w-48 bg-white/10 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/20 z-20 animate-[float_6s_ease-in-out_infinite] group-hover:translate-x-8 group-hover:translate-y-4 transition-transform duration-700">
-                            <div className="flex items-center gap-2 mb-3 border-b border-white/10 pb-2">
+                        <div className="absolute -right-4 top-12 w-44 bg-white/10 backdrop-blur-xl rounded-lg p-3 shadow-2xl border border-white/20 z-20 animate-[float_6s_ease-in-out_infinite] group-hover:translate-x-4 group-hover:translate-y-2 transition-transform duration-700">
+                            <div className="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
                                 <Settings2 size={12} className="text-brand-blue" />
                                 <span className="text-[10px] text-white font-bold uppercase tracking-wider">Rubric Config</span>
                             </div>
-                            <div className="space-y-2">
+                            <div className="space-y-1.5">
                                 <div className="flex items-center gap-2 text-xs text-white/80 hover:text-white transition-colors">
                                     <CheckCircle2 size={10} className="text-green-400" />
                                     <span>Clinical Safety</span>
@@ -192,7 +183,7 @@ const Hero: React.FC = () => {
                         </div>
 
                         {/* Floating Element 3: Security Badge */}
-                        <div className="absolute -left-4 bottom-24 bg-white rounded-lg p-3 shadow-2xl border border-gray-100 z-20 animate-[floatDelayed_7s_ease-in-out_infinite] group-hover:-translate-x-8 group-hover:-translate-y-4 transition-transform duration-700">
+                        <div className="absolute -left-2 bottom-20 bg-white rounded-lg p-3 shadow-2xl border border-gray-100 z-20 animate-[floatDelayed_7s_ease-in-out_infinite] group-hover:-translate-x-4 group-hover:-translate-y-2 transition-transform duration-700">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-green-100 rounded-full text-green-600">
                                     <ShieldCheck size={16} />
@@ -215,6 +206,7 @@ const Hero: React.FC = () => {
             </FadeIn>
 
         </div>
+        
         <style>{`
             @keyframes float {
                 0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -234,7 +226,80 @@ const Hero: React.FC = () => {
             }
         `}</style>
       </div>
+
+      {/* Logo Slider Section */}
+      <LogoSlider />
     </section>
+  );
+};
+
+// Logo Slider Component with GSAP
+const LogoSlider: React.FC = () => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const logos = [
+    { name: 'Koita Foundation', style: 'font-serif font-medium text-xl' },
+    { name: 'IIT Bombay', style: 'font-bold font-sans text-lg' },
+    { name: 'The Lancet', style: 'font-serif italic text-xl' },
+    { name: 'RSNA', style: 'font-mono font-bold text-xl' },
+    { name: 'Stanford Medicine', style: 'font-serif font-medium text-lg' },
+    { name: 'MIT CSAIL', style: 'font-mono font-bold text-lg' },
+    { name: 'Mayo Clinic', style: 'font-serif text-xl' },
+    { name: 'Johns Hopkins', style: 'font-sans font-semibold text-lg' },
+  ];
+
+  useEffect(() => {
+    if (!trackRef.current) return;
+
+    const track = trackRef.current;
+    const items = track.children;
+    const totalWidth = Array.from(items).slice(0, logos.length).reduce((acc, item) => acc + (item as HTMLElement).offsetWidth + 64, 0);
+
+    // Set up infinite scroll animation
+    gsap.set(track, { x: 0 });
+    
+    const tween = gsap.to(track, {
+      x: -totalWidth,
+      duration: 30,
+      ease: 'none',
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize((x: number) => parseFloat(x as unknown as string) % totalWidth)
+      }
+    });
+
+    return () => {
+      tween.kill();
+    };
+  }, [logos.length]);
+
+  return (
+    <div className="w-full mt-16 lg:mt-24 py-8 border-t border-gray-200/60 overflow-hidden bg-paper relative">
+      {/* Gradient Masks */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-paper to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-paper to-transparent z-10 pointer-events-none"></div>
+      
+      <div className="container mx-auto px-6 md:px-12 mb-6">
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+          Collaborating with leading institutions
+        </p>
+      </div>
+      
+      <div ref={sliderRef} className="relative overflow-hidden">
+        <div ref={trackRef} className="flex items-center gap-16 whitespace-nowrap">
+          {/* Duplicate logos for seamless loop */}
+          {[...logos, ...logos, ...logos].map((logo, index) => (
+            <div
+              key={index}
+              className={`flex-shrink-0 text-navy-900 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-default select-none ${logo.style}`}
+            >
+              {logo.name}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
