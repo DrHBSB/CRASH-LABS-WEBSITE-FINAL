@@ -142,10 +142,10 @@ const FeaturedBlogCard: React.FC<FeaturedPostProps> = ({ post }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="grid lg:grid-cols-2 min-h-[500px]">
+      <div className="grid lg:grid-cols-2 min-h-[520px]">
         
         {/* Left Side: 3D Isometric Illustration */}
-        <div className="relative h-64 lg:h-auto overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-[#1a2744]">
+        <div className="relative min-h-[400px] lg:min-h-[520px] overflow-visible bg-gradient-to-br from-navy-950 via-navy-900 to-[#1a2744] flex items-center justify-center p-8">
           
           {/* Background Grid */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
@@ -154,11 +154,11 @@ const FeaturedBlogCard: React.FC<FeaturedPostProps> = ({ post }) => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl"></div>
 
           {/* 3D Isometric Elements Container */}
-          <div className="absolute inset-0 flex items-center justify-center perspective-[1500px]">
-            <div className={`relative w-80 h-80 transform transition-all duration-1000 ${isHovered ? 'rotate-x-0 rotate-y-0' : 'rotate-x-12 -rotate-y-12'}`}>
+          <div className="relative w-full max-w-md h-[380px]" style={{ perspective: '1500px' }}>
+            <div className={`relative w-full h-full transition-all duration-1000 ${isHovered ? '' : ''}`} style={{ transform: isHovered ? 'rotateX(0deg) rotateY(0deg)' : 'rotateX(12deg) rotateY(-12deg)', transformStyle: 'preserve-3d' }}>
               
               {/* Main Dashboard Panel */}
-              <div className="absolute top-8 left-4 right-4 h-64 bg-navy-800/90 backdrop-blur-sm rounded-2xl border border-white/10 shadow-2xl overflow-hidden z-10">
+              <div className="absolute top-8 left-4 right-4 h-72 bg-navy-800/90 backdrop-blur-sm rounded-2xl border border-white/10 shadow-2xl overflow-hidden z-10">
                 
                 {/* Window Header */}
                 <div className="h-8 border-b border-white/10 bg-navy-950/50 flex items-center px-4 gap-2">
@@ -222,7 +222,7 @@ const FeaturedBlogCard: React.FC<FeaturedPostProps> = ({ post }) => {
               </div>
 
               {/* Floating Stats Card */}
-              <div className={`absolute -right-4 top-4 bg-navy-800/90 backdrop-blur-xl rounded-xl p-4 shadow-2xl border border-white/10 z-20 transition-all duration-500 ${isHovered ? 'translate-x-4' : ''} animate-[floatCard_5s_ease-in-out_infinite]`}>
+              <div className={`absolute right-0 top-0 bg-navy-800/90 backdrop-blur-xl rounded-xl p-4 shadow-2xl border border-white/10 z-20 transition-all duration-500 ${isHovered ? 'translate-x-2' : ''}`} style={{ animation: 'floatCard 5s ease-in-out infinite' }}>
                 <div className="flex items-center gap-2 mb-2">
                   <FileText size={12} className="text-white/60" />
                   <span className="text-[9px] font-bold text-white/60 uppercase tracking-wider">Accuracy Delta</span>
@@ -232,7 +232,7 @@ const FeaturedBlogCard: React.FC<FeaturedPostProps> = ({ post }) => {
               </div>
 
               {/* Floating Chart Element */}
-              <div className={`absolute -left-2 bottom-8 bg-white rounded-xl p-3 shadow-2xl border border-gray-100 z-20 transition-all duration-500 ${isHovered ? '-translate-x-4' : ''} animate-[floatCardAlt_6s_ease-in-out_infinite]`}>
+              <div className={`absolute left-0 bottom-4 bg-white rounded-xl p-3 shadow-2xl border border-gray-100 z-20 transition-all duration-500 ${isHovered ? '-translate-x-2' : ''}`} style={{ animation: 'floatCardAlt 6s ease-in-out infinite' }}>
                 <div className="flex items-center gap-2">
                   <div className="p-2 bg-brand-blue/10 rounded-lg">
                     <TrendingUp size={16} className="text-brand-blue" />
@@ -246,18 +246,18 @@ const FeaturedBlogCard: React.FC<FeaturedPostProps> = ({ post }) => {
 
               {/* Connection Lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30">
-                <line x1="50%" y1="30%" x2="85%" y2="15%" stroke="#2C3E96" strokeWidth="1" strokeDasharray="4 4" className="animate-[dashMove_3s_linear_infinite]" />
-                <line x1="50%" y1="70%" x2="15%" y2="85%" stroke="#2C3E96" strokeWidth="1" strokeDasharray="4 4" className="animate-[dashMove_3s_linear_infinite_reverse]" />
+                <line x1="50%" y1="30%" x2="85%" y2="15%" stroke="#2C3E96" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite' }} />
+                <line x1="50%" y1="70%" x2="15%" y2="85%" stroke="#2C3E96" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite reverse' }} />
               </svg>
 
               {/* Floating Data Particles */}
-              {[...Array(8)].map((_, i) => (
+              {[...Array(6)].map((_, i) => (
                 <div 
                   key={i}
-                  className="absolute w-1 h-1 bg-brand-blue/60 rounded-full"
+                  className="absolute w-1.5 h-1.5 bg-brand-blue/60 rounded-full"
                   style={{
-                    left: `${20 + (i % 4) * 20}%`,
-                    top: `${10 + Math.floor(i / 4) * 80}%`,
+                    left: `${15 + (i % 3) * 30}%`,
+                    top: `${20 + Math.floor(i / 3) * 60}%`,
                     animation: `particleFloat ${3 + i * 0.5}s ease-in-out infinite`,
                     animationDelay: `${i * 0.3}s`
                   }}
@@ -265,9 +265,6 @@ const FeaturedBlogCard: React.FC<FeaturedPostProps> = ({ post }) => {
               ))}
             </div>
           </div>
-
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-navy-900/50 lg:hidden"></div>
         </div>
 
         {/* Right Side: Content */}
