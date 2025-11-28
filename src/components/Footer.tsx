@@ -1,82 +1,117 @@
 import React from 'react';
+import { ArrowUp, ArrowRight } from 'lucide-react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+    onNavigateHome?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer id="contact" className="bg-brand-blue pt-24 pb-12 text-white overflow-hidden">
+    <footer id="contact" className="bg-navy-900 text-white">
+      
+      {/* CTA Section */}
+      <div className="border-b border-white/10">
+        <div className="container mx-auto px-6 md:px-12 py-20 md:py-28">
+          <div className="max-w-3xl">
+            <h2 className="text-3xl md:text-5xl font-serif font-semibold text-white tracking-tight mb-6 leading-tight">
+              Let's Accelerate Healthcare AI Innovation Together
+            </h2>
+            <p className="text-lg text-white/60 mb-8 max-w-xl">
+              Whether you're a clinician, researcher, or industry partner — we'd love to collaborate.
+            </p>
+            <a 
+              href="mailto:contact@crashlab.in" 
+              className="group inline-flex items-center gap-3 px-6 py-3 bg-brand-blue text-white font-semibold rounded-full hover:bg-white hover:text-navy-900 transition-all duration-300"
+            >
+              Get in Touch
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      {/* Main Footer Content */}
       <div className="container mx-auto px-6 md:px-12">
         
-        {/* Main Call to Action */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
-            <div>
-                <h2 className="text-6xl md:text-8xl font-serif font-medium leading-[0.9] mb-8 tracking-tighter">
-                    Got a project <br/> <span className="italic opacity-70">in mind?</span>
-                </h2>
+        {/* Contact Info Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 py-12 lg:py-16 border-b border-white/10 gap-8 lg:gap-12">
+          
+          {/* Logo */}
+          <div 
+            className="cursor-pointer group"
+            onClick={() => { if(onNavigateHome) onNavigateHome(); scrollToTop(); }}
+          >
+            <div className="flex items-center gap-3">
+              <svg viewBox="0 0 100 100" className="w-10 h-10 fill-none stroke-current text-white group-hover:text-brand-blue transition-colors" strokeWidth="6" strokeLinecap="square">
+                <path d="M 85 28 A 42 42 0 1 0 85 72" />
+                <rect x="32" y="32" width="36" height="36" strokeWidth="5" />
+                <line x1="50" y1="50" x2="92" y2="50" strokeWidth="5" />
+                <circle cx="50" cy="50" r="6" className="fill-current stroke-none" />
+              </svg>
+              <span className="text-xl font-serif font-semibold text-white tracking-tight">
+                CRASH Lab
+              </span>
             </div>
-            <div className="flex flex-col justify-end items-start lg:items-end">
-                <p className="text-xl md:text-2xl font-sans text-white/80 max-w-md text-left lg:text-right mb-8 font-light">
-                    Tell us your idea and we'll get things in motion.
-                </p>
-                <a href="mailto:contact@crashlab.in" className="px-8 py-4 bg-white text-brand-blue font-bold rounded-full text-lg hover:bg-navy-900 hover:text-white transition-all duration-300">
-                    Get in touch
-                </a>
-            </div>
-        </div>
+            <p className="text-sm text-white/50 mt-4 max-w-xs">
+              Centre for Responsible AI in Healthcare at Koita Centre for Digital Health
+            </p>
+          </div>
 
-        {/* Info Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-white/20 pt-16 mb-24">
-            
-            <div className="md:col-span-5">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="text-white">
-                        <svg viewBox="0 0 100 100" className="w-12 h-12 fill-none stroke-current" strokeWidth="10" strokeLinecap="square">
-                        {/* Outer C */}
-                        <path d="M 85 28 A 42 42 0 1 0 85 72" />
-                        {/* Inner Square */}
-                        <rect x="32" y="32" width="36" height="36" strokeWidth="8" />
-                        {/* Center Line */}
-                        <line x1="50" y1="50" x2="92" y2="50" strokeWidth="8" />
-                        {/* Center Dot (Filled) */}
-                        <circle cx="50" cy="50" r="8" className="fill-current stroke-none" />
-                        </svg>
-                    </div>
-                    <span className="text-3xl font-sans font-bold text-white uppercase tracking-tight">
-                        Crash Lab
-                    </span>
-                </div>
-                <p className="text-white/60 text-sm font-sans">
-                    Responsible AI for Indian Healthcare.
-                </p>
+          {/* Contact */}
+          <div>
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-4">
+              Contact
+            </h3>
+            <div className="space-y-2 text-sm text-white/70">
+              <p>Koita Centre for Digital Health</p>
+              <p>Ashoka University</p>
+              <a 
+                href="mailto:contact@crashlab.in" 
+                className="hover:text-brand-blue transition-colors block"
+              >
+                contact@crashlab.in
+              </a>
             </div>
+          </div>
 
-            <div className="md:col-span-4">
-                <a href="mailto:hola@crashlab.in" className="text-2xl md:text-3xl font-sans font-medium hover:opacity-70 transition-opacity block mb-2 tracking-tight">
-                    contact@crashlab.in
-                </a>
-                <p className="text-white/60 text-lg">
-                    +91 22 2576 7000
-                </p>
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 mb-4">
+              Quick Links
+            </h3>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+              <a href="#research" className="text-white/70 hover:text-white transition-colors">Research</a>
+              <a href="#publications" className="text-white/70 hover:text-white transition-colors">Publications</a>
+              <a href="#mission" className="text-white/70 hover:text-white transition-colors">Mission</a>
+              <a href="#team" className="text-white/70 hover:text-white transition-colors">Team</a>
             </div>
-
-             <div className="md:col-span-3 text-right">
-                <p className="text-2xl font-serif">
-                    IIT Bombay, Powai<br/>
-                    Mumbai — 400076
-                </p>
-            </div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-[10px] font-bold tracking-[0.2em] uppercase text-white/40">
-            <div className="flex gap-6 mb-4 md:mb-0">
-                <a href="#" className="hover:text-white transition-colors">Instagram</a>
-                <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-                <a href="#" className="hover:text-white transition-colors">Twitter</a>
-            </div>
-            
-            <div className="flex gap-6">
-                <span>© 2024 CRASH Lab</span>
-                <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            </div>
+        <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-white/40">
+            © 2024 CRASH Lab. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-xs text-white/40 hover:text-white transition-colors">
+              LinkedIn
+            </a>
+            <a href="#" className="text-xs text-white/40 hover:text-white transition-colors">
+              Twitter
+            </a>
+            <button 
+              onClick={scrollToTop}
+              className="text-xs text-white/40 hover:text-white transition-colors flex items-center gap-1"
+            >
+              <ArrowUp size={12} />
+              Top
+            </button>
+          </div>
         </div>
 
       </div>

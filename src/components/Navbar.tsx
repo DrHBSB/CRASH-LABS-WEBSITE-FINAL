@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+    onNavigateHome?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -13,6 +17,15 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+      // If we are on home page (no onNavigateHome passed or just href="#home"), let default behavior happen
+      // If we are on blog page, prevent default and go home
+      if (onNavigateHome) {
+          e.preventDefault();
+          onNavigateHome();
+      }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -21,7 +34,7 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3 cursor-pointer z-50 group">
+        <a href="#home" onClick={handleLogoClick} className="flex items-center gap-3 cursor-pointer z-50 group">
           <div className="text-navy-900 group-hover:text-brand-blue transition-colors duration-300">
             <svg viewBox="0 0 100 100" className="w-10 h-10 fill-none stroke-current" strokeWidth="10" strokeLinecap="square">
               {/* Outer C */}
@@ -37,7 +50,7 @@ const Navbar: React.FC = () => {
           <span className="text-2xl font-sans font-bold text-navy-900 uppercase tracking-tight group-hover:text-brand-blue transition-colors duration-300">
             Crash Lab
           </span>
-        </div>
+        </a>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10">
@@ -45,6 +58,16 @@ const Navbar: React.FC = () => {
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
+              onClick={(e) => {
+                  if (onNavigateHome) {
+                      e.preventDefault();
+                      onNavigateHome();
+                      setTimeout(() => {
+                          const element = document.getElementById(item.toLowerCase());
+                          if (element) element.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                  }
+              }}
               className="text-xs font-medium uppercase tracking-[0.05em] text-navy-900 hover:text-brand-blue transition-colors"
             >
               {item}
@@ -76,8 +99,11 @@ const Navbar: React.FC = () => {
           <a
             key={item}
             href={`#${item.toLowerCase()}`}
-            className="text-4xl font-serif font-medium text-navy-900 tracking-tight hover:text-brand-blue"
-            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-4xl font-serif font-semibold text-navy-900 tracking-tight hover:text-brand-blue"
+            onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (onNavigateHome) onNavigateHome();
+            }}
           >
             {item}
           </a>
