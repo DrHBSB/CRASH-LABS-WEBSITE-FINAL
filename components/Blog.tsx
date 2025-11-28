@@ -43,7 +43,7 @@ const Blog: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 pb-8 border-b border-navy-900/10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 pb-8 border-b border-brand-blue/15">
           <FadeIn>
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue mb-3">Publications & Research</p>
             <h2 className="text-3xl md:text-5xl font-serif font-semibold text-navy-900 tracking-tight">
@@ -64,7 +64,7 @@ const Blog: React.FC = () => {
             <FadeIn key={post.id} delay={index * 100}>
               <a 
                 href="#" 
-                className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-navy-900/10 hover:bg-navy-900/[0.02] -mx-4 px-4 transition-colors"
+                className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-brand-blue/10 hover:bg-brand-blue/[0.03] -mx-4 px-4 transition-colors"
               >
                 <div className="flex-1 mb-4 md:mb-0">
                   {/* Meta */}

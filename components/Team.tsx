@@ -202,7 +202,7 @@ const Team: React.FC = () => {
 
         {/* Join the Team Section */}
         <FadeIn delay={400}>
-          <div className="mt-20 p-8 md:p-12 bg-navy-900 rounded-3xl relative overflow-hidden">
+          <div className="mt-20 p-8 md:p-12 bg-brand-blue rounded-2xl relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0" style={{
@@ -216,13 +216,13 @@ const Team: React.FC = () => {
                 <h3 className="text-2xl md:text-3xl font-serif font-semibold text-white mb-3">
                   Join the Team
                 </h3>
-                <p className="text-gray-400 max-w-lg">
+                <p className="text-white/70 max-w-lg">
                   We're always looking for passionate researchers, engineers, and clinicians to help shape the future of healthcare AI.
                 </p>
               </div>
               <a 
                 href="#contact" 
-                className="group flex items-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-bold uppercase tracking-wider rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
+                className="group flex items-center gap-3 px-8 py-4 bg-white text-brand-blue text-sm font-bold uppercase tracking-wider rounded-full hover:bg-navy-900 hover:text-white transition-all duration-300 whitespace-nowrap"
               >
                 Get in Touch
                 <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -233,7 +233,7 @@ const Team: React.FC = () => {
 
         {/* As Seen In Section */}
         <FadeIn delay={600}>
-          <div className="mt-32 border-t border-navy-900/10 pt-16">
+          <div className="mt-32 border-t border-brand-blue/15 pt-16">
             <div className="text-center text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-12">
               In Collaboration With
             </div>

@@ -57,9 +57,9 @@ const Hero: React.FC = () => {
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
            style={{ 
-             backgroundImage: 'radial-gradient(#CBD5E1 1px, transparent 1px)', 
-             backgroundSize: '40px 40px',
-             opacity: 0.4
+             backgroundImage: 'radial-gradient(#1a5f4a 0.5px, transparent 0.5px)', 
+             backgroundSize: '32px 32px',
+             opacity: 0.08
            }}>
       </div>
       
@@ -297,7 +297,7 @@ const LogoSlider: React.FC = () => {
 
     const track = trackRef.current;
     const items = track.children;
-    const totalWidth = Array.from(items).slice(0, logos.length).reduce((acc, item) => acc + (item as HTMLElement).offsetWidth + 64, 0);
+    const totalWidth: number = Array.from(items).slice(0, logos.length).reduce<number>((acc, item) => acc + (item as HTMLElement).offsetWidth + 64, 0);
 
     // Set up infinite scroll animation
     gsap.set(track, { x: 0 });
@@ -308,7 +308,7 @@ const LogoSlider: React.FC = () => {
       ease: 'none',
       repeat: -1,
       modifiers: {
-        x: gsap.utils.unitize((x: number) => parseFloat(x as unknown as string) % totalWidth)
+        x: (x: string): string => `${parseFloat(x) % totalWidth}px`
       }
     });
 
