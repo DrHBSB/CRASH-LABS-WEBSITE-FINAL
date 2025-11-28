@@ -3,7 +3,11 @@ import { ArrowRight, ShieldCheck, BarChart3, Settings2, CheckCircle2 } from 'luc
 import { ParallaxImage } from './Animations';
 import gsap from 'gsap';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onPartnerClick?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
   const heroTextRef = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLSpanElement>(null);
   const line2Ref = useRef<HTMLSpanElement>(null);
@@ -100,9 +104,12 @@ const Hero: React.FC = () => {
                         Join the Team
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
-                    <a href="#contact" className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200">
+                    <button 
+                      onClick={onPartnerClick}
+                      className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200"
+                    >
                         Industry Partners
-                    </a>
+                    </button>
                 </div>
             </div>
 
