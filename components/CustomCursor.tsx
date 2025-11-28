@@ -156,7 +156,7 @@ const CustomCursor: React.FC = () => {
         }`}
         style={{
           ...getCursorStyle(),
-          borderColor: isButton ? '#2C3E96' : cursorColor,
+          borderColor: isButton ? '#1a5f4a' : cursorColor,
           background: isButton ? 'rgba(44, 62, 150, 0.08)' : 'transparent',
           transition: isButton 
             ? 'left 0.15s ease-out, top 0.15s ease-out, width 0.15s ease-out, height 0.15s ease-out, border-radius 0.15s ease-out, opacity 0.2s' 

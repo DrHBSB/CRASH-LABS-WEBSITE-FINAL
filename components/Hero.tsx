@@ -122,7 +122,7 @@ const Hero: React.FC = () => {
                                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
                                     <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
                                 </div>
-                                <div className="text-[10px] font-mono text-blue-200/50 tracking-wider">eval_results_final.csv</div>
+                                <div className="text-[10px] font-mono text-emerald-200/50 tracking-wider">eval_results_final.csv</div>
                                 <div className="w-4"></div> 
                             </div>
 
@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
                                             <div className="w-8 h-8 rounded-lg bg-brand-blue flex items-center justify-center text-white font-bold text-xs shadow-inner">01</div>
                                             <div className="w-28">
                                                 <div className="text-sm font-bold text-white">Gemini 3.0</div>
-                                                <div className="text-[10px] text-blue-200">Google DeepMind</div>
+                                                <div className="text-[10px] text-emerald-200">Google DeepMind</div>
                                             </div>
                                             <div className="flex-1 flex flex-col gap-1">
                                                 <div className="flex justify-between text-[10px] text-white/60">

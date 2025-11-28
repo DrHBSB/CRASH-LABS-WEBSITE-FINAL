@@ -124,7 +124,7 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
                         <div className="w-6 h-6 rounded bg-brand-blue flex items-center justify-center text-white font-bold text-[10px]">01</div>
                         <div className="flex-1">
                           <div className="text-xs font-bold text-white">Gemini 3.0 Pro</div>
-                          <div className="text-[9px] text-blue-200/60">Google DeepMind</div>
+                          <div className="text-[9px] text-emerald-200/60">Google DeepMind</div>
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-mono font-bold text-green-400">92.3%</div>
@@ -185,8 +185,8 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
 
               {/* Connection Lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30">
-                <line x1="50%" y1="30%" x2="85%" y2="15%" stroke="#2C3E96" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite' }} />
-                <line x1="50%" y1="70%" x2="15%" y2="85%" stroke="#2C3E96" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite reverse' }} />
+                <line x1="50%" y1="30%" x2="85%" y2="15%" stroke="#1a5f4a" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite' }} />
+                <line x1="50%" y1="70%" x2="15%" y2="85%" stroke="#1a5f4a" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite reverse' }} />
               </svg>
 
               {/* Floating Data Particles */}
@@ -220,7 +220,7 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
           </div>
 
           {/* Title */}
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white leading-[1.1] mb-6 group-hover:text-blue-100 transition-colors">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white leading-[1.1] mb-6 group-hover:text-emerald-100 transition-colors">
             Gemini 3.0 Pro Surpasses Radiology Trainees on Radiology's Last Exam (RadLE)
           </h3>
 

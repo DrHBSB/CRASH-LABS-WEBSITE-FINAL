@@ -262,7 +262,7 @@ const DataCommonsIso = () => {
                             {/* Center Icon */}
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
                                 <Database className={`w-10 h-10 mb-1 transition-all duration-300 ${isHovered ? 'text-white scale-110' : 'text-white/90'}`} strokeWidth={1.5} />
-                                <div className="text-[8px] font-mono text-blue-200 uppercase tracking-widest">Federated</div>
+                                <div className="text-[8px] font-mono text-emerald-200 uppercase tracking-widest">Federated</div>
                             </div>
                             
                             {/* Pulse Effect */}
@@ -330,9 +330,9 @@ const DataCommonsIso = () => {
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
                     <defs>
                         <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#2C3E96" stopOpacity="0.8" />
+                            <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0.8" />
                             <stop offset="50%" stopColor="#8B5CF6" stopOpacity="1" />
-                            <stop offset="100%" stopColor="#2C3E96" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="#1a5f4a" stopOpacity="0.8" />
                         </linearGradient>
                         <filter id="glow">
                             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -374,7 +374,7 @@ const DataCommonsIso = () => {
                                 {/* Data packet animation */}
                                 <circle
                                     r="3"
-                                    fill="#2C3E96"
+                                    fill="#1a5f4a"
                                     className="animate-[packetMove_2s_linear_infinite]"
                                     style={{ animationDelay: `${index * 0.5}s` }}
                                 >
@@ -487,7 +487,7 @@ const StandardsIso = () => {
                             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
                             <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
                         </div>
-                        <div className="text-[9px] font-mono text-blue-200/50 tracking-wider">benchmark_v2.json</div>
+                        <div className="text-[9px] font-mono text-emerald-200/50 tracking-wider">benchmark_v2.json</div>
                         <div className="w-4"></div>
                     </div>
 
@@ -608,9 +608,9 @@ const StandardsIso = () => {
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40" style={{ transform: 'translateZ(-20px)' }}>
                     <defs>
                         <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#2C3E96" stopOpacity="0" />
-                            <stop offset="50%" stopColor="#2C3E96" stopOpacity="1" />
-                            <stop offset="100%" stopColor="#2C3E96" stopOpacity="0" />
+                            <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0" />
+                            <stop offset="50%" stopColor="#1a5f4a" stopOpacity="1" />
+                            <stop offset="100%" stopColor="#1a5f4a" stopOpacity="0" />
                         </linearGradient>
                     </defs>
                     <line x1="10%" y1="20%" x2="90%" y2="20%" stroke="url(#dataGradient)" strokeWidth="1" strokeDasharray="4 4" className="animate-[dashMove_2s_linear_infinite]" />
@@ -682,7 +682,7 @@ const ModelsIso = () => {
                                     cx={x} 
                                     cy={y} 
                                     r="4" 
-                                    fill="#2C3E96"
+                                    fill="#1a5f4a"
                                     className="animate-[nodePulse_2s_ease-in-out_infinite]"
                                     style={{ animationDelay: `${i * 0.15}s` }}
                                 />
@@ -693,7 +693,7 @@ const ModelsIso = () => {
                                         y1={y} 
                                         x2={30 + ((i + 4) % 4) * 50} 
                                         y2={y + 60}
-                                        stroke="#2C3E96"
+                                        stroke="#1a5f4a"
                                         strokeWidth="0.5"
                                         strokeOpacity="0.3"
                                         className="animate-[lineFlow_3s_linear_infinite]"
@@ -726,8 +726,8 @@ const ModelsIso = () => {
                             <svg className="absolute inset-0 w-full h-full">
                                 <defs>
                                     <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#2C3E96" stopOpacity="0" />
-                                        <stop offset="50%" stopColor="#2C3E96" stopOpacity="1" />
+                                        <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0" />
+                                        <stop offset="50%" stopColor="#1a5f4a" stopOpacity="1" />
                                         <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
                                     </linearGradient>
                                 </defs>
@@ -823,7 +823,7 @@ const ModelsIso = () => {
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
                     <defs>
                         <linearGradient id="connectionGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#2C3E96" stopOpacity="0.8" />
+                            <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0.8" />
                             <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.2" />
                         </linearGradient>
                     </defs>

@@ -296,7 +296,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
               className="w-24 h-24 rounded-full flex items-center justify-center bg-gray-300 text-gray-600"
               style={{
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                backgroundColor: member.isLead ? '#2C3E96' : (isHovered ? '#0F172A' : '#D1D5DB'),
+                backgroundColor: member.isLead ? '#1a5f4a' : (isHovered ? '#0F172A' : '#D1D5DB'),
                 color: member.isLead || isHovered ? '#FFFFFF' : '#4B5563'
               }}
             >
@@ -320,7 +320,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
             className="text-lg font-bold font-serif leading-tight mb-1 text-navy-900"
             style={{
               transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              color: isHovered ? '#2C3E96' : '#0F172A'
+              color: isHovered ? '#1a5f4a' : '#0F172A'
             }}
           >
             {member.name}
