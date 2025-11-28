@@ -42,7 +42,7 @@ const MissionVision: React.FC = () => {
         
         {/* Section 1: Mission */}
         <div className="py-12 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12 relative">
-            <div ref={borderRef1} className="absolute top-0 left-0 right-0 h-px bg-brand-blue/20" />
+            <div ref={borderRef1} className="absolute top-0 left-0 right-0 h-px bg-navy-900/10" />
             <div className="md:col-span-4">
                 <FadeIn>
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue mb-3">01 — Mission</p>
@@ -62,7 +62,7 @@ const MissionVision: React.FC = () => {
 
         {/* Section 2: Vision */}
         <div className="py-12 md:py-20 grid md:grid-cols-12 gap-6 md:gap-12 relative">
-            <div ref={borderRef2} className="absolute top-0 left-0 right-0 h-px bg-brand-blue/20" />
+            <div ref={borderRef2} className="absolute top-0 left-0 right-0 h-px bg-navy-900/10" />
             <div className="md:col-span-4 flex justify-between items-start">
                  <FadeIn>
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue mb-3">02 — Vision</p>

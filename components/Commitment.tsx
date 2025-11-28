@@ -6,17 +6,14 @@ const Commitment: React.FC = () => {
     <section className="py-12 bg-paper">
       <div className="container mx-auto px-6 md:px-12">
         <FadeIn>
-            <div className="relative w-full rounded-2xl overflow-hidden bg-brand-dark text-white p-8 md:p-20 min-h-[550px] flex items-end">
-                
-                {/* Green gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/30 via-transparent to-transparent pointer-events-none" />
+            <div className="relative w-full rounded-2xl overflow-hidden bg-navy-900 text-white p-8 md:p-20 min-h-[550px] flex items-end">
                 
                 {/* Parallax Background */}
                 <ParallaxImage 
                     src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                     alt="Commitment Texture"
                     className="absolute inset-0 w-full h-full"
-                    imageClassName="opacity-30 mix-blend-overlay"
+                    imageClassName="opacity-40 mix-blend-overlay"
                     speed={0.15}
                 />
                 

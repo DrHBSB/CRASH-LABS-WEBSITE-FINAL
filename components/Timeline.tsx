@@ -94,18 +94,11 @@ const Timeline: React.FC = () => {
                 </div>
 
                 <FadeIn delay={600}>
-                    <div className="mt-24 bg-brand-blue text-white p-10 md:p-16 rounded-2xl relative overflow-hidden">
-                        {/* Subtle pattern */}
-                        <div className="absolute inset-0 opacity-10" style={{
-                          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                          backgroundSize: '24px 24px'
-                        }} />
-                        <div className="relative z-10">
-                          <h3 className="text-3xl md:text-4xl font-serif font-semibold mb-6 text-white">Future Outlook</h3>
-                          <p className="text-lg md:text-xl font-sans font-normal leading-relaxed text-white/90">
-                              Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
-                          </p>
-                        </div>
+                    <div className="mt-24 bg-navy-900 text-white p-10 md:p-16 rounded-2xl">
+                        <h3 className="text-3xl md:text-4xl font-serif font-semibold mb-6 text-white">Future Outlook</h3>
+                        <p className="text-lg md:text-xl font-sans font-normal leading-relaxed text-white/90">
+                            Expanding collaborations across India and internationally, building the infrastructure for the next generation of responsible healthcare AI. We aim to scale our "Data Commons" to 50+ hospitals by 2026.
+                        </p>
                     </div>
                 </FadeIn>
             </div>
