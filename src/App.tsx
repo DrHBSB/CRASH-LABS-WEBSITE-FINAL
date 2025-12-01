@@ -11,9 +11,11 @@ import Blog from './components/Blog';
 import Footer from './components/Footer';
 import BlogPost from './components/BlogPost';
 import CustomCursor from './components/CustomCursor';
+import PartnershipModal from './components/PartnershipModal';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'home' | 'blog'>('home');
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
 
   const navigateToBlog = () => {
     setCurrentView('blog');
@@ -41,7 +43,7 @@ const App: React.FC = () => {
       <main className="flex-grow pt-16">
         {currentView === 'home' ? (
           <>
-            <Hero />
+            <Hero onPartnerClick={() => setIsPartnerModalOpen(true)} />
             <MissionVision />
             <WhyCrashLab onReadMore={navigateToBlog} />
             <Commitment />
@@ -56,6 +58,12 @@ const App: React.FC = () => {
       </main>
       
       <Footer onNavigateHome={navigateToHome} />
+      
+      {/* Partnership Modal */}
+      <PartnershipModal 
+        isOpen={isPartnerModalOpen} 
+        onClose={() => setIsPartnerModalOpen(false)} 
+      />
     </div>
   );
 };

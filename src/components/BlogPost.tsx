@@ -39,7 +39,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ onBack }) => {
                             <span className="px-3 py-1 bg-brand-blue text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Benchmark Update</span>
                         </div>
                         <h2 className="text-3xl md:text-5xl font-serif text-white leading-tight">
-                            Gemini 3.0 Pro <span className="text-blue-200">Surpasses Trainees</span>
+                            Gemini 3.0 Pro <span className="text-emerald-200">Surpasses Trainees</span>
                         </h2>
                     </div>
                     

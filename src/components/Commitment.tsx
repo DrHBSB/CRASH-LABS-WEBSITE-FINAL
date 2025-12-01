@@ -6,7 +6,7 @@ const Commitment: React.FC = () => {
     <section className="py-12 bg-paper">
       <div className="container mx-auto px-6 md:px-12">
         <FadeIn>
-            <div className="relative w-full rounded-2xl overflow-hidden bg-navy-900 text-white p-8 md:p-20 min-h-[600px] flex items-end">
+            <div className="relative w-full rounded-2xl overflow-hidden bg-navy-900 text-white p-8 md:p-20 min-h-[550px] flex items-end">
                 
                 {/* Parallax Background */}
                 <ParallaxImage 
@@ -20,14 +20,14 @@ const Commitment: React.FC = () => {
                 <div className="relative z-10 max-w-4xl">
                     <FadeIn delay={200}>
                         <p className="font-serif font-semibold text-3xl md:text-5xl lg:text-6xl leading-[1.1] mb-8 text-white tracking-tight">
-                            “We believe in open science, ethical AI development, and radical collaboration. Every tool we build is designed with safety, fairness, and real-world impact at its core.”
+                            "We believe in open science, ethical AI development, and radical collaboration. Every tool we build is designed with safety, fairness, and real-world impact at its core."
                         </p>
                     </FadeIn>
                     
                     <FadeIn delay={400}>
                         <div className="flex flex-col md:flex-row md:items-center gap-4 text-xs font-sans tracking-[0.2em] uppercase text-white/70 mt-12 font-bold">
-                            <span className="text-white">Our Commitment</span>
-                            <span className="hidden md:block w-8 h-px bg-white/30"></span>
+                            <span className="text-brand-blue">Our Commitment</span>
+                            <span className="hidden md:block w-8 h-px bg-brand-blue/50"></span>
                             <span>Supported by the Koita Foundation</span>
                         </div>
                     </FadeIn>

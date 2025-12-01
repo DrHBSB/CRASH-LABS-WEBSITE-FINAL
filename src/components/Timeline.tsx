@@ -78,7 +78,7 @@ const Timeline: React.FC = () => {
                                 <h3 
                                   className="text-2xl md:text-3xl font-serif font-normal text-navy-900 leading-tight tracking-tight"
                                   style={{ transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
-                                  onMouseEnter={(e) => e.currentTarget.style.color = '#2C3E96'}
+                                  onMouseEnter={(e) => e.currentTarget.style.color = '#1a5f4a'}
                                   onMouseLeave={(e) => e.currentTarget.style.color = '#0F172A'}
                                 >
                                     {event.title}

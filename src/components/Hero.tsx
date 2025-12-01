@@ -3,7 +3,11 @@ import { ArrowRight, ShieldCheck, BarChart3, Settings2, CheckCircle2 } from 'luc
 import { ParallaxImage } from './Animations';
 import gsap from 'gsap';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onPartnerClick?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
   const heroTextRef = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLSpanElement>(null);
   const line2Ref = useRef<HTMLSpanElement>(null);
@@ -100,9 +104,12 @@ const Hero: React.FC = () => {
                         Join the Team
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
-                    <a href="#contact" className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200">
+                    <button 
+                      onClick={onPartnerClick}
+                      className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200"
+                    >
                         Industry Partners
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -122,7 +129,7 @@ const Hero: React.FC = () => {
                                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
                                     <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
                                 </div>
-                                <div className="text-[10px] font-mono text-blue-200/50 tracking-wider">eval_results_final.csv</div>
+                                <div className="text-[10px] font-mono text-emerald-200/50 tracking-wider">eval_results_final.csv</div>
                                 <div className="w-4"></div> 
                             </div>
 
@@ -152,7 +159,7 @@ const Hero: React.FC = () => {
                                             <div className="w-8 h-8 rounded-lg bg-brand-blue flex items-center justify-center text-white font-bold text-xs shadow-inner">01</div>
                                             <div className="w-28">
                                                 <div className="text-sm font-bold text-white">Gemini 3.0</div>
-                                                <div className="text-[10px] text-blue-200">Google DeepMind</div>
+                                                <div className="text-[10px] text-emerald-200">Google DeepMind</div>
                                             </div>
                                             <div className="flex-1 flex flex-col gap-1">
                                                 <div className="flex justify-between text-[10px] text-white/60">
@@ -297,7 +304,7 @@ const LogoSlider: React.FC = () => {
 
     const track = trackRef.current;
     const items = track.children;
-    const totalWidth = Array.from(items).slice(0, logos.length).reduce((acc, item) => acc + (item as HTMLElement).offsetWidth + 64, 0);
+    const totalWidth: number = Array.from(items).slice(0, logos.length).reduce<number>((acc, item) => acc + (item as HTMLElement).offsetWidth + 64, 0);
 
     // Set up infinite scroll animation
     gsap.set(track, { x: 0 });
@@ -308,7 +315,7 @@ const LogoSlider: React.FC = () => {
       ease: 'none',
       repeat: -1,
       modifiers: {
-        x: gsap.utils.unitize((x: number) => parseFloat(x as unknown as string) % totalWidth)
+        x: (x: string): string => `${parseFloat(x) % totalWidth}px`
       }
     });
 
