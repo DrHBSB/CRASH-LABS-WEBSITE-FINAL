@@ -8,36 +8,42 @@ const teamMembers = [
     name: "Dr. Suvrankar Datta", 
     role: "Group Lead", 
     initials: "SD",
+    image: "/images/team/suvrankar-datta.jpeg",
     isLead: true
   },
   { 
     name: "Dr. Hakikat Bir Singh Bhatti", 
     role: "Researcher", 
     initials: "HB",
+    image: "/images/team/hakikat-bhatti.jpeg",
     isLead: false
   },
   { 
     name: "Kautik Singh", 
     role: "Researcher", 
     initials: "KS",
+    image: "/images/team/kautik-singh.jpeg",
     isLead: false
   },
   { 
     name: "Dr. Mrudula Bhalke", 
     role: "Researcher", 
     initials: "MB",
+    image: "/images/team/mrudula-bhalke.jpeg",
     isLead: false
   },
   { 
     name: "Dr. Lakshmi Vennela Chowdary Kaza", 
     role: "Researcher", 
     initials: "LK",
+    image: "/images/team/lakshmi-kaza.jpeg",
     isLead: false
   },
   { 
     name: "Siddharth Reddy Anthireddy", 
     role: "Researcher", 
     initials: "SA",
+    image: "/images/team/siddharth-reddy.jpeg",
     isLead: false
   },
   { 
@@ -288,21 +294,42 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
       onMouseLeave={handleMouseLeave}
     >
       <div ref={cardRef} className="relative">
-        {/* Placeholder Container */}
+        {/* Photo Container */}
         <div className="relative aspect-[3/4] overflow-hidden mb-5 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200">
-          {/* Placeholder with Initials */}
-          <div className="w-full h-full flex items-center justify-center">
-            <div 
-              className="w-24 h-24 rounded-full flex items-center justify-center bg-gray-300 text-gray-600"
-              style={{
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                backgroundColor: member.isLead ? '#1a5f4a' : (isHovered ? '#0F172A' : '#D1D5DB'),
-                color: member.isLead || isHovered ? '#FFFFFF' : '#4B5563'
-              }}
-            >
-              <span className="text-2xl font-bold font-serif tracking-tight">{member.initials}</span>
+          {member.image ? (
+            <>
+              {/* Actual Photo */}
+              <img 
+                src={member.image} 
+                alt={member.name}
+                className="w-full h-full object-cover transition-transform duration-500 ease-out"
+                style={{
+                  transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                }}
+              />
+              {/* Hover Overlay */}
+              <div 
+                className="absolute inset-0 bg-navy-900/0 transition-all duration-300"
+                style={{
+                  backgroundColor: isHovered ? 'rgba(15, 23, 42, 0.1)' : 'rgba(15, 23, 42, 0)'
+                }}
+              />
+            </>
+          ) : (
+            /* Fallback with Initials */
+            <div className="w-full h-full flex items-center justify-center">
+              <div 
+                className="w-24 h-24 rounded-full flex items-center justify-center bg-gray-300 text-gray-600"
+                style={{
+                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                  backgroundColor: member.isLead ? '#1a5f4a' : (isHovered ? '#0F172A' : '#D1D5DB'),
+                  color: member.isLead || isHovered ? '#FFFFFF' : '#4B5563'
+                }}
+              >
+                <span className="text-2xl font-bold font-serif tracking-tight">{member.initials}</span>
+              </div>
             </div>
-          </div>
+          )}
           
           {/* Lead Badge */}
           {member.isLead && (
