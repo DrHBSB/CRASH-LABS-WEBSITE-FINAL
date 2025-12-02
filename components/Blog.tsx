@@ -61,10 +61,11 @@ const posts = [
     id: 7,
     category: "Benchmark",
     date: "2025",
-    title: "Radiology's Last Exam",
-    venue: "CRASH Lab",
+    title: "Radiology's Last Exam (RadLE)",
+    venue: "arXiv",
     author: "CRASH Lab",
-    description: "A comprehensive benchmark for evaluating AI clinical reasoning in radiology"
+    description: "Benchmarking frontier multimodal AI against human experts with a taxonomy of visual reasoning errors in radiology. Part of work accepted at RSNA 2025 (Cutting Edge Oral Presentation).",
+    link: "https://arxiv.org/abs/2509.25559"
   }
 ];
 
@@ -92,39 +93,78 @@ const Blog: React.FC = () => {
         <div className="space-y-0">
           {posts.map((post, index) => (
             <FadeIn key={post.id} delay={index * 100}>
-              <div 
-                className="group flex flex-col md:flex-row md:items-start justify-between py-6 md:py-8 border-b border-navy-900/10 -mx-4 px-4"
-              >
-                <div className="flex-1 mb-4 md:mb-0">
-                  {/* Meta */}
-                  <div className="flex items-center gap-3 mb-2 text-[10px] font-bold uppercase tracking-[0.15em]">
-                    <span className="text-brand-blue">{post.category}</span>
-                    <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                    <span className="text-gray-400">{post.date}</span>
+              {post.link ? (
+                <a 
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col md:flex-row md:items-start justify-between py-6 md:py-8 border-b border-navy-900/10 -mx-4 px-4 hover:bg-navy-900/[0.02] transition-colors"
+                >
+                  <div className="flex-1 mb-4 md:mb-0">
+                    {/* Meta */}
+                    <div className="flex items-center gap-3 mb-2 text-[10px] font-bold uppercase tracking-[0.15em]">
+                      <span className="text-brand-blue">{post.category}</span>
+                      <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                      <span className="text-gray-400">{post.date}</span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-lg md:text-xl font-serif font-semibold text-navy-900 leading-snug pr-8 group-hover:text-brand-blue transition-colors">
+                      {post.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-sm text-gray-500 mt-2 pr-8 leading-relaxed">
+                      {post.description}
+                    </p>
                   </div>
                   
-                  {/* Title */}
-                  <h3 className="text-lg md:text-xl font-serif font-semibold text-navy-900 leading-snug pr-8">
-                    {post.title}
-                  </h3>
+                  {/* Right side info */}
+                  <div className="flex items-center gap-6 md:gap-8 md:mt-6">
+                    <div className="hidden md:block text-right">
+                      <div className="text-sm font-medium text-navy-900">{post.venue}</div>
+                      <div className="text-xs text-gray-500">{post.author}</div>
+                    </div>
+                    <div className="w-10 h-10 rounded-full border border-navy-900/10 flex items-center justify-center group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:text-white text-navy-900 transition-all">
+                      <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </a>
+              ) : (
+                <div 
+                  className="group flex flex-col md:flex-row md:items-start justify-between py-6 md:py-8 border-b border-navy-900/10 -mx-4 px-4"
+                >
+                  <div className="flex-1 mb-4 md:mb-0">
+                    {/* Meta */}
+                    <div className="flex items-center gap-3 mb-2 text-[10px] font-bold uppercase tracking-[0.15em]">
+                      <span className="text-brand-blue">{post.category}</span>
+                      <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                      <span className="text-gray-400">{post.date}</span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-lg md:text-xl font-serif font-semibold text-navy-900 leading-snug pr-8">
+                      {post.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-sm text-gray-500 mt-2 pr-8 leading-relaxed">
+                      {post.description}
+                    </p>
+                  </div>
                   
-                  {/* Description */}
-                  <p className="text-sm text-gray-500 mt-2 pr-8 leading-relaxed">
-                    {post.description}
-                  </p>
-                </div>
-                
-                {/* Right side info */}
-                <div className="flex items-center gap-6 md:gap-8 md:mt-6">
-                  <div className="hidden md:block text-right">
-                    <div className="text-sm font-medium text-navy-900">{post.venue}</div>
-                    <div className="text-xs text-gray-500">{post.author}</div>
-                  </div>
-                  <div className="px-3 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-medium">
-                    Coming Soon
+                  {/* Right side info */}
+                  <div className="flex items-center gap-6 md:gap-8 md:mt-6">
+                    <div className="hidden md:block text-right">
+                      <div className="text-sm font-medium text-navy-900">{post.venue}</div>
+                      <div className="text-xs text-gray-500">{post.author}</div>
+                    </div>
+                    <div className="px-3 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-medium">
+                      Coming Soon
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </FadeIn>
           ))}
         </div>
