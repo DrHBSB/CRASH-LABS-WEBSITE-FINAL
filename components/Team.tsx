@@ -221,7 +221,7 @@ const Team: React.FC = () => {
                 </p>
               </div>
               <a 
-                href="#contact" 
+                href="mailto:Suvrankar.datta@ashoka.edu.in" 
                 className="group flex items-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-bold uppercase tracking-wider rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
               >
                 Get in Touch

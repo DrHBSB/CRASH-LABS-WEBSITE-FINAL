@@ -5,35 +5,66 @@ import { FadeIn, AnimatedHeading } from './Animations';
 const posts = [
   {
     id: 1,
-    category: "Research Paper",
-    date: "OCT 2024",
-    title: "Federated Learning in Indian Hospitals: A Multi-site Case Study",
-    venue: "NeurIPS 2024",
-    author: "CRASH Team"
+    category: "Accepted Abstract",
+    date: "RSNA 2025",
+    title: "Learning to Write Like a Radiologist: Multidimensional Evaluation and Benchmarking of Autonomous Optimization Pipelines for Hyper-Personalized Head CT Report Generation",
+    venue: "RSNA 2025",
+    author: "CRASH Lab",
+    description: "Multidimensional evaluation framework for autonomous optimization pipelines in personalized head CT report generation"
   },
   {
     id: 2,
-    category: "Publication",
-    date: "SEP 2024",
-    title: "Bridging the Gap: Measuring AI Trust among Rural Radiologists",
-    venue: "The Lancet Digital Health",
-    author: "Dr. Mrudula Bhalke"
+    category: "Accepted Abstract",
+    date: "RSNA 2025",
+    title: "Stress-Test and Radiologist Blinded Validation of Multimodal Foundation Models on an Unseen Chest Radiograph Dataset Using a Novel Multi-Metric Evaluation Framework",
+    venue: "RSNA 2025",
+    author: "CRASH Lab",
+    description: "Comprehensive evaluation framework for multimodal foundation models in chest radiograph analysis with radiologist-blinded validation"
   },
   {
     id: 3,
-    category: "Conference",
-    date: "AUG 2024",
-    title: "New Framework for Algorithmic Bias Detection in Medical Imaging",
-    venue: "RSNA 2024",
-    author: "Siddharth Reddy"
+    category: "Accepted Abstract",
+    date: "RSNA 2025",
+    title: "Style-Aware Radiology Reporting: A Scalable Autonomous Optimisation Pipeline for Improving Head CT Report Generation Quality",
+    venue: "RSNA 2025",
+    author: "CRASH Lab",
+    description: "Scalable autonomous optimization pipeline focused on style-aware improvements in head CT report generation"
   },
   {
     id: 4,
-    category: "Preprint",
-    date: "JUL 2024",
-    title: "Context-Aware Foundation Models for South Asian Healthcare",
-    venue: "arXiv",
-    author: "Dr. Suvrankar Datta"
+    category: "Accepted Abstract",
+    date: "RSNA 2025",
+    title: "Towards Hyper-Personalised Radiology Reporting: A Scalable Autonomous Optimisation Pipeline for Improving Chest X-Ray Report Generation Quality",
+    venue: "RSNA 2025",
+    author: "CRASH Lab",
+    description: "Autonomous optimization pipeline for hyper-personalized chest X-ray report generation with quality improvements"
+  },
+  {
+    id: 5,
+    category: "Accepted Abstract",
+    date: "RSNA 2025",
+    title: "TRUST: A Novel Five-Point Scale for Assessment of Reliability and Referencing Integrity in AI Agent Generated Radiology Reports",
+    venue: "RSNA 2025",
+    author: "CRASH Lab",
+    description: "Novel assessment scale for evaluating reliability and referencing integrity in AI-generated radiology reports"
+  },
+  {
+    id: 6,
+    category: "Accepted Abstract",
+    date: "RSNA 2025",
+    title: "Validation of RADAR and TRUST Metrics: Analyzing Inter-Reader Agreement and Draft Variability in Agentic Radiology Reporting",
+    venue: "RSNA 2025",
+    author: "CRASH Lab",
+    description: "Analysis of inter-reader agreement and draft variability using RADAR and TRUST metrics in agentic radiology reporting"
+  },
+  {
+    id: 7,
+    category: "Benchmark",
+    date: "2025",
+    title: "Radiology's Last Exam",
+    venue: "CRASH Lab",
+    author: "CRASH Lab",
+    description: "A comprehensive benchmark for evaluating AI clinical reasoning in radiology"
   }
 ];
 
@@ -51,10 +82,9 @@ const Blog: React.FC = () => {
             </h2>
           </FadeIn>
           <FadeIn delay={200}>
-            <a href="#" className="hidden md:flex items-center gap-2 text-sm font-medium text-navy-900 hover:text-brand-blue transition-colors group mt-4 md:mt-0">
-                View all publications 
-                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
+            <span className="hidden md:flex items-center gap-2 text-sm font-medium text-gray-500 mt-4 md:mt-0">
+                6 RSNA 2025 Accepted Abstracts
+            </span>
           </FadeIn>
         </div>
 
@@ -62,9 +92,8 @@ const Blog: React.FC = () => {
         <div className="space-y-0">
           {posts.map((post, index) => (
             <FadeIn key={post.id} delay={index * 100}>
-              <a 
-                href="#" 
-                className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-navy-900/10 hover:bg-navy-900/[0.02] -mx-4 px-4 transition-colors"
+              <div 
+                className="group flex flex-col md:flex-row md:items-start justify-between py-6 md:py-8 border-b border-navy-900/10 -mx-4 px-4"
               >
                 <div className="flex-1 mb-4 md:mb-0">
                   {/* Meta */}
@@ -75,22 +104,27 @@ const Blog: React.FC = () => {
                   </div>
                   
                   {/* Title */}
-                  <h3 className="text-lg md:text-xl font-serif font-semibold text-navy-900 leading-snug group-hover:text-brand-blue transition-colors pr-8">
+                  <h3 className="text-lg md:text-xl font-serif font-semibold text-navy-900 leading-snug pr-8">
                     {post.title}
                   </h3>
+                  
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 mt-2 pr-8 leading-relaxed">
+                    {post.description}
+                  </p>
                 </div>
                 
                 {/* Right side info */}
-                <div className="flex items-center gap-6 md:gap-8">
+                <div className="flex items-center gap-6 md:gap-8 md:mt-6">
                   <div className="hidden md:block text-right">
                     <div className="text-sm font-medium text-navy-900">{post.venue}</div>
                     <div className="text-xs text-gray-500">{post.author}</div>
                   </div>
-                  <div className="w-10 h-10 rounded-full border border-navy-900/10 flex items-center justify-center group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:text-white text-navy-900 transition-all">
-                    <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                  <div className="px-3 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-medium">
+                    Coming Soon
                   </div>
                 </div>
-              </a>
+              </div>
             </FadeIn>
           ))}
         </div>

@@ -100,7 +100,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                 </p>
 
                 <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" style={{ opacity: 0 }}>
-                    <a href="#contact" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
+                    <a href="mailto:Suvrankar.datta@ashoka.edu.in" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
                         Join the Team
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
