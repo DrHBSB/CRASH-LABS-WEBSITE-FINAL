@@ -245,9 +245,9 @@ const Team: React.FC = () => {
             </div>
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60">
               <h3 className="text-3xl font-serif font-bold text-navy-900/80 tracking-tighter">RSNA</h3>
-              <h3 className="text-xl font-sans font-bold text-navy-900/80 tracking-tight">NeurIPS</h3>
-              <h3 className="text-2xl font-serif italic text-navy-900/80">The Lancet</h3>
-              <h3 className="text-xl font-mono font-bold text-navy-900/80">ICML</h3>
+              <h3 className="text-xl font-sans font-bold text-navy-900/80 tracking-tight">Ashoka University</h3>
+              <h3 className="text-2xl font-serif font-semibold text-navy-900/80">IIT Bombay</h3>
+              <h3 className="text-xl font-mono font-bold text-navy-900/80">Koita Foundation</h3>
             </div>
           </div>
         </FadeIn>

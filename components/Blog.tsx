@@ -5,6 +5,16 @@ import { FadeIn, AnimatedHeading } from './Animations';
 const posts = [
   {
     id: 1,
+    category: "Benchmark",
+    date: "2025",
+    title: "Radiology's Last Exam (RadLE)",
+    venue: "arXiv",
+    author: "CRASH Lab",
+    description: "Benchmarking frontier multimodal AI against human experts with a taxonomy of visual reasoning errors in radiology. Part of work accepted at RSNA 2025 (Cutting Edge Oral Presentation).",
+    link: "https://arxiv.org/abs/2509.25559"
+  },
+  {
+    id: 2,
     category: "Accepted Abstract",
     date: "RSNA 2025",
     title: "Learning to Write Like a Radiologist: Multidimensional Evaluation and Benchmarking of Autonomous Optimization Pipelines for Hyper-Personalized Head CT Report Generation",
@@ -13,7 +23,7 @@ const posts = [
     description: "Multidimensional evaluation framework for autonomous optimization pipelines in personalized head CT report generation"
   },
   {
-    id: 2,
+    id: 3,
     category: "Accepted Abstract",
     date: "RSNA 2025",
     title: "Stress-Test and Radiologist Blinded Validation of Multimodal Foundation Models on an Unseen Chest Radiograph Dataset Using a Novel Multi-Metric Evaluation Framework",
@@ -22,7 +32,7 @@ const posts = [
     description: "Comprehensive evaluation framework for multimodal foundation models in chest radiograph analysis with radiologist-blinded validation"
   },
   {
-    id: 3,
+    id: 4,
     category: "Accepted Abstract",
     date: "RSNA 2025",
     title: "Style-Aware Radiology Reporting: A Scalable Autonomous Optimisation Pipeline for Improving Head CT Report Generation Quality",
@@ -31,7 +41,7 @@ const posts = [
     description: "Scalable autonomous optimization pipeline focused on style-aware improvements in head CT report generation"
   },
   {
-    id: 4,
+    id: 5,
     category: "Accepted Abstract",
     date: "RSNA 2025",
     title: "Towards Hyper-Personalised Radiology Reporting: A Scalable Autonomous Optimisation Pipeline for Improving Chest X-Ray Report Generation Quality",
@@ -40,7 +50,7 @@ const posts = [
     description: "Autonomous optimization pipeline for hyper-personalized chest X-ray report generation with quality improvements"
   },
   {
-    id: 5,
+    id: 6,
     category: "Accepted Abstract",
     date: "RSNA 2025",
     title: "TRUST: A Novel Five-Point Scale for Assessment of Reliability and Referencing Integrity in AI Agent Generated Radiology Reports",
@@ -49,23 +59,13 @@ const posts = [
     description: "Novel assessment scale for evaluating reliability and referencing integrity in AI-generated radiology reports"
   },
   {
-    id: 6,
+    id: 7,
     category: "Accepted Abstract",
     date: "RSNA 2025",
     title: "Validation of RADAR and TRUST Metrics: Analyzing Inter-Reader Agreement and Draft Variability in Agentic Radiology Reporting",
     venue: "RSNA 2025",
     author: "CRASH Lab",
     description: "Analysis of inter-reader agreement and draft variability using RADAR and TRUST metrics in agentic radiology reporting"
-  },
-  {
-    id: 7,
-    category: "Benchmark",
-    date: "2025",
-    title: "Radiology's Last Exam (RadLE)",
-    venue: "arXiv",
-    author: "CRASH Lab",
-    description: "Benchmarking frontier multimodal AI against human experts with a taxonomy of visual reasoning errors in radiology. Part of work accepted at RSNA 2025 (Cutting Edge Oral Presentation).",
-    link: "https://arxiv.org/abs/2509.25559"
   }
 ];
 

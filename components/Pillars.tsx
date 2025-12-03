@@ -206,242 +206,106 @@ const Card: React.FC<CardProps> = ({ title, description, features, theme, visual
     );
 }
 
-// --- CSS 3D Isometric Components (Matching Hero Style) ---
+// --- Clean Professional Illustrations ---
 
 const DataCommonsIso = () => {
-    const [hoveredNode, setHoveredNode] = React.useState<number | null>(null);
     const [isHovered, setIsHovered] = React.useState(false);
-
-    const nodes = [
-        { label: 'Hospital A', position: 'top-left', delay: 0 },
-        { label: 'Hospital B', position: 'top-right', delay: 0.5 },
-        { label: 'Clinic C', position: 'bottom-left', delay: 1 },
-        { label: 'Lab D', position: 'bottom-right', delay: 1.5 },
-    ];
 
     return (
         <div 
-            className="relative w-full h-full flex items-center justify-center group"
+            className="relative w-full h-full flex items-center justify-center"
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => { setIsHovered(false); setHoveredNode(null); }}
+            onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Animated Data Particles Background */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(15)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-1.5 h-1.5 bg-brand-blue/60 rounded-full"
-                        style={{
-                            left: `${15 + (i % 5) * 18}%`,
-                            animation: `dataParticle ${4 + (i * 0.3)}s ease-in-out infinite`,
-                            animationDelay: `${i * 0.2}s`
-                        }}
-                    />
-                ))}
-            </div>
-
-            {/* Main Container */}
-            <div className={`relative w-72 h-72 transform transition-all duration-700 ${isHovered ? 'rotate-x-0 rotate-y-0 scale-105' : 'rotate-x-12 rotate-y-12'}`}>
+            <div className={`relative w-full max-w-[320px] transition-transform duration-500 ${isHovered ? 'scale-[1.02]' : ''}`}>
                 
-                {/* Central Hub */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div className={`relative w-28 h-28 transition-all duration-500 ${isHovered ? 'scale-110' : ''}`}>
-                        
-                        {/* Outer Glow */}
-                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-blue to-purple-600 blur-xl transition-all duration-500 ${isHovered ? 'opacity-50 scale-125' : 'opacity-30'}`}></div>
-                        
-                        {/* Hub Body */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-indigo-600 to-navy-900 rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
-                            
-                            {/* Inner Pattern */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_60%)]"></div>
-                            
-                            {/* Rotating Ring */}
-                            <div className="absolute inset-2 border-2 border-dashed border-white/20 rounded-xl animate-[spinSlow_20s_linear_infinite]"></div>
-                            
-                            {/* Center Icon */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <Database className={`w-10 h-10 mb-1 transition-all duration-300 ${isHovered ? 'text-white scale-110' : 'text-white/90'}`} strokeWidth={1.5} />
-                                <div className="text-[8px] font-mono text-emerald-200 uppercase tracking-widest">Federated</div>
+                {/* Main Card - Dark themed to match background */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
+                    
+                    {/* Header */}
+                    <div className="h-12 border-b border-white/10 flex items-center px-4 bg-white/5">
+                        <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-lg bg-brand-blue/20 flex items-center justify-center">
+                                <Database size={12} className="text-brand-blue" />
                             </div>
-                            
-                            {/* Pulse Effect */}
-                            <div className="absolute inset-0 rounded-2xl border-2 border-white/30 animate-[hubPulse_2s_ease-out_infinite]"></div>
+                            <span className="text-xs font-semibold text-white">Federated Network</span>
                         </div>
+                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-500/20 rounded-full">
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                            <span className="text-[9px] text-emerald-400 font-medium">Connected</span>
+                        </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-5">
+                        {/* Network Visualization */}
+                        <div className="relative h-40 mb-4">
+                            {/* Central Hub */}
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                                <div className="w-16 h-16 rounded-2xl bg-brand-blue shadow-lg flex items-center justify-center">
+                                    <Database size={24} className="text-white" />
                     </div>
                 </div>
 
                 {/* Satellite Nodes */}
-                {nodes.map((node, index) => {
+                            {['Hospital A', 'Clinic B', 'Lab C', 'Hospital D'].map((label, i) => {
                     const positions = [
-                        { x: -80, y: -80 },  // top-left
-                        { x: 80, y: -80 },   // top-right
-                        { x: -80, y: 80 },   // bottom-left
-                        { x: 80, y: 80 },    // bottom-right
-                    ];
-                    const pos = positions[index];
-                    
+                                    { x: -70, y: -50 },
+                                    { x: 70, y: -50 },
+                                    { x: -70, y: 50 },
+                                    { x: 70, y: 50 },
+                                ];
+                                const pos = positions[i];
                     return (
-                        <div
-                            key={index}
-                            className={`absolute left-1/2 top-1/2 z-30 cursor-pointer transition-all duration-500`}
-                            style={{
-                                transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) ${hoveredNode === index ? 'scale(1.15)' : 'scale(1)'}`,
-                                animation: isHovered ? 'none' : `nodeFloat ${3 + index * 0.5}s ease-in-out infinite`,
-                                animationDelay: `${node.delay}s`
-                            }}
-                            onMouseEnter={() => setHoveredNode(index)}
-                            onMouseLeave={() => setHoveredNode(null)}
-                        >
-                            {/* Node Glow */}
-                            <div className={`absolute inset-0 rounded-xl bg-white blur-md transition-opacity duration-300 ${hoveredNode === index ? 'opacity-40' : 'opacity-0'}`}></div>
-                            
-                            {/* Node Body */}
-                            <div className={`relative w-16 h-16 rounded-xl shadow-xl border-2 transition-all duration-300 flex flex-col items-center justify-center ${
-                                hoveredNode === index 
-                                    ? 'bg-white border-brand-blue' 
-                                    : 'bg-white/10 backdrop-blur-md border-white/20'
-                            }`}>
-                                {/* Status Indicator */}
-                                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full transition-all duration-300 ${hoveredNode === index ? 'bg-green-500' : 'bg-green-400'}`}>
-                                    <div className="absolute inset-0 rounded-full bg-green-400 animate-ping"></div>
+                                    <div key={i} className="absolute left-1/2 top-1/2" style={{ transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))` }}>
+                                        <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center hover:border-brand-blue/50 transition-colors">
+                                            <Database size={16} className="text-white/70" />
                                 </div>
-                                
-                                {/* Icon */}
-                                <Database size={16} className={`transition-colors duration-300 ${hoveredNode === index ? 'text-brand-blue' : 'text-white/80'}`} />
-                                
-                                {/* Label */}
-                                <span className={`text-[7px] font-bold uppercase tracking-wider mt-1 transition-colors duration-300 ${hoveredNode === index ? 'text-navy-900' : 'text-white/60'}`}>
-                                    {node.label}
-                                </span>
-                            </div>
-                            
-                            {/* Tooltip */}
-                            <div className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-1 bg-navy-900 text-white text-[8px] font-mono rounded transition-all duration-300 ${
-                                hoveredNode === index ? 'opacity-100 -bottom-7' : 'opacity-0 -bottom-5 pointer-events-none'
-                            }`}>
-                                Connected • Secure
-                            </div>
+                                        <div className="text-[8px] text-white/50 text-center mt-1 font-medium">{label}</div>
                         </div>
                     );
                 })}
 
                 {/* Connection Lines */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0.8" />
-                            <stop offset="50%" stopColor="#8B5CF6" stopOpacity="1" />
-                            <stop offset="100%" stopColor="#1a5f4a" stopOpacity="0.8" />
-                        </linearGradient>
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    
-                    {/* Lines from center to nodes */}
-                    {nodes.map((_, index) => {
-                        const positions = [
-                            { x: -80, y: -80 },
-                            { x: 80, y: -80 },
-                            { x: -80, y: 80 },
-                            { x: 80, y: 80 },
-                        ];
-                        const pos = positions[index];
-                        const centerX = 144;
-                        const centerY = 144;
-                        
-                        return (
-                            <g key={index}>
-                                <line
-                                    x1={centerX}
-                                    y1={centerY}
-                                    x2={centerX + pos.x}
-                                    y2={centerY + pos.y}
-                                    stroke="url(#lineGradient)"
-                                    strokeWidth={hoveredNode === index ? "3" : "2"}
-                                    strokeDasharray={hoveredNode === index ? "0" : "8 4"}
-                                    filter={hoveredNode === index ? "url(#glow)" : ""}
-                                    className={`transition-all duration-300 ${hoveredNode === index ? 'opacity-100' : 'opacity-50'}`}
-                                    style={{
-                                        animation: hoveredNode !== index ? `dashFlow ${2 + index * 0.3}s linear infinite` : 'none'
-                                    }}
-                                />
-                                {/* Data packet animation */}
-                                <circle
-                                    r="3"
-                                    fill="#1a5f4a"
-                                    className="animate-[packetMove_2s_linear_infinite]"
-                                    style={{ animationDelay: `${index * 0.5}s` }}
-                                >
-                                    <animateMotion
-                                        dur={`${2 + index * 0.2}s`}
-                                        repeatCount="indefinite"
-                                        path={`M ${centerX} ${centerY} L ${centerX + pos.x} ${centerY + pos.y}`}
-                                    />
-                                </circle>
-                            </g>
-                        );
-                    })}
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                                <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="75%" y2="75%" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="4 4" />
                 </svg>
+                        </div>
 
-                {/* Floating Stats Badge */}
-                <div className={`absolute -right-4 top-8 bg-white rounded-lg p-3 shadow-2xl border border-gray-100 z-40 transition-all duration-500 ${isHovered ? 'translate-x-2' : ''} animate-[float_5s_ease-in-out_infinite]`}>
-                    <div className="text-[9px] text-gray-500 uppercase tracking-wider mb-1">Data Sources</div>
-                    <div className="text-xl font-bold text-navy-900">47<span className="text-brand-blue text-sm">+</span></div>
-                    <div className="flex items-center gap-1 mt-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                        <span className="text-[8px] text-green-600 font-medium">All Synced</span>
+                        {/* Stats */}
+                        <div className="grid grid-cols-3 gap-3">
+                            <div className="text-center p-2 bg-white/5 rounded-lg">
+                                <div className="text-lg font-bold text-white">47</div>
+                                <div className="text-[9px] text-white/50 uppercase">Sources</div>
+                            </div>
+                            <div className="text-center p-2 bg-brand-blue/20 rounded-lg">
+                                <div className="text-lg font-bold text-brand-blue">100%</div>
+                                <div className="text-[9px] text-white/50 uppercase">Private</div>
+                            </div>
+                            <div className="text-center p-2 bg-white/5 rounded-lg">
+                                <div className="text-lg font-bold text-white">24/7</div>
+                                <div className="text-[9px] text-white/50 uppercase">Sync</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                {/* Privacy Badge */}
-                <div className={`absolute -left-4 bottom-12 bg-navy-900 rounded-lg p-2.5 shadow-2xl border border-white/10 z-40 transition-all duration-500 ${isHovered ? '-translate-x-2' : ''} animate-[floatDelayed_6s_ease-in-out_infinite]`}>
+                {/* Floating Badge */}
+                <div className={`absolute -right-3 -top-3 bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/20 z-20 transition-all duration-500 ${isHovered ? 'translate-x-1 -translate-y-1' : ''}`} style={{ animation: 'gentleFloat 4s ease-in-out infinite' }}>
                     <div className="flex items-center gap-2">
-                        <Shield size={14} className="text-green-400" />
-                        <div>
-                            <div className="text-[9px] font-bold text-white">Privacy Safe</div>
-                            <div className="text-[7px] text-white/60">End-to-End Encrypted</div>
-                        </div>
+                        <Shield size={14} className="text-emerald-400" />
+                        <span className="text-[9px] text-white font-semibold">End-to-End Encrypted</span>
                     </div>
                 </div>
             </div>
 
-            {/* Custom Animations */}
             <style>{`
-                @keyframes dataParticle {
-                    0%, 100% { top: 100%; opacity: 0; }
-                    10% { opacity: 0.6; }
-                    90% { opacity: 0.6; }
-                    50% { top: 0%; }
-                }
-                @keyframes spinSlow {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                @keyframes hubPulse {
-                    0% { transform: scale(1); opacity: 0.5; }
-                    100% { transform: scale(1.5); opacity: 0; }
-                }
-                @keyframes nodeFloat {
-                    0%, 100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) translateY(0); }
-                    50% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) translateY(-8px); }
-                }
-                @keyframes dashFlow {
-                    from { stroke-dashoffset: 0; }
-                    to { stroke-dashoffset: 24; }
-                }
-                @keyframes float {
+                @keyframes gentleFloat {
                     0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-8px); }
-                }
-                @keyframes floatDelayed {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(8px); }
+                    50% { transform: translateY(-6px); }
                 }
             `}</style>
         </div>
@@ -449,203 +313,85 @@ const DataCommonsIso = () => {
 };
 
 const StandardsIso = () => {
-    const [hoveredRow, setHoveredRow] = React.useState<number | null>(null);
-    
-    const benchmarkData = [
-        { metric: 'Clinical Accuracy', score: 94.2, grade: 'A+', status: 'pass' },
-        { metric: 'Fairness Index', score: 98.0, grade: 'A+', status: 'pass' },
-        { metric: 'Safety Score', score: 99.9, grade: 'A+', status: 'pass' },
-        { metric: 'Explainability', score: 87.5, grade: 'A', status: 'pass' },
+    const [isHovered, setIsHovered] = React.useState(false);
+
+    const metrics = [
+        { name: 'Clinical Accuracy', score: 94.2, grade: 'A+' },
+        { name: 'Fairness Index', score: 98.0, grade: 'A+' },
+        { name: 'Safety Score', score: 99.9, grade: 'A+' },
+        { name: 'Explainability', score: 87.5, grade: 'A' },
     ];
 
     return (
-         <div className="relative w-full h-full flex items-center justify-center group">
-            {/* Animated Data Flow Particles */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(8)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-1 h-1 bg-brand-blue rounded-full opacity-60"
-                        style={{
-                            left: `${10 + (i * 12)}%`,
-                            animation: `dataFlow ${3 + (i * 0.5)}s ease-in-out infinite`,
-                            animationDelay: `${i * 0.3}s`
-                        }}
-                    />
-                ))}
-            </div>
-
-            <div className="relative w-72 h-80 transform rotate-x-6 -rotate-y-8 group-hover:rotate-x-0 group-hover:rotate-y-0 transition-transform duration-700 perspective-[1000px]">
+        <div 
+            className="relative w-full h-full flex items-center justify-center"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <div className={`relative w-full max-w-[320px] transition-transform duration-500 ${isHovered ? 'scale-[1.02]' : ''}`}>
                 
-                {/* Main Dashboard Panel */}
-                <div className="absolute inset-0 bg-navy-900 rounded-xl shadow-2xl border border-white/10 overflow-hidden z-30">
+                {/* Main Card */}
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-200/60 overflow-hidden">
                     
-                    {/* Header Bar */}
-                    <div className="h-10 border-b border-white/10 bg-navy-950/50 flex items-center px-4 justify-between">
-                        <div className="flex gap-2">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
-                        </div>
-                        <div className="text-[9px] font-mono text-emerald-200/50 tracking-wider">benchmark_v2.json</div>
-                        <div className="w-4"></div>
-                    </div>
-
-                    {/* Dashboard Content */}
-                    <div className="p-4 relative">
-                        {/* Title Section */}
-                    <div className="flex justify-between items-center mb-4">
+                    {/* Header */}
+                    <div className="h-12 border-b border-gray-100 flex items-center px-4 bg-gray-50/80">
                             <div className="flex items-center gap-2">
-                                <Shield size={14} className="text-brand-blue" />
-                                <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest">Eval Suite</span>
+                            <div className="w-6 h-6 rounded-lg bg-brand-blue/10 flex items-center justify-center">
+                                <Shield size={12} className="text-brand-blue" />
                             </div>
-                            <div className="flex items-center gap-1.5 px-2 py-1 bg-green-500/10 border border-green-500/20 rounded">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                                <span className="text-[9px] text-green-400 font-mono">ALL PASS</span>
+                            <span className="text-xs font-semibold text-navy-900">Evaluation Suite</span>
                             </div>
+                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-50 rounded-full">
+                            <span className="text-[9px] text-emerald-700 font-semibold">ALL PASS</span>
                         </div>
-
-                        {/* Benchmark Results Table */}
-                        <div className="space-y-2">
-                            {benchmarkData.map((item, index) => (
-                                <div 
-                                    key={index}
-                                    className={`relative flex items-center gap-3 p-2.5 rounded-lg cursor-pointer transition-all duration-300 ${
-                                        hoveredRow === index 
-                                            ? 'bg-brand-blue/20 border border-brand-blue/40 scale-[1.02]' 
-                                            : 'bg-white/5 border border-transparent hover:bg-white/10'
-                                    }`}
-                                    onMouseEnter={() => setHoveredRow(index)}
-                                    onMouseLeave={() => setHoveredRow(null)}
-                                >
-                                    {/* Rank */}
-                                    <div className={`w-5 h-5 rounded text-[9px] font-bold flex items-center justify-center transition-colors ${
-                                        hoveredRow === index ? 'bg-brand-blue text-white' : 'bg-white/10 text-white/60'
-                                    }`}>
-                                        {String(index + 1).padStart(2, '0')}
                                     </div>
                                     
-                                    {/* Metric Name */}
-                                    <div className="flex-1 min-w-0">
-                                        <div className={`text-[11px] font-medium truncate transition-colors ${
-                                            hoveredRow === index ? 'text-white' : 'text-gray-300'
-                                        }`}>
-                                            {item.metric}
+                    {/* Metrics List */}
+                    <div className="p-4 space-y-2">
+                        {metrics.map((metric, i) => (
+                            <div key={i} className="flex items-center gap-3 p-3 bg-gray-50/50 rounded-xl hover:bg-gray-100/50 transition-colors">
+                                <div className="w-6 h-6 rounded bg-gray-200 flex items-center justify-center text-gray-600 font-bold text-[10px]">
+                                    {String(i + 1).padStart(2, '0')}
                                         </div>
+                                <div className="flex-1">
+                                    <div className="text-xs font-medium text-gray-700">{metric.name}</div>
                                     </div>
-                                    
-                                    {/* Progress Bar */}
-                                    <div className="w-16 h-1.5 bg-navy-950 rounded-full overflow-hidden">
-                                        <div 
-                                            className={`h-full rounded-full transition-all duration-500 ${
-                                                hoveredRow === index ? 'bg-brand-blue' : 'bg-gray-500'
-                                            }`}
-                                            style={{ 
-                                                width: hoveredRow === index ? `${item.score}%` : `${item.score * 0.8}%`,
-                                                transition: 'width 0.5s ease-out'
-                                            }}
-                                        />
+                                <div className="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                    <div className="h-full bg-brand-blue rounded-full" style={{ width: `${metric.score}%` }}></div>
                                     </div>
-                                    
-                                    {/* Score */}
-                                    <div className={`text-[10px] font-mono w-10 text-right transition-colors ${
-                                        hoveredRow === index ? 'text-white' : 'text-gray-400'
-                                    }`}>
-                                        {item.score}%
+                                <div className="text-xs font-semibold text-gray-600 w-12 text-right">{metric.score}%</div>
+                                <div className="px-1.5 py-0.5 bg-emerald-100 text-emerald-700 text-[9px] font-bold rounded">
+                                    {metric.grade}
                                     </div>
-                                    
-                                    {/* Grade Badge */}
-                                    <div className={`text-[9px] font-bold px-1.5 py-0.5 rounded transition-all ${
-                                        hoveredRow === index 
-                                            ? 'bg-green-500 text-white scale-110' 
-                                            : 'bg-green-500/20 text-green-400'
-                                    }`}>
-                                        {item.grade}
-                                    </div>
-
-                                    {/* Hover Glow Effect */}
-                                    {hoveredRow === index && (
-                                        <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/10 to-purple-500/10 rounded-lg pointer-events-none animate-pulse"></div>
-                                    )}
                                 </div>
                             ))}
                         </div>
 
-                        {/* Animated Scan Line */}
-                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                            <div className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-brand-blue/50 to-transparent animate-[scanlineVertical_3s_linear_infinite]"></div>
-                        </div>
-
-                        {/* Grid Overlay */}
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
+                    {/* Footer */}
+                    <div className="px-4 py-3 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between">
+                        <span className="text-[10px] text-gray-400 uppercase tracking-wider">Overall Score</span>
+                        <span className="text-lg font-bold text-brand-blue">94.9%</span>
                     </div>
                 </div>
 
-                {/* Floating Stats Card */}
-                <div className="absolute -right-6 top-8 w-24 bg-white/10 backdrop-blur-xl rounded-lg p-3 shadow-2xl border border-white/20 z-40 animate-[float_5s_ease-in-out_infinite] group-hover:translate-x-2 transition-transform duration-500">
-                    <div className="text-[9px] text-white/60 uppercase tracking-wider mb-1">Avg Score</div>
-                    <div className="text-xl font-mono font-bold text-white">94.9<span className="text-brand-blue text-sm">%</span></div>
-                    <div className="flex items-center gap-1 mt-1">
-                        <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-green-400"></div>
-                        <span className="text-[9px] text-green-400 font-mono">+2.3%</span>
-                         </div>
-                         </div>
-
-                {/* Floating Compliance Badge */}
-                <div className="absolute -left-4 bottom-12 bg-white rounded-lg p-2.5 shadow-2xl border border-gray-100 z-40 animate-[floatDelayed_6s_ease-in-out_infinite] group-hover:-translate-x-2 transition-transform duration-500">
+                {/* Floating Badge */}
+                <div className={`absolute -left-3 bottom-8 bg-white rounded-xl p-2.5 shadow-xl border border-gray-100 z-20 transition-all duration-500 ${isHovered ? '-translate-x-1 translate-y-1' : ''}`} style={{ animation: 'gentleFloat 5s ease-in-out infinite' }}>
                     <div className="flex items-center gap-2">
-                        <div className="p-1.5 bg-green-100 rounded-full text-green-600">
-                            <Shield size={12} />
+                        <div className="p-1.5 bg-emerald-100 rounded-lg">
+                            <Shield size={12} className="text-emerald-600" />
                          </div>
                         <div>
-                            <div className="text-[10px] font-bold text-navy-900">FDA Ready</div>
+                            <div className="text-[9px] font-semibold text-navy-900">FDA Ready</div>
                             <div className="text-[8px] text-gray-500">Compliant</div>
                          </div>
                     </div>
                 </div>
-
-                {/* Data Stream Lines */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40" style={{ transform: 'translateZ(-20px)' }}>
-                    <defs>
-                        <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0" />
-                            <stop offset="50%" stopColor="#1a5f4a" stopOpacity="1" />
-                            <stop offset="100%" stopColor="#1a5f4a" stopOpacity="0" />
-                        </linearGradient>
-                    </defs>
-                    <line x1="10%" y1="20%" x2="90%" y2="20%" stroke="url(#dataGradient)" strokeWidth="1" strokeDasharray="4 4" className="animate-[dashMove_2s_linear_infinite]" />
-                    <line x1="10%" y1="80%" x2="90%" y2="80%" stroke="url(#dataGradient)" strokeWidth="1" strokeDasharray="4 4" className="animate-[dashMove_2.5s_linear_infinite_reverse]" />
-                </svg>
             </div>
 
-            {/* Custom Animations */}
             <style>{`
-                @keyframes dataFlow {
-                    0%, 100% { 
-                        top: 100%; 
-                        opacity: 0;
-                    }
-                    10% { opacity: 0.6; }
-                    90% { opacity: 0.6; }
-                    50% { 
-                        top: 0%; 
-                    }
-                }
-                @keyframes scanlineVertical {
-                    0% { top: -10%; }
-                    100% { top: 110%; }
-                }
-                @keyframes dashMove {
-                    0% { stroke-dashoffset: 0; }
-                    100% { stroke-dashoffset: 40; }
-                }
-                @keyframes float {
+                @keyframes gentleFloat {
                     0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-8px); }
-                }
-                @keyframes floatDelayed {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(8px); }
+                    50% { transform: translateY(-6px); }
                 }
             `}</style>
         </div>
@@ -653,266 +399,116 @@ const StandardsIso = () => {
 };
 
 const ModelsIso = () => {
-    const [hoveredFeature, setHoveredFeature] = React.useState<number | null>(null);
     const [isHovered, setIsHovered] = React.useState(false);
 
     const features = [
-        { label: 'Context-Aware', icon: '🎯', color: 'from-brand-blue to-indigo-600' },
-        { label: 'Bias Mitigation', icon: '⚖️', color: 'from-purple-500 to-pink-500' },
-        { label: 'Explainable', icon: '💡', color: 'from-amber-500 to-orange-500' },
-        { label: 'Privacy-First', icon: '🔒', color: 'from-green-500 to-emerald-500' },
+        { label: 'Context-Aware', icon: Cpu },
+        { label: 'Bias Mitigation', icon: Shield },
+        { label: 'Explainable', icon: Database },
+        { label: 'Privacy-First', icon: Shield },
     ];
 
     return (
         <div 
-            className="relative w-full h-full flex items-center justify-center perspective-[1200px] group"
+            className="relative w-full h-full flex items-center justify-center"
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => { setIsHovered(false); setHoveredFeature(null); }}
+            onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Animated Neural Network Background */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-                <svg className="w-full h-full" viewBox="0 0 200 200">
-                    {/* Neural network nodes */}
-                    {[...Array(12)].map((_, i) => {
-                        const x = 30 + (i % 4) * 50;
-                        const y = 40 + Math.floor(i / 4) * 60;
-                        return (
-                            <g key={i}>
-                                <circle 
-                                    cx={x} 
-                                    cy={y} 
-                                    r="4" 
-                                    fill="#1a5f4a"
-                                    className="animate-[nodePulse_2s_ease-in-out_infinite]"
-                                    style={{ animationDelay: `${i * 0.15}s` }}
-                                />
-                                {/* Connection lines */}
-                                {i < 8 && (
-                                    <line 
-                                        x1={x} 
-                                        y1={y} 
-                                        x2={30 + ((i + 4) % 4) * 50} 
-                                        y2={y + 60}
-                                        stroke="#1a5f4a"
-                                        strokeWidth="0.5"
-                                        strokeOpacity="0.3"
-                                        className="animate-[lineFlow_3s_linear_infinite]"
-                                        style={{ animationDelay: `${i * 0.2}s` }}
-                                    />
-                                )}
-                            </g>
-                        );
-                    })}
-                </svg>
-            </div>
-
-            {/* Main Container */}
-            <div className={`relative w-64 h-72 transform transition-all duration-700 ${isHovered ? 'rotate-x-0 rotate-y-0 scale-105' : 'rotate-x-8 -rotate-y-12'}`}>
+            <div className={`relative w-full max-w-[320px] transition-transform duration-500 ${isHovered ? 'scale-[1.02]' : ''}`}>
                 
-                {/* Central AI Core */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className={`relative w-32 h-32 transition-all duration-500 ${isHovered ? 'scale-110' : ''}`}>
-                        
-                        {/* Outer Glow Ring */}
-                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-tr from-brand-blue via-purple-500 to-pink-500 opacity-20 blur-xl transition-all duration-500 ${isHovered ? 'scale-150 opacity-40' : ''}`}></div>
-                        
-                        {/* Hexagonal Core */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-navy-900 to-navy-800 rounded-2xl border border-white/20 shadow-2xl overflow-hidden">
-                            
-                            {/* Inner Grid Pattern */}
-                            <div className="absolute inset-0 bg-[linear-gradient(rgba(44,62,150,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(44,62,150,0.1)_1px,transparent_1px)] bg-[size:8px_8px]"></div>
-                            
-                            {/* Animated Circuit Lines */}
-                            <svg className="absolute inset-0 w-full h-full">
-                                <defs>
-                                    <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0" />
-                                        <stop offset="50%" stopColor="#1a5f4a" stopOpacity="1" />
-                                        <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
-                                    </linearGradient>
-                                </defs>
-                                <path 
-                                    d="M 20 64 L 44 64 L 64 44 L 64 20" 
-                                    stroke="url(#circuitGrad)" 
-                                    strokeWidth="2" 
-                                    fill="none"
-                                    className="animate-[circuitFlow_2s_linear_infinite]"
-                                />
-                                <path 
-                                    d="M 108 64 L 84 64 L 64 84 L 64 108" 
-                                    stroke="url(#circuitGrad)" 
-                                    strokeWidth="2" 
-                                    fill="none"
-                                    className="animate-[circuitFlow_2s_linear_infinite_reverse]"
-                                    style={{ animationDelay: '1s' }}
-                                />
-                            </svg>
-                            
-                            {/* Central Chip Icon */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className={`relative transition-all duration-500 ${isHovered ? 'scale-110' : ''}`}>
-                                    <Cpu className={`w-12 h-12 transition-all duration-500 ${isHovered ? 'text-brand-blue' : 'text-white/80'}`} strokeWidth={1.5} />
-                                    
-                                    {/* Pulsing Core */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className={`w-4 h-4 rounded-full bg-brand-blue transition-all duration-300 ${isHovered ? 'animate-ping' : 'animate-pulse'}`}></div>
+                {/* Main Card */}
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-200/60 overflow-hidden">
+                    
+                    {/* Header */}
+                    <div className="h-12 border-b border-gray-100 flex items-center px-4 bg-gray-50/80">
+                        <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-lg bg-brand-blue/10 flex items-center justify-center">
+                                <Cpu size={12} className="text-brand-blue" />
                                     </div>
+                            <span className="text-xs font-semibold text-navy-900">Foundation Model</span>
                                 </div>
-                            </div>
-                            
-                            {/* Scan Line Effect */}
-                            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                                <div className="absolute inset-x-0 h-8 bg-gradient-to-b from-brand-blue/20 via-brand-blue/10 to-transparent animate-[coreScan_3s_ease-in-out_infinite]"></div>
+                        <div className="ml-auto px-2 py-1 bg-amber-50 border border-amber-200 rounded-full">
+                            <span className="text-[9px] text-amber-700 font-semibold">Training</span>
                             </div>
                         </div>
                         
-                        {/* Corner Accents */}
-                        <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-brand-blue rounded-tl"></div>
-                        <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-brand-blue rounded-tr"></div>
-                        <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-purple-500 rounded-bl"></div>
-                        <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-purple-500 rounded-br"></div>
+                    {/* Content */}
+                    <div className="p-5">
+                        {/* Model Visualization */}
+                        <div className="relative h-32 mb-4 flex items-center justify-center">
+                            {/* Central Model Icon */}
+                            <div className="w-20 h-20 rounded-2xl bg-navy-900 shadow-xl flex items-center justify-center relative z-10">
+                                <Cpu size={32} className="text-white" />
+                                <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand-blue flex items-center justify-center">
+                                    <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
                     </div>
                 </div>
 
-                {/* Orbiting Feature Nodes */}
-                {features.map((feature, index) => {
-                    const angle = (index * 90) - 45; // Position at corners
-                    const radius = 100;
-                    const x = Math.cos((angle * Math.PI) / 180) * radius;
-                    const y = Math.sin((angle * Math.PI) / 180) * radius;
-                    
+                            {/* Feature Icons */}
+                            {features.map((feature, i) => {
+                                const positions = [
+                                    { x: -65, y: -35 },
+                                    { x: 65, y: -35 },
+                                    { x: -65, y: 35 },
+                                    { x: 65, y: 35 },
+                                ];
+                                const pos = positions[i];
+                                const Icon = feature.icon;
                     return (
-                        <div
-                            key={index}
-                            className={`absolute left-1/2 top-1/2 transition-all duration-500 cursor-pointer z-20`}
-                            style={{
-                                transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) ${hoveredFeature === index ? 'scale(1.2)' : 'scale(1)'}`,
-                                animation: isHovered ? 'none' : `orbitFloat_${index} 4s ease-in-out infinite`,
-                                animationDelay: `${index * 0.5}s`
-                            }}
-                            onMouseEnter={() => setHoveredFeature(index)}
-                            onMouseLeave={() => setHoveredFeature(null)}
-                        >
-                            <div className={`relative group/node`}>
-                                {/* Node Glow */}
-                                <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${feature.color} blur-md transition-opacity duration-300 ${hoveredFeature === index ? 'opacity-60' : 'opacity-0'}`}></div>
-                                
-                                {/* Node Body */}
-                                <div className={`relative w-14 h-14 rounded-xl bg-white shadow-xl border-2 transition-all duration-300 flex items-center justify-center ${hoveredFeature === index ? 'border-brand-blue bg-brand-blue/5' : 'border-gray-100'}`}>
-                                    <span className="text-xl">{feature.icon}</span>
-                                    
-                                    {/* Active Indicator */}
-                                    <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full transition-all duration-300 ${hoveredFeature === index ? 'bg-green-500 scale-100' : 'bg-gray-300 scale-75'}`}>
-                                        {hoveredFeature === index && (
-                                            <div className="absolute inset-0 rounded-full bg-green-500 animate-ping"></div>
-                                        )}
-                     </div>
-                 </div>
-
-                                {/* Label Tooltip */}
-                                <div className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-1 bg-navy-900 text-white text-[9px] font-bold uppercase tracking-wider rounded transition-all duration-300 ${hoveredFeature === index ? 'opacity-100 -bottom-8' : 'opacity-0 -bottom-6 pointer-events-none'}`}>
-                                    {feature.label}
-                                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-navy-900 rotate-45"></div>
-                                </div>
+                                    <div key={i} className="absolute left-1/2 top-1/2" style={{ transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))` }}>
+                                        <div className="w-10 h-10 rounded-xl bg-white border-2 border-gray-200 shadow-md flex items-center justify-center hover:border-brand-blue transition-colors">
+                                            <Icon size={16} className="text-gray-500" />
                             </div>
                         </div>
                     );
                 })}
 
-                {/* Connection Lines to Features */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
-                    <defs>
-                        <linearGradient id="connectionGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#1a5f4a" stopOpacity="0.8" />
-                            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.2" />
-                        </linearGradient>
-                    </defs>
-                    {features.map((_, index) => {
-                        const angle = (index * 90) - 45;
-                        const startRadius = 50;
-                        const endRadius = 85;
-                        const startX = 128 + Math.cos((angle * Math.PI) / 180) * startRadius;
-                        const startY = 144 + Math.sin((angle * Math.PI) / 180) * startRadius;
-                        const endX = 128 + Math.cos((angle * Math.PI) / 180) * endRadius;
-                        const endY = 144 + Math.sin((angle * Math.PI) / 180) * endRadius;
-                        
-                        return (
-                            <line
-                                key={index}
-                                x1={startX}
-                                y1={startY}
-                                x2={endX}
-                                y2={endY}
-                                stroke="url(#connectionGrad)"
-                                strokeWidth={hoveredFeature === index ? "2" : "1"}
-                                strokeDasharray={hoveredFeature === index ? "0" : "4 4"}
-                                className={`transition-all duration-300 ${hoveredFeature === index ? 'opacity-100' : 'opacity-40'}`}
-                            />
-                        );
-                    })}
+                            {/* Connection Lines */}
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                                <line x1="50%" y1="50%" x2="28%" y2="30%" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="72%" y2="30%" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="28%" y2="70%" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="72%" y2="70%" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="4 4" />
                 </svg>
+                        </div>
 
-                {/* Floating "India" Badge */}
-                <div className={`absolute -right-4 top-4 bg-gradient-to-r from-orange-500 via-white to-green-500 p-[2px] rounded-lg shadow-xl z-30 transition-all duration-500 ${isHovered ? 'translate-x-2 scale-110' : ''} animate-[float_5s_ease-in-out_infinite]`}>
-                    <div className="bg-white px-3 py-1.5 rounded-md">
-                        <span className="text-[10px] font-bold text-navy-900 uppercase tracking-wider">Made for India</span>
+                        {/* Feature Labels */}
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                            {['Context-Aware', 'Bias Mitigation', 'Explainable', 'Privacy-First'].map((label, i) => (
+                                <div key={i} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-brand-blue"></div>
+                                    <span className="text-[10px] text-gray-600 font-medium">{label}</span>
                     </div>
+                            ))}
                 </div>
 
-                {/* Floating Stats */}
-                <div className={`absolute -left-6 bottom-8 bg-navy-900 rounded-lg p-3 shadow-2xl border border-white/10 z-30 transition-all duration-500 ${isHovered ? '-translate-x-2' : ''} animate-[floatDelayed_6s_ease-in-out_infinite]`}>
-                    <div className="text-[9px] text-white/60 uppercase tracking-wider mb-1">Parameters</div>
-                    <div className="text-lg font-mono font-bold text-white">7<span className="text-brand-blue text-sm">B</span></div>
-                    <div className="flex items-center gap-1 mt-1">
-                        <div className="w-8 h-1 bg-white/20 rounded-full overflow-hidden">
-                            <div className="h-full w-3/4 bg-brand-blue rounded-full animate-pulse"></div>
+                        {/* Stats */}
+                        <div className="flex items-center justify-between p-3 bg-navy-900 rounded-xl">
+                            <div>
+                                <div className="text-[9px] text-white/60 uppercase tracking-wider">Parameters</div>
+                                <div className="text-lg font-bold text-white">7B</div>
                         </div>
-                        <span className="text-[8px] text-brand-blue font-mono">Training</span>
+                            <div className="w-px h-8 bg-white/20"></div>
+                            <div className="text-right">
+                                <div className="text-[9px] text-white/60 uppercase tracking-wider">Status</div>
+                                <div className="text-sm font-semibold text-brand-blue">Training</div>
+                            </div>
                     </div>
                 </div>
              </div>
 
-            {/* Custom Animations */}
+                {/* Floating Badge */}
+                <div className={`absolute -right-3 -top-3 bg-white rounded-xl p-2 shadow-xl border border-gray-100 z-20 transition-all duration-500 ${isHovered ? 'translate-x-1 -translate-y-1' : ''}`} style={{ animation: 'gentleFloat 4s ease-in-out infinite' }}>
+                    <div className="flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-orange-100 via-white to-green-100 rounded-lg">
+                        <span className="text-[9px] font-bold text-navy-900 uppercase tracking-wider">Made for India</span>
+                    </div>
+                </div>
+            </div>
+
             <style>{`
-                @keyframes nodePulse {
-                    0%, 100% { opacity: 0.4; r: 4; }
-                    50% { opacity: 1; r: 6; }
-                }
-                @keyframes lineFlow {
-                    0% { stroke-dashoffset: 0; }
-                    100% { stroke-dashoffset: 20; }
-                }
-                @keyframes circuitFlow {
-                    0% { stroke-dashoffset: 100; }
-                    100% { stroke-dashoffset: 0; }
-                }
-                @keyframes coreScan {
-                    0%, 100% { top: -20%; }
-                    50% { top: 100%; }
-                }
-                @keyframes orbitFloat_0 {
-                    0%, 100% { transform: translate(calc(-50% + 71px), calc(-50% + -71px)) translateY(0); }
-                    50% { transform: translate(calc(-50% + 71px), calc(-50% + -71px)) translateY(-6px); }
-                }
-                @keyframes orbitFloat_1 {
-                    0%, 100% { transform: translate(calc(-50% + 71px), calc(-50% + 71px)) translateY(0); }
-                    50% { transform: translate(calc(-50% + 71px), calc(-50% + 71px)) translateY(6px); }
-                }
-                @keyframes orbitFloat_2 {
-                    0%, 100% { transform: translate(calc(-50% + -71px), calc(-50% + 71px)) translateY(0); }
-                    50% { transform: translate(calc(-50% + -71px), calc(-50% + 71px)) translateY(-6px); }
-                }
-                @keyframes orbitFloat_3 {
-                    0%, 100% { transform: translate(calc(-50% + -71px), calc(-50% + -71px)) translateY(0); }
-                    50% { transform: translate(calc(-50% + -71px), calc(-50% + -71px)) translateY(6px); }
-                }
-                @keyframes float {
+                @keyframes gentleFloat {
                     0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-8px); }
-                }
-                @keyframes floatDelayed {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(8px); }
+                    50% { transform: translateY(-6px); }
                 }
             `}</style>
         </div>
@@ -920,11 +516,9 @@ const ModelsIso = () => {
 };
 
 const HumanIso = () => {
-    const [activeTab, setActiveTab] = React.useState(0);
     const [isHovered, setIsHovered] = React.useState(false);
     const [isTyping, setIsTyping] = React.useState(true);
 
-    const tabs = ['Notes', 'Diagnosis', 'Rx'];
     const messages = [
         { type: 'user', text: 'Patient reports chest pain...' },
         { type: 'ai', text: 'Analyzing symptoms. Recommend ECG and cardiac enzymes.' },
@@ -939,168 +533,105 @@ const HumanIso = () => {
 
     return (
         <div 
-            className="relative w-full h-full flex items-center justify-center group"
+            className="relative w-full h-full flex items-center justify-center"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Ambient Particles */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
-                {[...Array(6)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-2 h-2 bg-brand-blue/40 rounded-full blur-sm"
-                        style={{
-                            left: `${20 + i * 15}%`,
-                            animation: `ambientFloat ${5 + i}s ease-in-out infinite`,
-                            animationDelay: `${i * 0.5}s`
-                        }}
-                    />
-                ))}
-            </div>
-
-            {/* Main Container */}
-            <div className={`relative w-72 h-64 transform transition-all duration-700 ${isHovered ? 'rotate-x-0 rotate-y-0 scale-105' : 'rotate-x-12 -rotate-y-6 rotate-z-1'}`}>
+            <div className={`relative w-full max-w-[320px] transition-transform duration-500 ${isHovered ? 'scale-[1.02]' : ''}`}>
                 
-                {/* Main Interface Panel */}
-                <div className="absolute inset-0 bg-navy-900 rounded-2xl shadow-2xl border border-white/10 overflow-hidden flex flex-col">
+                {/* Main Card - Dark themed Chat Interface */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
                     
-                    {/* Window Header */}
-                    <div className="h-10 border-b border-white/10 bg-navy-950/50 flex items-center px-4 justify-between">
-                        <div className="flex gap-2">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/30 border border-red-500/50 hover:bg-red-500 transition-colors cursor-pointer"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30 border border-yellow-500/50 hover:bg-yellow-500 transition-colors cursor-pointer"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/30 border border-green-500/50 hover:bg-green-500 transition-colors cursor-pointer"></div>
+                    {/* Header */}
+                    <div className="h-12 border-b border-white/10 flex items-center px-4 bg-white/5">
+                        <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-lg bg-brand-blue/20 flex items-center justify-center">
+                                <Users size={12} className="text-brand-blue" />
                         </div>
-                        <div className="text-[9px] font-mono text-white/40 tracking-wider">CRASH Assistant v2.0</div>
-                        <div className="w-12"></div>
+                            <span className="text-xs font-semibold text-white">Clinical Assistant</span>
+                        </div>
+                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-500/20 rounded-full">
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                            <span className="text-[9px] text-emerald-400 font-medium">Online</span>
+                        </div>
                     </div>
 
-                    {/* Tab Bar */}
-                    <div className="flex border-b border-white/5">
-                        {tabs.map((tab, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setActiveTab(index)}
-                                className={`flex-1 py-2 text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
-                                    activeTab === index 
-                                        ? 'text-brand-blue border-b-2 border-brand-blue bg-white/5' 
-                                        : 'text-white/40 hover:text-white/60'
-                                }`}
-                            >
-                                {tab}
-                            </button>
-                        ))}
+                    {/* Chat Area */}
+                    <div className="p-4 space-y-3 min-h-[180px]">
+                        {/* User Message */}
+                        <div className="flex justify-end">
+                            <div className="max-w-[80%] px-3 py-2 bg-white/10 rounded-xl rounded-br-none">
+                                <p className="text-xs text-white/80">{messages[0].text}</p>
+                            </div>
                     </div>
 
-                    {/* Content Area */}
-                    <div className="flex-1 p-3 flex flex-col gap-2 overflow-hidden relative">
-                        
-                        {/* Chat Messages */}
-                        {messages.map((msg, index) => (
-                            <div 
-                                key={index}
-                                className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                            >
-                                <div className={`max-w-[85%] px-3 py-2 rounded-xl text-[9px] leading-relaxed ${
-                                    msg.type === 'user' 
-                                        ? 'bg-white/10 text-white/80 rounded-br-none' 
-                                        : 'bg-brand-blue/20 text-brand-blue border border-brand-blue/30 rounded-bl-none'
-                                }`}>
-                                    {msg.type === 'ai' && (
+                        {/* AI Response */}
+                        <div className="flex justify-start">
+                            <div className="max-w-[80%] px-3 py-2 bg-brand-blue/20 border border-brand-blue/30 rounded-xl rounded-bl-none">
                                         <div className="flex items-center gap-1 mb-1">
-                                            <Cpu size={8} className="text-brand-blue" />
-                                            <span className="text-[7px] font-bold uppercase tracking-wider text-brand-blue/60">AI Assistant</span>
+                                    <Cpu size={10} className="text-brand-blue" />
+                                    <span className="text-[9px] font-semibold text-brand-blue">AI Assistant</span>
                                         </div>
-                                    )}
-                                    {msg.text}
+                                <p className="text-xs text-white/80">{messages[1].text}</p>
                                 </div>
                             </div>
-                        ))}
 
                         {/* Typing Indicator */}
                         <div className={`flex justify-start transition-opacity duration-300 ${isTyping ? 'opacity-100' : 'opacity-0'}`}>
-                            <div className="bg-brand-blue/10 border border-brand-blue/20 px-3 py-2 rounded-xl rounded-bl-none">
+                            <div className="px-3 py-2 bg-white/5 border border-white/10 rounded-xl rounded-bl-none">
                                 <div className="flex gap-1">
-                                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                    <div className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                    <div className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                    <div className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                                 </div>
                             </div>
                         </div>
-
-                        {/* Grid Overlay */}
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:12px_12px] pointer-events-none"></div>
                     </div>
 
-                    {/* Input Bar */}
-                    <div className="h-12 border-t border-white/10 bg-navy-950/30 flex items-center px-3 gap-2">
-                        <div className="flex-1 h-7 bg-white/5 rounded-full px-3 flex items-center">
-                            <span className="text-[9px] text-white/30">Type a message...</span>
+                    {/* Input Area */}
+                    <div className="p-3 border-t border-white/10 bg-white/5">
+                        <div className="flex items-center gap-2">
+                            <div className="flex-1 h-9 bg-white/5 border border-white/10 rounded-full px-4 flex items-center">
+                                <span className="text-xs text-white/40">Type a message...</span>
                         </div>
-                        <button className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center hover:bg-brand-blue/80 transition-colors">
-                            <ArrowRight size={12} className="text-white" />
+                            <button className="w-9 h-9 rounded-full bg-brand-blue flex items-center justify-center hover:bg-brand-blue/90 transition-colors">
+                                <ArrowRight size={14} className="text-white" />
                         </button>
+                        </div>
                     </div>
                 </div>
 
-                {/* Floating Clinician Avatar */}
-                <div className={`absolute -bottom-4 -right-4 z-30 transition-all duration-500 ${isHovered ? 'translate-x-2 translate-y-2' : ''} animate-[floatAvatar_4s_ease-in-out_infinite]`}>
-                    <div className="relative">
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 shadow-xl border-3 border-white flex items-center justify-center">
-                            <Users size={20} className="text-white" />
+                {/* Floating Clinician Badge */}
+                <div className={`absolute -right-3 bottom-12 bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/20 z-20 transition-all duration-500 ${isHovered ? 'translate-x-1' : ''}`} style={{ animation: 'gentleFloat 5s ease-in-out infinite' }}>
+                    <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center">
+                            <Users size={14} className="text-white" />
                         </div>
-                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-white flex items-center justify-center">
-                            <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        <div>
+                            <div className="text-[9px] font-semibold text-white">Dr. Sharma</div>
+                            <div className="text-[8px] text-white/60">Radiologist</div>
                         </div>
-                    </div>
-                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white px-2 py-1 rounded-full shadow-lg">
-                        <span className="text-[8px] font-bold text-navy-900 uppercase tracking-wider">Dr. Sharma</span>
                     </div>
                 </div>
 
                 {/* Floating AI Badge */}
-                <div className={`absolute -top-3 -left-3 z-30 transition-all duration-500 ${isHovered ? '-translate-x-2 -translate-y-2' : ''} animate-[floatBadge_5s_ease-in-out_infinite]`}>
-                    <div className="bg-gradient-to-r from-brand-blue to-purple-600 rounded-xl p-3 shadow-xl">
+                <div className={`absolute -left-3 -top-3 bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/20 z-20 transition-all duration-500 ${isHovered ? '-translate-x-1 -translate-y-1' : ''}`} style={{ animation: 'gentleFloat 4s ease-in-out infinite' }}>
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                                <Cpu size={16} className="text-white" />
+                        <div className="w-7 h-7 rounded-lg bg-brand-blue/20 flex items-center justify-center">
+                            <Cpu size={14} className="text-brand-blue" />
                      </div>
                             <div>
-                                <div className="text-[9px] font-bold text-white">AI Copilot</div>
-                                <div className="text-[7px] text-white/60">Always Learning</div>
+                            <div className="text-[9px] font-semibold text-white">AI Copilot</div>
+                            <div className="text-[8px] text-white/60">Always Learning</div>
                              </div>
                          </div>
                      </div>
                  </div>
 
-                {/* Workflow Indicator */}
-                <div className={`absolute top-1/2 -right-6 -translate-y-1/2 z-20 transition-all duration-500 ${isHovered ? 'translate-x-4' : ''}`}>
-                    <div className="flex flex-col gap-2">
-                        {['Input', 'Process', 'Output'].map((step, i) => (
-                            <div key={i} className="flex items-center gap-2">
-                                <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-brand-blue animate-pulse' : 'bg-white/30'}`}></div>
-                                <span className={`text-[7px] font-bold uppercase tracking-wider ${i === 1 ? 'text-brand-blue' : 'text-white/30'}`}>{step}</span>
-                            </div>
-                        ))}
-                    </div>
-                 </div>
-             </div>
-
-            {/* Custom Animations */}
             <style>{`
-                @keyframes ambientFloat {
-                    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
-                    25% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
-                    50% { transform: translateY(-10px) translateX(-5px); opacity: 0.4; }
-                    75% { transform: translateY(-30px) translateX(5px); opacity: 0.6; }
-                }
-                @keyframes floatAvatar {
-                    0%, 100% { transform: translateY(0); }
+                @keyframes gentleFloat {
+                    0%, 100% { transform: translateY(0px); }
                     50% { transform: translateY(-6px); }
-                }
-                @keyframes floatBadge {
-                    0%, 100% { transform: translateY(0) rotate(-2deg); }
-                    50% { transform: translateY(-8px) rotate(2deg); }
                 }
             `}</style>
         </div>
