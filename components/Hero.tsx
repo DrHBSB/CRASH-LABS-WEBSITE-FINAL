@@ -255,12 +255,12 @@ const LogoSlider: React.FC = () => {
 
   const logos = [
     { name: 'Koita Foundation', style: 'font-serif font-semibold text-xl' },
-    { name: 'IIT Bombay', style: 'font-bold font-sans text-lg' },
-    { name: 'RSNA', style: 'font-mono font-bold text-xl' },
     { name: 'Ashoka University', style: 'font-serif font-semibold text-lg' },
-    { name: 'MIT CSAIL', style: 'font-mono font-bold text-lg' },
-    { name: 'Mayo Clinic', style: 'font-serif text-xl' },
-    { name: 'Johns Hopkins', style: 'font-sans font-semibold text-lg' },
+    { name: 'AIIMS', style: 'font-bold font-sans text-xl' },
+    { name: 'IIT Bombay', style: 'font-bold font-sans text-lg' },
+    { name: 'IIT Delhi', style: 'font-bold font-sans text-lg' },
+    { name: 'IISc', style: 'font-bold font-sans text-lg' },
+    { name: 'RSNA', style: 'font-mono font-bold text-xl' },
   ];
 
   useEffect(() => {
