@@ -73,7 +73,7 @@ ${formData.idea}
 ---
 Sent from CRASH Lab Website Partnership Form`;
 
-    const mailtoLink = `mailto:kautiksn@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:Suvrankar.datta@ashoka.edu.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     // Small delay for UX
     setTimeout(() => {

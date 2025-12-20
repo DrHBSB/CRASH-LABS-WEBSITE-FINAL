@@ -24,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
               Whether you're a clinician, researcher, or industry partner — we'd love to collaborate.
             </p>
             <a 
-              href="mailto:contact@crashlab.in" 
+              href="mailto:Suvrankar.datta@ashoka.edu.in" 
               className="group inline-flex items-center gap-3 px-6 py-3 bg-brand-blue text-white font-semibold rounded-full hover:bg-white hover:text-navy-900 transition-all duration-300"
             >
               Get in Touch
@@ -70,10 +70,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
               <p>Koita Centre for Digital Health</p>
               <p>Ashoka University</p>
               <a 
-                href="mailto:contact@crashlab.in" 
+                href="mailto:Suvrankar.datta@ashoka.edu.in" 
                 className="hover:text-brand-blue transition-colors block"
               >
-                contact@crashlab.in
+                Suvrankar.datta@ashoka.edu.in
               </a>
             </div>
           </div>

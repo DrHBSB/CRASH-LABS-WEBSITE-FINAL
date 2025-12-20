@@ -1,0 +1,10 @@
+# robots.txt for crashlab.in
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://crashlab.in/sitemap.xml
+
+# Disallow private pages
+Disallow: /brand
+

@@ -117,39 +117,52 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
 
                   {/* Leaderboard */}
                   <div className="space-y-2">
-                    {/* Row 1 - Gemini (Winner) */}
+                    {/* Row 1 - Expert Radiologists */}
                     <div className="relative group/row">
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-blue to-purple-600 rounded-lg opacity-40 blur"></div>
-                      <div className="relative flex items-center gap-3 p-3 bg-navy-900 border border-brand-blue/40 rounded-lg">
-                        <div className="w-6 h-6 rounded bg-brand-blue flex items-center justify-center text-white font-bold text-[10px]">01</div>
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#5B5FC7] to-purple-600 rounded-lg opacity-40 blur"></div>
+                      <div className="relative flex items-center gap-3 p-3 bg-navy-900 border border-[#5B5FC7]/40 rounded-lg">
+                        <div className="w-6 h-6 rounded bg-[#5B5FC7] flex items-center justify-center text-white font-bold text-[10px]">01</div>
                         <div className="flex-1">
-                          <div className="text-xs font-bold text-white">Gemini 3.0 Pro</div>
-                          <div className="text-[9px] text-emerald-200/60">Google DeepMind</div>
+                          <div className="text-xs font-bold text-white">Expert Radiologists</div>
+                          <div className="text-[9px] text-white/50">Human Baseline</div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm font-mono font-bold text-green-400">92.3%</div>
+                          <div className="text-sm font-mono font-bold text-[#5B5FC7]">83%</div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Row 2 - Trainees */}
+                    {/* Row 2 - Gemini 3.0 Pro */}
+                    <div className="flex items-center gap-3 p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                      <div className="w-5 h-5 rounded bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-[9px]">02</div>
+                      <div className="flex-1">
+                        <div className="text-[11px] font-medium text-white flex items-center gap-2">
+                          Gemini 3.0 Pro
+                          <span className="px-1 py-0.5 bg-emerald-500 text-[7px] font-bold rounded text-white">NEW</span>
+                        </div>
+                        <div className="text-[9px] text-gray-500">Google DeepMind</div>
+                      </div>
+                      <div className="text-xs font-mono text-emerald-400 font-bold">57%</div>
+                    </div>
+
+                    {/* Row 3 - Radiology Trainees */}
                     <div className="flex items-center gap-3 p-2.5 bg-white/5 border border-white/5 rounded-lg">
-                      <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-white/60 font-bold text-[9px]">02</div>
+                      <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-white/60 font-bold text-[9px]">03</div>
                       <div className="flex-1">
                         <div className="text-[11px] font-medium text-gray-300">Radiology Trainees</div>
                         <div className="text-[9px] text-gray-500">Human Baseline</div>
                       </div>
-                      <div className="text-xs font-mono text-gray-400">86.3%</div>
+                      <div className="text-xs font-mono text-gray-400">45%</div>
                     </div>
 
-                    {/* Row 3 */}
+                    {/* Row 4 - GPT-5 */}
                     <div className="flex items-center gap-3 p-2.5 bg-white/5 border border-white/5 rounded-lg opacity-60">
-                      <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-white/60 font-bold text-[9px]">03</div>
+                      <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-white/60 font-bold text-[9px]">04</div>
                       <div className="flex-1">
-                        <div className="text-[11px] font-medium text-gray-300">GPT-4 Vision</div>
-                        <div className="text-[9px] text-gray-500">OpenAI</div>
+                        <div className="text-[11px] font-medium text-gray-300">GPT-5 Thinking</div>
+                        <div className="text-[9px] text-gray-500">Prior SOTA</div>
                       </div>
-                      <div className="text-xs font-mono text-gray-400">81.7%</div>
+                      <div className="text-xs font-mono text-gray-400">30%</div>
                     </div>
                   </div>
                 </div>

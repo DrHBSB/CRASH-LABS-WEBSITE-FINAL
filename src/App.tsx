@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MissionVision from './components/MissionVision';
@@ -12,10 +12,27 @@ import Footer from './components/Footer';
 import BlogPost from './components/BlogPost';
 import CustomCursor from './components/CustomCursor';
 import PartnershipModal from './components/PartnershipModal';
+import BrandKit from './components/BrandKit';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'blog'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'blog' | 'brand'>('home');
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+
+  // Check URL for private pages on mount
+  useEffect(() => {
+    const checkRoute = () => {
+      const path = window.location.pathname;
+      const params = new URLSearchParams(window.location.search);
+      
+      if (path === '/brand' || params.has('brand')) {
+        setCurrentView('brand');
+      }
+    };
+    
+    checkRoute();
+    window.addEventListener('popstate', checkRoute);
+    return () => window.removeEventListener('popstate', checkRoute);
+  }, []);
 
   const navigateToBlog = () => {
     setCurrentView('blog');
@@ -24,6 +41,7 @@ const App: React.FC = () => {
 
   const navigateToHome = () => {
     setCurrentView('home');
+    window.history.pushState({}, '', '/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -40,24 +58,32 @@ const App: React.FC = () => {
       <CustomCursor />
       <Navbar onNavigateHome={navigateToHome} />
       
-      <main className="flex-grow pt-16">
-        {currentView === 'home' ? (
-          <>
-            <Hero onPartnerClick={() => setIsPartnerModalOpen(true)} />
-            <MissionVision />
-            <WhyCrashLab onReadMore={navigateToBlog} />
-            <Commitment />
-            <Pillars />
-            <Timeline />
-            <Team />
-            <Blog />
-          </>
-        ) : (
-          <BlogPost onBack={navigateToHome} />
-        )}
-      </main>
-      
-      <Footer onNavigateHome={navigateToHome} />
+      {currentView === 'brand' ? (
+        <main className="flex-grow">
+          <BrandKit />
+        </main>
+      ) : (
+        <>
+          <main className="flex-grow pt-16">
+            {currentView === 'home' ? (
+              <>
+                <Hero onPartnerClick={() => setIsPartnerModalOpen(true)} />
+                <MissionVision />
+                <WhyCrashLab onReadMore={navigateToBlog} />
+                <Commitment />
+                <Pillars />
+                <Timeline />
+                <Team />
+                <Blog />
+              </>
+            ) : (
+              <BlogPost onBack={navigateToHome} />
+            )}
+          </main>
+          
+          <Footer onNavigateHome={navigateToHome} />
+        </>
+      )}
       
       {/* Partnership Modal */}
       <PartnershipModal 
