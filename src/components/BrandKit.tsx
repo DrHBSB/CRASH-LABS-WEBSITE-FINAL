@@ -43,13 +43,13 @@ const BrandKit: React.FC = () => {
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-serif font-semibold text-navy-900 mb-2">Logo</h2>
           <p className="text-gray-500 mb-12">Primary logo and variations</p>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {/* Dark Logo on Light */}
             <div className="bg-white rounded-2xl p-12 border border-gray-200 flex flex-col items-center justify-center min-h-[300px]">
               <div className="flex items-center gap-3 mb-8">
                 <CrashLabLogo className="w-12 h-12" color="#0F172A" />
-                <span className="text-2xl font-sans font-bold text-navy-900 uppercase tracking-tight">Crash Lab</span>
+                <span className="text-2xl font-sans font-bold text-navy-900 uppercase tracking-tight">CRASH Lab</span>
               </div>
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Primary • Light Background</span>
             </div>
@@ -127,7 +127,7 @@ const BrandKit: React.FC = () => {
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-serif font-semibold text-navy-900 mb-2">Colors</h2>
           <p className="text-gray-500 mb-12">Click any color to copy its hex value</p>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {colors.map((color) => (
               <button
@@ -135,7 +135,7 @@ const BrandKit: React.FC = () => {
                 onClick={() => copyToClipboard(color.hex, color.name)}
                 className="group text-left"
               >
-                <div 
+                <div
                   className="aspect-square rounded-2xl mb-4 flex items-end p-4 transition-transform group-hover:scale-[1.02] shadow-lg"
                   style={{ backgroundColor: color.hex }}
                 >
@@ -178,7 +178,7 @@ const BrandKit: React.FC = () => {
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-serif font-semibold text-navy-900 mb-2">Typography</h2>
           <p className="text-gray-500 mb-12">Font families and usage guidelines</p>
-          
+
           <div className="space-y-12">
             {/* Space Grotesk */}
             <div className="bg-white rounded-2xl p-8 border border-gray-200">
@@ -197,7 +197,7 @@ const BrandKit: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="space-y-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 <p className="text-5xl text-navy-900 font-semibold" style={{ letterSpacing: '-0.02em' }}>The quick brown fox jumps over the lazy dog</p>
                 <p className="text-3xl text-navy-900/80 font-medium" style={{ letterSpacing: '-0.02em' }}>The quick brown fox jumps over the lazy dog</p>
@@ -223,7 +223,7 @@ const BrandKit: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="space-y-4" style={{ fontFamily: "'Inter', sans-serif" }}>
                 <p className="text-3xl text-navy-900 font-medium">The quick brown fox jumps over the lazy dog</p>
                 <p className="text-xl text-navy-900/80">The quick brown fox jumps over the lazy dog</p>
@@ -272,7 +272,7 @@ const BrandKit: React.FC = () => {
           <div className="mt-12 bg-navy-900 rounded-2xl p-6">
             <h3 className="text-sm font-semibold text-white mb-4">Google Fonts Import</h3>
             <pre className="text-xs font-mono text-green-400 overflow-x-auto">
-{`<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">`}
+              {`<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">`}
             </pre>
           </div>
         </div>
@@ -283,7 +283,7 @@ const BrandKit: React.FC = () => {
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-serif font-semibold text-navy-900 mb-2">UI Elements</h2>
           <p className="text-gray-500 mb-12">Common component styles</p>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {/* Buttons */}
             <div className="bg-white rounded-2xl p-8 border border-gray-200">
