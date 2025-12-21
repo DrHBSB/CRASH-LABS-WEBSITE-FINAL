@@ -11,11 +11,11 @@ interface FadeInProps {
   threshold?: number;
 }
 
-export const FadeIn: React.FC<FadeInProps> = ({ 
-  children, 
-  className = "", 
-  delay = 0, 
-  threshold = 0.2 
+export const FadeIn: React.FC<FadeInProps> = ({
+  children,
+  className = "",
+  delay = 0,
+  threshold = 0.2
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,12 +35,11 @@ export const FadeIn: React.FC<FadeInProps> = ({
   return (
     <div
       ref={ref}
-      className={`transform ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
+      className={`transform ${isVisible
+          ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4'
-      } ${className}`}
-      style={{ 
+        } ${className}`}
+      style={{
         transitionDelay: `${delay}ms`,
         transitionProperty: 'opacity, transform',
         transitionDuration: '600ms',
@@ -64,10 +63,10 @@ interface ParallaxImageProps {
   imageClassName?: string;
 }
 
-export const ParallaxImage: React.FC<ParallaxImageProps> = ({ 
-  src, 
-  alt, 
-  speed = 0.1, 
+export const ParallaxImage: React.FC<ParallaxImageProps> = ({
+  src,
+  alt,
+  speed = 0.1,
   className = "",
   imageClassName = ""
 }) => {
@@ -79,13 +78,13 @@ export const ParallaxImage: React.FC<ParallaxImageProps> = ({
       if (!ref.current) return;
       const rect = ref.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       // Only animate if in view
       if (rect.top < windowHeight && rect.bottom > 0) {
         const centerPosition = windowHeight / 2;
         const elementCenter = rect.top + rect.height / 2;
         const distanceFromCenter = elementCenter - centerPosition;
-        
+
         setOffset(distanceFromCenter * speed);
       }
     };
@@ -97,11 +96,12 @@ export const ParallaxImage: React.FC<ParallaxImageProps> = ({
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
-      <img 
-        src={src} 
-        alt={alt} 
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
         className={`absolute w-full h-[120%] -top-[10%] object-cover transition-transform duration-75 ease-linear will-change-transform ${imageClassName}`}
-        style={{ transform: `translateY(${offset}px)` }} 
+        style={{ transform: `translateY(${offset}px)` }}
       />
     </div>
   );
@@ -115,12 +115,12 @@ interface AnimatedHeadingProps {
   text: string;
   className?: string;
   delay?: number;
-  wordMode?: boolean; 
+  wordMode?: boolean;
 }
 
-export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({ 
-  text, 
-  className = "", 
+export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
+  text,
+  className = "",
   delay = 0,
   wordMode = false
 }) => {
@@ -141,12 +141,11 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
 
   // Simplified: just fade in the whole text with premium easing
   return (
-    <span 
-      ref={ref} 
-      className={`inline-block ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      } ${className}`}
-      style={{ 
+    <span
+      ref={ref}
+      className={`inline-block ${isVisible ? 'opacity-100' : 'opacity-0'
+        } ${className}`}
+      style={{
         transitionDelay: `${delay}ms`,
         transitionProperty: 'opacity',
         transitionDuration: '500ms',

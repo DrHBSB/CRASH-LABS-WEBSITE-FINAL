@@ -4,51 +4,51 @@ import { FadeIn, AnimatedHeading } from './Animations';
 import gsap from 'gsap';
 
 const teamMembers = [
-  { 
-    name: "Dr. Suvrankar Datta", 
-    role: "Group Lead", 
+  {
+    name: "Dr. Suvrankar Datta",
+    role: "Group Lead",
     initials: "SD",
     image: "/images/team/suvrankar-datta.jpeg",
     isLead: true
   },
-  { 
-    name: "Dr. Hakikat Bir Singh Bhatti", 
-    role: "Researcher", 
+  {
+    name: "Dr. Hakikat Bir Singh Bhatti",
+    role: "Researcher",
     initials: "HB",
     image: "/images/team/hakikat-bhatti.jpeg",
     isLead: false
   },
-  { 
-    name: "Kautik Singh", 
-    role: "Researcher", 
+  {
+    name: "Kautik Singh",
+    role: "Researcher",
     initials: "KS",
     image: "/images/team/kautik-singh.jpeg",
     isLead: false
   },
-  { 
-    name: "Dr. Mrudula Bhalke", 
-    role: "Researcher", 
+  {
+    name: "Dr. Mrudula Bhalke",
+    role: "Researcher",
     initials: "MB",
     image: "/images/team/mrudula-bhalke.jpeg",
     isLead: false
   },
-  { 
-    name: "Dr. Lakshmi Vennela Chowdary Kaza", 
-    role: "Researcher", 
+  {
+    name: "Dr. Lakshmi Vennela Chowdary Kaza",
+    role: "Researcher",
     initials: "LK",
     image: "/images/team/lakshmi-kaza.jpeg",
     isLead: false
   },
-  { 
-    name: "Siddharth Reddy Anthireddy", 
-    role: "Researcher", 
+  {
+    name: "Siddharth Reddy Anthireddy",
+    role: "Researcher",
     initials: "SA",
     image: "/images/team/siddharth-reddy.jpeg",
     isLead: false
   },
-  { 
-    name: "Upasana Karnwal", 
-    role: "Researcher", 
+  {
+    name: "Upasana Karnwal",
+    role: "Researcher",
     initials: "UK",
     isLead: false
   },
@@ -57,6 +57,8 @@ const teamMembers = [
 const Team: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -84,6 +86,31 @@ const Team: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+
+    setTouchEnd(0);
+    setTouchStart(0);
+  };
+
   const maxIndex = Math.max(0, teamMembers.length - visibleItems);
 
   const nextSlide = () => {
@@ -104,12 +131,12 @@ const Team: React.FC = () => {
   useEffect(() => {
     cardsRef.current.forEach((card, index) => {
       if (card) {
-        gsap.fromTo(card, 
+        gsap.fromTo(card,
           { opacity: 0, y: 50 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6, 
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
             delay: index * 0.1,
             ease: 'power3.out'
           }
@@ -121,58 +148,33 @@ const Team: React.FC = () => {
   return (
     <section id="team" className="py-24 bg-paper overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
-        
+
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
+        <div className="mb-16">
           <FadeIn>
             <h2 className="text-4xl md:text-6xl font-serif font-semibold text-navy-900 tracking-tight">
               <AnimatedHeading text="Our Team" />
             </h2>
           </FadeIn>
-          
-          {/* Navigation Controls */}
-          <FadeIn delay={200}>
-            <div className="flex gap-3 mt-6 md:mt-0">
-              <button 
-                onClick={prevSlide}
-                disabled={currentIndex === 0}
-                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                  currentIndex === 0 
-                    ? 'border-gray-200 text-gray-300 cursor-not-allowed' 
-                    : 'border-navy-900/20 text-navy-900 hover:bg-navy-900 hover:text-white hover:border-navy-900'
-                }`}
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button 
-                onClick={nextSlide}
-                disabled={currentIndex >= maxIndex}
-                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                  currentIndex >= maxIndex 
-                    ? 'border-gray-200 text-gray-300 cursor-not-allowed' 
-                    : 'border-navy-900/20 text-navy-900 hover:bg-navy-900 hover:text-white hover:border-navy-900'
-                }`}
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </FadeIn>
         </div>
 
         {/* Slider */}
         <div className="relative">
-          <div 
+          <div
             ref={sliderRef}
             className="overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-out"
-              style={{ 
+              style={{
                 transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
               }}
             >
               {teamMembers.map((member, index) => (
-                <div 
+                <div
                   key={index}
                   ref={el => { cardsRef.current[index] = el; }}
                   className="flex-shrink-0 px-3"
@@ -184,25 +186,54 @@ const Team: React.FC = () => {
             </div>
           </div>
 
-          {/* Progress Indicator */}
-          <div className="flex justify-center gap-2 mt-10">
-            {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  if (!isAnimating) {
-                    setIsAnimating(true);
-                    setCurrentIndex(idx);
-                    setTimeout(() => setIsAnimating(false), 500);
-                  }
-                }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  idx === currentIndex 
-                    ? 'bg-brand-blue w-8' 
-                    : 'bg-gray-200 w-4 hover:bg-gray-300'
+          {/* Navigation Controls with Progress Indicator */}
+          <div className="flex justify-center items-center gap-4 md:gap-6 mt-10">
+            {/* Previous Button */}
+            <button
+              onClick={prevSlide}
+              disabled={currentIndex === 0}
+              aria-label="Previous slide"
+              className={`w-10 h-10 md:w-12 md:h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${currentIndex === 0
+                  ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                  : 'border-navy-900/20 text-navy-900 hover:bg-navy-900 hover:text-white hover:border-navy-900'
                 }`}
-              />
-            ))}
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            {/* Progress Indicator */}
+            <div className="flex justify-center gap-2">
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    if (!isAnimating) {
+                      setIsAnimating(true);
+                      setCurrentIndex(idx);
+                      setTimeout(() => setIsAnimating(false), 500);
+                    }
+                  }}
+                  aria-label={`Go to slide ${idx + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex
+                      ? 'bg-brand-blue w-8'
+                      : 'bg-gray-200 w-4 hover:bg-gray-300'
+                    }`}
+                />
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={nextSlide}
+              disabled={currentIndex >= maxIndex}
+              aria-label="Next slide"
+              className={`w-10 h-10 md:w-12 md:h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${currentIndex >= maxIndex
+                  ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                  : 'border-navy-900/20 text-navy-900 hover:bg-navy-900 hover:text-white hover:border-navy-900'
+                }`}
+            >
+              <ChevronRight size={20} />
+            </button>
           </div>
         </div>
 
@@ -216,7 +247,7 @@ const Team: React.FC = () => {
                 backgroundSize: '32px 32px'
               }} />
             </div>
-            
+
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
                 <h3 className="text-2xl md:text-3xl font-serif font-semibold text-white mb-3">
@@ -226,8 +257,8 @@ const Team: React.FC = () => {
                   We're always looking for passionate researchers, engineers, and clinicians to help shape the future of healthcare AI.
                 </p>
               </div>
-              <a 
-                href="mailto:Suvrankar.datta@ashoka.edu.in" 
+              <a
+                href="mailto:Suvrankar.datta@ashoka.edu.in"
                 className="group flex items-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-bold uppercase tracking-wider rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
               >
                 Get in Touch
@@ -244,10 +275,11 @@ const Team: React.FC = () => {
               In Collaboration With
             </div>
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60">
-              <h3 className="text-3xl font-serif font-bold text-navy-900/80 tracking-tighter">RSNA</h3>
+              <h3 className="text-xl font-sans font-bold text-navy-900/80 tracking-tight">Koita Foundation</h3>
               <h3 className="text-xl font-sans font-bold text-navy-900/80 tracking-tight">Ashoka University</h3>
               <h3 className="text-2xl font-serif font-semibold text-navy-900/80">IIT Bombay</h3>
-              <h3 className="text-xl font-mono font-bold text-navy-900/80">Koita Foundation</h3>
+              <h3 className="text-2xl font-serif font-semibold text-navy-900/80">RSNA</h3>
+
             </div>
           </div>
         </FadeIn>
@@ -288,7 +320,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
   };
 
   return (
-    <div 
+    <div
       className="group cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -299,16 +331,17 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
           {member.image ? (
             <>
               {/* Actual Photo */}
-              <img 
-                src={member.image} 
+              <img
+                src={member.image}
                 alt={member.name}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 ease-out"
                 style={{
                   transform: isHovered ? 'scale(1.05)' : 'scale(1)'
                 }}
               />
               {/* Hover Overlay */}
-              <div 
+              <div
                 className="absolute inset-0 bg-navy-900/0 transition-all duration-300"
                 style={{
                   backgroundColor: isHovered ? 'rgba(15, 23, 42, 0.1)' : 'rgba(15, 23, 42, 0)'
@@ -318,7 +351,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
           ) : (
             /* Fallback with Initials */
             <div className="w-full h-full flex items-center justify-center">
-              <div 
+              <div
                 className="w-24 h-24 rounded-full flex items-center justify-center bg-gray-300 text-gray-600"
                 style={{
                   transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -330,7 +363,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
               </div>
             </div>
           )}
-          
+
           {/* Lead Badge */}
           {member.isLead && (
             <div className="absolute top-4 left-4 z-20">
@@ -343,7 +376,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
 
         {/* Info */}
         <div>
-          <h3 
+          <h3
             className="text-lg font-bold font-serif leading-tight mb-1 text-navy-900"
             style={{
               transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -352,9 +385,8 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
           >
             {member.name}
           </h3>
-          <p className={`text-[10px] uppercase tracking-[0.2em] font-bold ${
-            member.isLead ? 'text-brand-blue' : 'text-gray-500'
-          }`}>
+          <p className={`text-[10px] uppercase tracking-[0.2em] font-bold ${member.isLead ? 'text-brand-blue' : 'text-gray-500'
+            }`}>
             {member.role}
           </p>
         </div>

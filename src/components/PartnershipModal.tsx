@@ -56,7 +56,7 @@ const PartnershipModal: React.FC<PartnershipModalProps> = ({ isOpen, onClose }) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -74,7 +74,7 @@ ${formData.idea}
 Sent from CRASH Lab Website Partnership Form`;
 
     const mailtoLink = `mailto:Suvrankar.datta@ashoka.edu.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
+
     // Small delay for UX
     setTimeout(() => {
       window.location.href = mailtoLink;
@@ -103,17 +103,17 @@ Sent from CRASH Lab Website Partnership Form`;
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-navy-900/80 backdrop-blur-sm"
         onClick={handleClose}
       />
-      
+
       {/* Modal */}
       <div className="relative bg-paper rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden">
         {/* Close button */}
-        <button 
+        <button
           onClick={handleClose}
           className="absolute top-4 right-4 p-2 text-gray-400 hover:text-navy-900 transition-colors z-10"
         >
@@ -172,9 +172,8 @@ Sent from CRASH Lab Website Partnership Form`;
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="John Smith"
-                    className={`w-full px-4 py-3 bg-white border rounded-lg text-navy-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-colors ${
-                      errors.name ? 'border-red-400' : 'border-gray-200'
-                    }`}
+                    className={`w-full px-4 py-3 bg-white border rounded-lg text-navy-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-colors ${errors.name ? 'border-red-400' : 'border-gray-200'
+                      }`}
                   />
                 </div>
                 {errors.name && (
@@ -198,9 +197,8 @@ Sent from CRASH Lab Website Partnership Form`;
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@company.com"
-                    className={`w-full pl-11 pr-4 py-3 bg-white border rounded-lg text-navy-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-colors ${
-                      errors.email ? 'border-red-400' : 'border-gray-200'
-                    }`}
+                    className={`w-full pl-11 pr-4 py-3 bg-white border rounded-lg text-navy-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-colors ${errors.email ? 'border-red-400' : 'border-gray-200'
+                      }`}
                   />
                 </div>
                 {errors.email && (
@@ -227,9 +225,8 @@ Sent from CRASH Lab Website Partnership Form`;
                     onChange={handleChange}
                     placeholder="Describe your organization and how you'd like to collaborate with CRASH Lab..."
                     rows={4}
-                    className={`w-full pl-11 pr-4 py-3 bg-white border rounded-lg text-navy-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-colors resize-none ${
-                      errors.idea ? 'border-red-400' : 'border-gray-200'
-                    }`}
+                    className={`w-full pl-11 pr-4 py-3 bg-white border rounded-lg text-navy-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-colors resize-none ${errors.idea ? 'border-red-400' : 'border-gray-200'
+                      }`}
                   />
                 </div>
                 {errors.idea && (
