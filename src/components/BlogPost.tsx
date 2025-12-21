@@ -204,7 +204,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
 
             {/* Main Content */}
             <div className="container mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-                <div className="lg:col-span-8 max-w-none mx-auto lg:mx-0 min-w-0">
+                <div className="lg:col-span-8 max-w-none mx-auto lg:mx-0 min-w-0 w-full">
                     {post.tldr && (
                         <FadeIn delay={100} className="bg-navy-900/5 p-6 md:p-8 rounded-xl border border-navy-900/10 mb-8 md:mb-12">
                             <h3 className="text-xs md:text-sm font-sans font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-brand-blue mb-3 md:mb-4">TL;DR</h3>

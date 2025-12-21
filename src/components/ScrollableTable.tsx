@@ -12,15 +12,19 @@ interface ScrollableTableProps {
 
 /**
  * ScrollableTable component
- * Handles horizontal scrolling on mobile devices properly without affecting page layout.
- * Uses a contained approach to ensure it never exceeds parent width.
+ * Uses a robust, standard pattern for responsive tables.
+ * - Outer container: rounded, bordered, manages visual boundary.
+ * - Scroll container: w-full, overflow-x-auto, STRICTLY manages scrolling.
+ * - Table: min-w-full to ensure it fills space or expands as needed.
  */
 const ScrollableTable: React.FC<ScrollableTableProps> = ({ headers, rows, className = '' }) => {
     return (
         <div className={`mb-8 md:mb-12 w-full max-w-full ${className}`}>
             <div className="flex flex-col w-full">
-                <div className="overflow-x-auto w-full border border-gray-200 rounded-lg md:rounded-xl shadow-sm bg-white">
-                    <div className="inline-block min-w-full align-middle">
+                {/* Visual container with border/radius */}
+                <div className="w-full border border-gray-200 rounded-lg md:rounded-xl shadow-sm bg-white overflow-hidden">
+                    {/* SCROLL CONTAINER - The critical part */}
+                    <div className="w-full overflow-x-auto">
                         <table className="min-w-full text-left border-collapse">
                             <thead>
                                 <tr className="bg-gray-50 border-b border-gray-200">
