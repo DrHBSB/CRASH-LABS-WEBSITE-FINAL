@@ -30,17 +30,7 @@ const Pillars: React.FC = () => {
             theme: "light",
             visual: <StandardsIso />
         },
-        {
-            title: "AI Models for India",
-            description: "Developing context-aware foundation models tailored to South Asian healthcare. Our models integrate bias mitigation, cultural relevance, and explainability from the ground up.",
-            features: [
-                "Context-aware architectures",
-                "Geometric and topology-driven learning",
-                "Bias-aware innovation from inception"
-            ],
-            theme: "light",
-            visual: <ModelsIso />
-        },
+        
         {
             title: "Human-Centric Design",
             description: "Co-creating intuitive AI tools with frontline clinicians. Through hyper-personalized workflows, we're reducing burnout and enhancing care quality.",
@@ -51,6 +41,17 @@ const Pillars: React.FC = () => {
             ],
             theme: "dark",
             visual: <HumanIso />
+        },
+        {
+            title: "AI Models for India",
+            description: "Developing context-aware foundation models tailored to South Asian healthcare. Our models integrate bias mitigation, cultural relevance, and explainability from the ground up.",
+            features: [
+                "Context-aware architectures",
+                "Geometric and topology-driven learning",
+                "Bias-aware innovation from inception"
+            ],
+            theme: "light",
+            visual: <ModelsIso />
         }
     ];
 
