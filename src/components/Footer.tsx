@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUp, ArrowRight } from 'lucide-react';
+import Logo from './Logo';
 
 interface FooterProps {
   onNavigateHome?: () => void;
@@ -71,12 +72,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
             onClick={() => { if (onNavigateHome) onNavigateHome(); scrollToTop(); }}
           >
             <div className="flex items-center gap-3">
-              <svg viewBox="0 0 100 100" className="w-10 h-10 fill-none stroke-current text-white group-hover:text-brand-blue transition-colors" strokeWidth="6" strokeLinecap="square">
-                <path d="M 85 28 A 42 42 0 1 0 85 72" />
-                <rect x="32" y="32" width="36" height="36" strokeWidth="5" />
-                <line x1="50" y1="50" x2="92" y2="50" strokeWidth="5" />
-                <circle cx="50" cy="50" r="6" className="fill-current stroke-none" />
-              </svg>
+<Logo className="w-10 h-10 text-white group-hover:text-brand-blue transition-colors" />
               <span className="text-xl font-serif font-semibold text-white tracking-tight">
                 CRASH Lab
               </span>

@@ -373,7 +373,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
                 src={member.image}
                 alt={member.name}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 ease-out"
+                className="w-full h-full object-cover object-top transition-transform duration-500 ease-out"
                 style={{
                   transform: isHovered ? 'scale(1.05)' : 'scale(1)'
                 }}

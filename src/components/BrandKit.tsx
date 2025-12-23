@@ -2,18 +2,10 @@ import React, { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 
 // Actual logo SVG component used on the website
-const CrashLabLogo: React.FC<{ className?: string; color?: string }> = ({ className = "w-10 h-10", color = "currentColor" }) => (
-  <svg viewBox="0 0 100 100" className={`${className} fill-none stroke-current`} strokeWidth="10" strokeLinecap="square" style={{ color }}>
-    {/* Outer C */}
-    <path d="M 85 28 A 42 42 0 1 0 85 72" />
-    {/* Inner Square */}
-    <rect x="32" y="32" width="36" height="36" strokeWidth="8" />
-    {/* Center Line */}
-    <line x1="50" y1="50" x2="92" y2="50" strokeWidth="8" />
-    {/* Center Dot (Filled) */}
-    <circle cx="50" cy="50" r="8" className="fill-current stroke-none" />
-  </svg>
-);
+import Logo from './Logo';
+
+// Actual logo SVG component used on the website
+const CrashLabLogo = Logo;
 
 const BrandKit: React.FC = () => {
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
