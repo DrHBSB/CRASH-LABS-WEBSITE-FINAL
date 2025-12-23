@@ -104,7 +104,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                 return (
                     <FadeIn key={index} delay={index * 100}>
                         <div className="mt-16 p-8 bg-brand-blue text-white rounded-2xl">
-                            <h3 className="text-2xl font-serif font-semibold mb-4">{calloutData.title}</h3>
+                            <h3 className="text-2xl font-serif font-semibold mb-4 text-white">{calloutData.title}</h3>
                             <p className="text-white/80 font-sans font-light mb-6">
                                 {calloutData.description}
                             </p>
@@ -278,7 +278,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
 
                         <FadeIn delay={300}>
                             <div className="bg-navy-900 text-white p-6 rounded-xl shadow-lg">
-                                <h4 className="text-xl font-serif font-semibold mb-2">CRASH Lab</h4>
+                                <h4 className="text-xl font-serif font-semibold mb-2 text-white">CRASH Lab</h4>
                                 <p className="text-sm text-white/60 mb-4">Koita Centre for Digital Health, Ashoka University</p>
                                 <div className="h-px bg-white/20 w-full mb-4"></div>
                                 <p className="text-xs leading-relaxed text-white/70">
