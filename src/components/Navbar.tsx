@@ -109,7 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
               {item}
             </a>
           ))}
-          <a href="mailto:Suvrankar.datta@ashoka.edu.in" className="text-xs font-medium uppercase tracking-[0.05em] text-brand-blue border border-brand-blue/30 px-6 py-2.5 rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 bg-transparent">
+          <a href="mailto:suvrankar.datta@ashoka.edu.in" className="text-xs font-medium uppercase tracking-[0.05em] text-brand-blue border border-brand-blue/30 px-6 py-2.5 rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 bg-transparent">
             Contact
           </a>
         </div>
@@ -152,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
 
             <a
               ref={(el) => { menuItemsRef.current[menuItems.length] = el; }}
-              href="mailto:Suvrankar.datta@ashoka.edu.in"
+              href="mailto:suvrankar.datta@ashoka.edu.in"
               className="mt-8 flex items-center justify-center gap-2 w-full py-4 bg-brand-blue text-white font-bold uppercase tracking-widest text-sm rounded-full shadow-lg active:scale-95 transition-all"
               onClick={() => setIsMobileMenuOpen(false)}
             >

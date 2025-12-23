@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowLeft, Share2, Download, FileText } from 'lucide-react';
 import { FadeIn } from './Animations';
-import ScrollableTable from './ScrollableTable';
 import { BlogPostData, ContentSection, TableData, CalloutData } from '../data/blogPosts';
 
 interface BlogPostProps {
@@ -15,7 +14,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
             case 'heading':
                 return (
                     <FadeIn key={index} delay={index * 100}>
-                        <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-semibold text-navy-900 mt-8 md:mt-12 mb-4 md:mb-6 tracking-tight">
+                        <h2 className="text-3xl font-serif font-semibold text-navy-900 mt-12 mb-6 tracking-tight">
                             {section.content as string}
                         </h2>
                     </FadeIn>
@@ -25,7 +24,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                 return (
                     <FadeIn key={index} delay={index * 100}>
                         <p
-                            className="text-base md:text-lg font-sans font-light text-navy-800 leading-relaxed mb-4 md:mb-6 break-words"
+                            className="text-lg font-sans font-light text-navy-800 leading-relaxed mb-6"
                             dangerouslySetInnerHTML={{ __html: (section.content as string).replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium">$1</strong>') }}
                         />
                     </FadeIn>
@@ -38,9 +37,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                         <ul className="space-y-4 my-8">
                             {items.map((item, i) => (
                                 <li key={i} className="flex gap-4 p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
-                                    <div className="flex-1 min-w-0">
+                                    <div>
                                         <span
-                                            className="text-gray-600 text-sm leading-relaxed break-words"
+                                            className="text-gray-600 text-sm leading-relaxed"
                                             dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<span class="block font-bold text-navy-900 text-sm mb-1">$1</span>').replace(/\n/g, '<br/>') }}
                                         />
                                     </div>
@@ -54,10 +53,49 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                 const tableData = section.content as TableData;
                 return (
                     <FadeIn key={index} delay={index * 100}>
-                        <ScrollableTable
-                            headers={tableData.headers}
-                            rows={tableData.rows}
-                        />
+                        {/* Mobile: horizontal scroll container */}
+                        <div className="-mx-6 md:mx-0 mb-12">
+                            <div className="overflow-x-auto">
+                                <div className="inline-block min-w-full align-middle">
+                                    <div className="overflow-hidden rounded-xl border border-gray-200 shadow-sm">
+                                        <table className="min-w-full text-left border-collapse">
+                                            <thead>
+                                                <tr className="bg-gray-50 border-b border-gray-200">
+                                                    {tableData.headers.map((header, i) => (
+                                                        <th key={i} className="py-3 md:py-4 px-4 md:px-6 text-xs font-bold uppercase tracking-wider text-gray-500 whitespace-nowrap">
+                                                            {header}
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-100 bg-white">
+                                                {tableData.rows.map((row, i) => (
+                                                    <tr
+                                                        key={i}
+                                                        className={row.highlight && row.highlightColor === 'brand-blue' ? 'bg-brand-blue/5' : 'bg-white'}
+                                                    >
+                                                        {row.cells.map((cell, j) => (
+                                                            <td
+                                                                key={j}
+                                                                className={`py-3 md:py-4 px-4 md:px-6 text-sm whitespace-nowrap ${j === 0 ? 'font-medium' : 'text-right'} ${row.highlight && row.highlightColor === 'brand-blue' ? 'text-brand-blue' : 'text-navy-900'
+                                                                    }`}
+                                                            >
+                                                                {cell.includes('NEW') ? (
+                                                                    <span className="flex items-center gap-2">
+                                                                        {cell.replace(' NEW', '')}
+                                                                        <span className="px-2 py-0.5 bg-brand-blue text-white text-[9px] rounded-full uppercase tracking-wide">New</span>
+                                                                    </span>
+                                                                ) : cell}
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </FadeIn>
                 );
 
@@ -65,15 +103,15 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                 const calloutData = section.content as CalloutData;
                 return (
                     <FadeIn key={index} delay={index * 100}>
-                        <div className="mt-8 md:mt-16 p-6 md:p-8 bg-brand-blue text-white rounded-xl md:rounded-2xl">
-                            <h3 className="text-xl md:text-2xl font-serif font-semibold mb-3 md:mb-4">{calloutData.title}</h3>
-                            <p className="text-sm md:text-base text-white/80 font-sans font-light mb-4 md:mb-6">
+                        <div className="mt-16 p-8 bg-brand-blue text-white rounded-2xl">
+                            <h3 className="text-2xl font-serif font-semibold mb-4">{calloutData.title}</h3>
+                            <p className="text-white/80 font-sans font-light mb-6">
                                 {calloutData.description}
                             </p>
                             {calloutData.buttonText && calloutData.buttonLink && (
                                 <a
                                     href={calloutData.buttonLink}
-                                    className="inline-block px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base bg-white text-brand-blue font-bold rounded-full hover:bg-navy-900 hover:text-white transition-all"
+                                    className="inline-block px-6 py-3 bg-white text-brand-blue font-bold rounded-full hover:bg-navy-900 hover:text-white transition-all"
                                 >
                                     {calloutData.buttonText}
                                 </a>
@@ -88,7 +126,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
     };
 
     return (
-        <article className="bg-paper min-h-screen pt-20 md:pt-24 pb-16 md:pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500 overflow-x-hidden">
+        <article className="bg-paper min-h-screen pt-20 md:pt-24 pb-16 md:pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Navigation / Header */}
             <div className="container mx-auto px-4 md:px-6 lg:px-12 mb-8 md:mb-12">
                 <button
@@ -102,7 +140,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                 <FadeIn className="max-w-5xl mx-auto">
                     {/* Featured Image Card */}
                     {post.featuredImage && (
-                        <div className="w-full bg-navy-900 rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative h-[250px] md:h-[400px] mb-8 md:mb-12 group">
+                        <div className="w-full bg-navy-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative h-[400px] mb-12 group">
                             <img
                                 src={post.featuredImage}
                                 alt={post.imageAlt || post.title}
@@ -110,7 +148,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-transparent to-transparent"></div>
 
-                            <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 flex justify-between items-end">
+                            <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
                                 <div>
                                     {post.imageOverlay?.badge && (
                                         <div className="flex items-center gap-2 mb-3">
@@ -119,7 +157,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                                             </span>
                                         </div>
                                     )}
-                                    <h2 className="text-lg md:text-3xl lg:text-5xl font-serif text-white leading-tight">
+                                    <h2 className="text-3xl md:text-5xl font-serif text-white leading-tight">
                                         {post.subtitle || post.title}
                                     </h2>
                                 </div>
@@ -147,13 +185,13 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                         </div>
                     )}
 
-                    <div className="flex flex-wrap gap-2 md:gap-4 items-center text-[9px] md:text-xs font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] text-gray-400 mb-4 md:mb-6">
+                    <div className="flex flex-wrap gap-4 items-center text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">
                         <span className="text-brand-blue">{post.date}</span>
                         <span className="w-1 h-1 rounded-full bg-gray-400"></span>
                         <span>{post.readTime}</span>
                     </div>
 
-                    <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-semibold text-navy-900 leading-[1.15] md:leading-[1.1] mb-6 md:mb-8 tracking-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-semibold text-navy-900 leading-[1.1] mb-8 tracking-tight">
                         {post.title}
                     </h1>
 
@@ -204,11 +242,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
 
             {/* Main Content */}
             <div className="container mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-                <div className="lg:col-span-8 max-w-none mx-auto lg:mx-0 min-w-0 w-full">
+                <div className="lg:col-span-8 max-w-none mx-auto lg:mx-0">
                     {post.tldr && (
-                        <FadeIn delay={100} className="bg-navy-900/5 p-6 md:p-8 rounded-xl border border-navy-900/10 mb-8 md:mb-12">
-                            <h3 className="text-xs md:text-sm font-sans font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-brand-blue mb-3 md:mb-4">TL;DR</h3>
-                            <p className="text-base md:text-lg lg:text-xl font-serif text-navy-900 italic leading-relaxed">
+                        <FadeIn delay={100} className="bg-navy-900/5 p-8 rounded-xl border border-navy-900/10 mb-12">
+                            <h3 className="text-sm font-sans font-bold uppercase tracking-[0.2em] text-brand-blue mb-4">TL;DR</h3>
+                            <p className="text-xl font-serif text-navy-900 italic leading-relaxed">
                                 {post.tldr}
                             </p>
                         </FadeIn>
@@ -226,8 +264,8 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                                     <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Authors</h4>
                                     <ul className="space-y-3">
                                         {post.authors.map((author, i) => (
-                                            <li key={i} className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
+                                            <li key={i} className="flex items-start gap-3">
+                                                <div className="w-8 h-8 flex-shrink-0 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
                                                     {author.initials}
                                                 </div>
                                                 <span className="text-sm font-medium text-navy-900">{author.name}</span>

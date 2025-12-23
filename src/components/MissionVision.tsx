@@ -37,7 +37,7 @@ const MissionVision: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="mission" className="py-20 md:py-32 bg-paper">
+    <section ref={sectionRef} id="mission" className="py-20 md:py-20 bg-paper">
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Section 1: Mission */}
