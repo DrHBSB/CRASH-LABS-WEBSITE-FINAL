@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
   }, []);
 
   return (
-    <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper pt-0 pb-0">
+    <section id="home" className="w-full relative min-h-[80vh] md:min-h-screen flex flex-col overflow-hidden bg-paper py-10 md:py-0">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
@@ -248,20 +248,21 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
   );
 };
 
-// Partner Logo Component handles lazy loading and fallback
-const PartnerLogo: React.FC<{ logo: { name: string; src: string; style: string } }> = ({ logo }) => {
+// PartnerLogo Component handles lazy loading and fallback - Refactored for GSAP control
+const PartnerLogo = React.forwardRef<HTMLDivElement, { logo: { name: string; src: string; style: string } }>(({ logo }, ref) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [hasError, setHasError] = React.useState(false);
 
   return (
     <div
-      className="flex-shrink-0 cursor-pointer flex items-center justify-center relative group"
+      ref={ref}
+      className="flex-shrink-0 cursor-pointer flex items-center justify-center relative group logo-item"
       title={logo.name}
     >
       {/* Text Fallback (visible while loading or on error) */}
       <div 
         className={`text-navy-900 font-serif font-semibold whitespace-nowrap transition-opacity duration-300 absolute inset-0 flex items-center justify-center ${
-          isLoaded && !hasError ? 'opacity-0' : 'opacity-40 group-hover:opacity-100'
+          isLoaded && !hasError ? 'opacity-0' : 'opacity-40'
         }`}
       >
         {logo.name}
@@ -274,18 +275,24 @@ const PartnerLogo: React.FC<{ logo: { name: string; src: string; style: string }
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
-        className={`w-auto object-contain mix-blend-multiply transition-all duration-500 grayscale group-hover:grayscale-0 
-          ${isLoaded && !hasError ? 'opacity-40 group-hover:opacity-100' : 'opacity-0'} 
+        // Removed default grayscale/opacity classes here; they will be controlled by the parent ticker
+        // initialized with base styles for SSR/initial render
+        className={`w-auto object-contain mix-blend-multiply transition-opacity duration-500 
+          ${isLoaded && !hasError ? 'opacity-100' : 'opacity-0'} 
           ${logo.style}`}
+        style={{ filter: 'grayscale(100%) contrast(1.2) brightness(1.1)', opacity: 0.4 }} 
       />
     </div>
   );
-};
+});
+
+PartnerLogo.displayName = 'PartnerLogo';
 
 // Logo Slider Component with GSAP
 const LogoSlider: React.FC = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const logoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const logos = [
     { name: 'Koita Foundation', src: '/images/logos/optimized/KoitaFoundation.webp', style: 'h-8 md:h-10' },
@@ -297,12 +304,15 @@ const LogoSlider: React.FC = () => {
     { name: 'RSNA', src: '/images/logos/optimized/RSNA.webp', style: 'h-8 md:h-10' },
   ];
 
+  // Quadruple the logos to ensure enough buffer for the loop and viewport coverage
+  const displayLogos = [...logos, ...logos, ...logos, ...logos];
+
   useEffect(() => {
     if (!trackRef.current) return;
 
     const track = trackRef.current;
     
-    // Set up infinite scroll animation with longer duration for better viewing
+    // Set up infinite scroll animation
     const tween = gsap.to(track, {
       x: "-50%",
       duration: 40,
@@ -310,8 +320,64 @@ const LogoSlider: React.FC = () => {
       repeat: -1,
     });
 
+    // Dynamic coloring based on position
+    const updateLogoStyles = () => {
+      const viewportWidth = window.innerWidth;
+      const centerMin = viewportWidth * 0.25; // Start of center zone (25%)
+      const centerMax = viewportWidth * 0.75; // End of center zone (75%)
+      
+      logoRefs.current.forEach((logo) => {
+        if (!logo) return;
+        
+        const rect = logo.getBoundingClientRect();
+        const logoCenter = rect.left + rect.width / 2;
+        const img = logo.querySelector('img');
+        
+        if (!img) return;
+
+        // Check if logo is within the center ("color") zone
+        // We add a little feathering/transition area
+        
+        let grayscale = 1; // Default fully grayscale
+        let opacity = 0.4; // Default low opacity
+
+        if (logoCenter >= centerMin && logoCenter <= centerMax) {
+          // Inside the zone: Full color, Full opacity
+          grayscale = 0;
+          opacity = 1;
+        } else {
+           // Outside zone: Calculate distance from nearest edge for smooth transition (optional)
+           // For now, per requirement: "automatically... when they are outside the middel... use the filters"
+           // To make it smooth, we can interpolate slightly near the edges
+           
+           const distToZone = logoCenter < centerMin 
+              ? centerMin - logoCenter 
+              : logoCenter - centerMax;
+            
+           // Transition over 100px pixels
+           const transitionRange = 100;
+           const factor = Math.min(distToZone / transitionRange, 1); // 0 (at edge) -> 1 (far away)
+           
+           // Simple smoothstep-like transition
+           grayscale = factor; 
+           opacity = 1 - (factor * 0.6); // 1 -> 0.4
+        }
+        
+        // Apply styles directly for performance
+        // Added contrast and brightness to help remove background artifacts (make white backgrounds pure white for blend mode)
+        gsap.set(img, { 
+            filter: `grayscale(${grayscale}) contrast(1.2) brightness(1.1)`,
+            opacity: opacity
+        });
+      });
+    };
+
+    // Add listener to GSAP ticker for performance (runs every frame)
+    gsap.ticker.add(updateLogoStyles);
+
     return () => {
       tween.kill();
+      gsap.ticker.remove(updateLogoStyles);
     };
   }, []);
 
@@ -329,10 +395,13 @@ const LogoSlider: React.FC = () => {
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-paper to-transparent z-10 pointer-events-none"></div>
       
       <div ref={sliderRef} className="relative overflow-hidden">
-        {/* Double the logos to create seamless loop logic simplified */}
         <div ref={trackRef} className="flex items-center gap-16 whitespace-nowrap w-fit px-8">
-          {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-            <PartnerLogo key={`${logo.name}-${index}`} logo={logo} />
+          {displayLogos.map((logo, index) => (
+            <PartnerLogo 
+                key={`${logo.name}-${index}`} 
+                logo={logo} 
+                ref={el => logoRefs.current[index] = el}
+            />
           ))}
         </div>
       </div>

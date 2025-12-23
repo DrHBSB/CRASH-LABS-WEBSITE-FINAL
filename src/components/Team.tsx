@@ -33,14 +33,14 @@ const teamMembers = [
     isLead: false
   },
   {
-    name: "Dr Shreyas Reddy K",
+    name: "Dr. Shreyas Reddy K",
     role: "Researcher",
     initials: "SR",
     image: "/images/team/shreyas-reddy.jpeg",
     isLead: false
   },
    {
-    name:"Dr Bhavya Ratan Maroo",
+    name:"Dr. Bhavya Ratan Maroo",
     role:"Researcher",
     initials:"BR",
     image:"/images/team/bhavya-ratan.jpeg",
