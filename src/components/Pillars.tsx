@@ -231,8 +231,8 @@ const Card: React.FC<CardProps> = ({ title, description, features, theme, visual
     return (
         <div className={`w-full mx-auto rounded-2xl overflow-hidden flex flex-col md:flex-row h-auto min-h-[420px] transition-all duration-500 ${isDark ? 'bg-[#0a0f1a] border border-white/5 text-white' : 'bg-white border border-gray-100 text-navy-900 shadow-xl'}`}>
 
-            {/* Illustration Section - Fixed mobile height and padding */}
-            <div className={`w-full md:w-1/2 h-80 md:h-auto relative overflow-visible flex items-center justify-center p-4 md:p-10 ${isDark ? 'bg-[#0d1424]' : 'bg-gray-50'}`}>
+            {/* Illustration Section - Adjusted for mobile */}
+            <div className={`w-full md:w-1/2 min-h-[400px] md:h-auto relative overflow-hidden flex items-center justify-center p-6 md:p-10 ${isDark ? 'bg-[#0d1424]' : 'bg-gray-50'}`}>
                 <div className="w-full h-full relative perspective-[1000px] flex items-center justify-center">
                     {visual}
                 </div>

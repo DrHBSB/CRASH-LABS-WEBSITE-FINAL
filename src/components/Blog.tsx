@@ -47,7 +47,7 @@ const Blog: React.FC<BlogProps> = ({ onViewPost }) => {
             </h2>
           </FadeIn>
           <FadeIn delay={200}>
-            <span className="hidden md:flex items-center gap-2 text-sm font-medium text-gray-500 mt-4 md:mt-0">
+            <span className="flex items-center gap-2 text-xs md:text-sm font-medium text-gray-500 mt-4 md:mt-0">
               {rsnaAcceptedCount} RSNA Accepted Abstracts
             </span>
           </FadeIn>

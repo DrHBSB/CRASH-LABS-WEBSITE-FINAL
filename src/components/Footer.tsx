@@ -10,6 +10,31 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleSectionClick = (sectionId: string) => {
+    // Check if we're on the home page
+    const isHome = window.location.pathname === '/';
+    
+    if (isHome) {
+      // Already on home, just scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home first, then scroll to section
+      if (onNavigateHome) {
+        onNavigateHome();
+      }
+      // Use setTimeout to allow navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   return (
     <footer id="contact" className="bg-navy-900 text-white">
 
@@ -24,7 +49,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
               Whether you're a clinician, researcher, or industry partner — we'd love to collaborate.
             </p>
             <a
-              href="mailto:Suvrankar.datta@ashoka.edu.in"
+              href="mailto:suvrankar.datta@ashoka.edu.in"
               className="group inline-flex items-center gap-3 px-6 py-3 bg-brand-blue text-white font-semibold rounded-full hover:bg-white hover:text-navy-900 transition-all duration-300"
             >
               Get in Touch
@@ -94,10 +119,30 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
               Quick Links
             </h3>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
-              <a href="#research" className="text-white/90 hover:text-white transition-colors">Research</a>
-              <a href="#publications" className="text-white/90 hover:text-white transition-colors">Publications</a>
-              <a href="#mission" className="text-white/90 hover:text-white transition-colors">Mission</a>
-              <a href="#team" className="text-white/90 hover:text-white transition-colors">Team</a>
+              <button 
+                onClick={() => handleSectionClick('research')} 
+                className="text-white/90 hover:text-white transition-colors text-left w-fit"
+              >
+                Research
+              </button>
+              <button 
+                onClick={() => handleSectionClick('publications')} 
+                className="text-white/90 hover:text-white transition-colors text-left w-fit"
+              >
+                Publications
+              </button>
+              <button 
+                onClick={() => handleSectionClick('mission')} 
+                className="text-white/90 hover:text-white transition-colors text-left w-fit"
+              >
+                Mission
+              </button>
+              <button 
+                onClick={() => handleSectionClick('team')} 
+                className="text-white/90 hover:text-white transition-colors text-left w-fit"
+              >
+                Team
+              </button>
             </div>
           </div>
         </div>

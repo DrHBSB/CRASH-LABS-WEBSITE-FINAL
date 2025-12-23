@@ -19,13 +19,6 @@ const teamMembers = [
     isLead: false
   },
   {
-    name: "Kautik Singh",
-    role: "Researcher",
-    initials: "KS",
-    image: "/images/team/kautik-singh.jpeg",
-    isLead: false
-  },
-  {
     name: "Dr. Mrudula Bhalke",
     role: "Researcher",
     initials: "MB",
@@ -40,6 +33,34 @@ const teamMembers = [
     isLead: false
   },
   {
+    name: "Dr Shreyas Reddy K",
+    role: "Researcher",
+    initials: "SR",
+    image: "/images/team/shreyas-reddy.jpeg",
+    isLead: false
+  },
+   {
+    name:"Dr Bhavya Ratan Maroo",
+    role:"Researcher",
+    initials:"BR",
+    image:"/images/team/bhavya-ratan.jpeg",
+    isLead:false
+  },
+  {
+    name:"Dr. Divya Buchireddygari",
+    role:"Researcher",
+    initials:"DB",
+    image:"/images/team/divya-buchireddygari.jpeg",
+    isLead:false
+  },
+  {
+    name: "Kautik Singh",
+    role: "Researcher",
+    initials: "KS",
+    image: "/images/team/kautik-singh.jpeg",
+    isLead: false
+  },
+  {
     name: "Siddharth Reddy Anthireddy",
     role: "Researcher",
     initials: "SA",
@@ -50,8 +71,16 @@ const teamMembers = [
     name: "Upasana Karnwal",
     role: "Researcher",
     initials: "UK",
-    isLead: false
+    isLead: false,
+    image:"/images/team/upasana-karnwal.jpeg"
   },
+  {
+    name:"Haritha R",
+    role:"Researcher",
+    initials:"HR",
+    image:"/images/team/haritha.jpeg",
+    isLead:false
+  }
 ];
 
 const Team: React.FC = () => {
@@ -258,7 +287,7 @@ const Team: React.FC = () => {
                 </p>
               </div>
               <a
-                href="mailto:Suvrankar.datta@ashoka.edu.in"
+                href="mailto:suvrankar.datta@ashoka.edu.in"
                 className="group flex items-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-bold uppercase tracking-wider rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
               >
                 Get in Touch
@@ -274,12 +303,21 @@ const Team: React.FC = () => {
             <div className="text-center text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-12">
               In Collaboration With
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60">
-              <h3 className="text-xl font-sans font-bold text-navy-900/80 tracking-tight">Koita Foundation</h3>
-              <h3 className="text-xl font-sans font-bold text-navy-900/80 tracking-tight">Ashoka University</h3>
-              <h3 className="text-2xl font-serif font-semibold text-navy-900/80">IIT Bombay</h3>
-              <h3 className="text-2xl font-serif font-semibold text-navy-900/80">RSNA</h3>
-
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
+              {[
+                { name: 'Koita Foundation', src: '/images/logos/optimized/KoitaFoundation.webp', className: 'h-8 md:h-10 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' },
+                { name: 'Ashoka University', src: '/images/logos/optimized/AshokaUni.webp', className: 'h-10 md:h-12 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' },
+                { name: 'IIT Bombay', src: '/images/logos/optimized/IITBombayText.webp', className: 'h-12 md:h-16 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300 mix-blend-multiply' },
+                { name: 'RSNA', src: '/images/logos/optimized/RSNA.webp', className: 'h-8 md:h-10 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' }
+              ].map((logo, index) => (
+                <img
+                  key={index}
+                  src={logo.src}
+                  alt={logo.name}
+                  title={logo.name}
+                  className={`w-auto object-contain cursor-pointer ${logo.className}`}
+                />
+              ))}
             </div>
           </div>
         </FadeIn>

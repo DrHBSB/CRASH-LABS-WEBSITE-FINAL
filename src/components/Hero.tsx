@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
   }, []);
 
   return (
-    <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper">
+    <section id="home" className="w-full relative min-h-screen flex flex-col overflow-hidden bg-paper pt-0 pb-0">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none" 
@@ -100,7 +100,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                 </p>
 
                 <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" style={{ opacity: 0 }}>
-                    <a href="mailto:Suvrankar.datta@ashoka.edu.in" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
+                    <a href="mailto:suvrankar.datta@ashoka.edu.in" className="group flex items-center justify-center gap-3 px-8 py-4 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300">
                         Join the Team
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
@@ -248,62 +248,91 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
   );
 };
 
+// Partner Logo Component handles lazy loading and fallback
+const PartnerLogo: React.FC<{ logo: { name: string; src: string; style: string } }> = ({ logo }) => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [hasError, setHasError] = React.useState(false);
+
+  return (
+    <div
+      className="flex-shrink-0 cursor-pointer flex items-center justify-center relative group"
+      title={logo.name}
+    >
+      {/* Text Fallback (visible while loading or on error) */}
+      <div 
+        className={`text-navy-900 font-serif font-semibold whitespace-nowrap transition-opacity duration-300 absolute inset-0 flex items-center justify-center ${
+          isLoaded && !hasError ? 'opacity-0' : 'opacity-40 group-hover:opacity-100'
+        }`}
+      >
+        {logo.name}
+      </div>
+
+      {/* Optimized Logo Image */}
+      <img 
+        src={logo.src} 
+        alt={logo.name} 
+        loading="lazy"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setHasError(true)}
+        className={`w-auto object-contain mix-blend-multiply transition-all duration-500 grayscale group-hover:grayscale-0 
+          ${isLoaded && !hasError ? 'opacity-40 group-hover:opacity-100' : 'opacity-0'} 
+          ${logo.style}`}
+      />
+    </div>
+  );
+};
+
 // Logo Slider Component with GSAP
 const LogoSlider: React.FC = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const logos = [
-    { name: 'Koita Foundation', style: 'font-serif font-semibold text-xl' },
-    { name: 'Ashoka University', style: 'font-serif font-semibold text-lg' },
-    { name: 'AIIMS', style: 'font-bold font-sans text-xl' },
-    { name: 'IIT Bombay', style: 'font-bold font-sans text-lg' },
-    { name: 'IIT Delhi', style: 'font-bold font-sans text-lg' },
-    { name: 'IISc', style: 'font-bold font-sans text-lg' },
-    { name: 'RSNA', style: 'font-mono font-bold text-xl' },
+    { name: 'Koita Foundation', src: '/images/logos/optimized/KoitaFoundation.webp', style: 'h-8 md:h-10' },
+    { name: 'Ashoka University', src: '/images/logos/optimized/AshokaUni.webp', style: 'h-10 md:h-12' },
+    { name: 'AIIMS', src: '/images/logos/optimized/AIIMS.webp', style: 'h-12 md:h-16' },
+    { name: 'IIT Bombay', src: '/images/logos/optimized/IITBombay.webp', style: 'h-12 md:h-16' },
+    { name: 'IIT Delhi', src: '/images/logos/optimized/IITDelhi.webp', style: 'h-12 md:h-16' },
+    { name: 'IISc', src: '/images/logos/optimized/IISc.webp', style: 'h-12 md:h-16' },
+    { name: 'RSNA', src: '/images/logos/optimized/RSNA.webp', style: 'h-8 md:h-10' },
   ];
 
   useEffect(() => {
     if (!trackRef.current) return;
 
     const track = trackRef.current;
-    const items = track.children;
-    const totalWidth: number = Array.from(items).slice(0, logos.length).reduce<number>((acc, item) => acc + (item as HTMLElement).offsetWidth + 64, 0);
-
-    // Set up infinite scroll animation
-    gsap.set(track, { x: 0 });
     
+    // Set up infinite scroll animation with longer duration for better viewing
     const tween = gsap.to(track, {
-      x: -totalWidth,
-      duration: 30,
+      x: "-50%",
+      duration: 40,
       ease: 'none',
       repeat: -1,
-      modifiers: {
-        x: (x: string): string => `${parseFloat(x) % totalWidth}px`
-      }
     });
 
     return () => {
       tween.kill();
     };
-  }, [logos.length]);
+  }, []);
 
   return (
-    <div className="w-full py-6 border-t border-gray-200/60 overflow-hidden bg-paper relative">
+    <div className="w-full py-6 border-t border-gray-200/60 overflow-hidden bg-paper relative mt-auto">
+      {/* Heading */}
+      <div className="container mx-auto px-6 md:px-12 mb-6 text-center">
+        {/* <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-navy-900/40">
+          Trusted by leading research institutions
+        </p> */}
+      </div>
+
       {/* Gradient Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-paper to-transparent z-10 pointer-events-none"></div>
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-paper to-transparent z-10 pointer-events-none"></div>
       
       <div ref={sliderRef} className="relative overflow-hidden">
-        <div ref={trackRef} className="flex items-center gap-16 whitespace-nowrap">
-          {/* Duplicate logos for seamless loop */}
-          {[...logos, ...logos, ...logos].map((logo, index) => (
-            <div
-              key={index}
-              className={`flex-shrink-0 text-navy-900 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-default select-none ${logo.style}`}
-            >
-              {logo.name}
-            </div>
+        {/* Double the logos to create seamless loop logic simplified */}
+        <div ref={trackRef} className="flex items-center gap-16 whitespace-nowrap w-fit px-8">
+          {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+            <PartnerLogo key={`${logo.name}-${index}`} logo={logo} />
           ))}
         </div>
       </div>
