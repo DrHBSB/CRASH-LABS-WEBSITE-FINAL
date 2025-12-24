@@ -246,10 +246,10 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
           <div className="flex items-center gap-4">
             <button
               onClick={onReadMore}
-              className="group/btn flex items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-white hover:text-brand-blue transition-colors"
+              className="group/btn flex items-center gap-3 text-sm font-bold uppercase tracking-[0.15em] text-white hover:text-steel-200 transition-colors"
             >
               Read Full Analysis
-              <span className="w-10 h-10 rounded-full border border-white/20 group-hover/btn:border-brand-blue group-hover/btn:bg-brand-blue flex items-center justify-center transition-all">
+              <span className="w-10 h-10 rounded-full border border-white/30 group-hover/btn:border-white group-hover/btn:bg-white/10 flex items-center justify-center transition-all">
                 <ArrowRight size={16} className="group-hover/btn:translate-x-0.5 transition-transform" />
               </span>
             </button>
