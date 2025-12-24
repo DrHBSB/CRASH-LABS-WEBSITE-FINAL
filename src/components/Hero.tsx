@@ -106,7 +106,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                     </a>
                     <button 
                       onClick={onPartnerClick}
-                      className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-all duration-300 border border-gray-200"
+                      className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-medium rounded-full hover:bg-navy-900 hover:text-white transition-all duration-300 border border-navy-900/20"
                     >
                         Industry Partners
                     </button>
@@ -140,15 +140,15 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                                     <div className="flex gap-1.5">
                                         <div className="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
                                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/60"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-steel-500/60"></div>
                                     </div>
                                     <div className="h-4 w-px bg-white/10 mx-2"></div>
                                     <BarChart3 size={14} className="text-brand-blue" />
                                     <span className="text-[11px] font-bold text-white/90 tracking-wide">RadLE Benchmark</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-                                    <span className="text-[9px] font-mono text-green-400/80 uppercase tracking-wider">Live</span>
+                                    <div className="w-2 h-2 rounded-full bg-steel-400 animate-pulse"></div>
+                                    <span className="text-[9px] font-mono text-steel-400/80 uppercase tracking-wider">Live</span>
                                 </div>
                             </div>
 
@@ -175,15 +175,15 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                                     {/* Expert Radiologists */}
                                     <div className="flex flex-col items-center flex-1 group/bar">
                                         <div className="text-[10px] font-mono font-bold text-white mb-2">83%</div>
-                                        <div className="w-full bg-gradient-to-t from-brand-blue via-brand-blue to-emerald-400 rounded-t-md shadow-lg shadow-brand-blue/30 group-hover/bar:shadow-brand-blue/50 transition-shadow" style={{ height: '180px' }}></div>
+                                        <div className="w-full bg-gradient-to-t from-brand-dark via-brand-blue to-brand-light rounded-t-md shadow-lg shadow-brand-blue/30 group-hover/bar:shadow-brand-blue/50 transition-shadow" style={{ height: '180px' }}></div>
                                         <div className="text-[8px] text-white/50 text-center leading-tight mt-2 font-medium">Expert<br/>Radiologists</div>
                                     </div>
                                     
                                     {/* Gemini 3.0 Pro API */}
                                     <div className="flex flex-col items-center flex-1 relative group/bar">
-                                        <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-emerald-500 text-white text-[6px] font-bold rounded uppercase tracking-wider">New</div>
-                                        <div className="text-[10px] font-mono font-bold text-emerald-400 mb-2">57%</div>
-                                        <div className="w-full bg-gradient-to-t from-emerald-600/80 to-emerald-400/60 rounded-t-md" style={{ height: '124px' }}></div>
+                                        <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-steel-500 text-white text-[6px] font-bold rounded uppercase tracking-wider">New</div>
+                                        <div className="text-[10px] font-mono font-bold text-steel-400 mb-2">57%</div>
+                                        <div className="w-full bg-gradient-to-t from-steel-600/80 to-steel-400/60 rounded-t-md" style={{ height: '124px' }}></div>
                                         <div className="text-[8px] text-white/50 text-center leading-tight mt-2 font-medium">Gemini 3.0<br/>Pro</div>
                                     </div>
                                     

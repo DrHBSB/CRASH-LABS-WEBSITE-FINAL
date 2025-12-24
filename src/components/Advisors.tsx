@@ -79,7 +79,7 @@ const AdvisorCard: React.FC<{ advisor: typeof advisors[0] }> = ({ advisor }) => 
                 <h3
                     className="text-xl font-bold font-serif leading-tight mb-1"
                     style={{
-                        color: isHovered ? '#1a5f4a' : '#0F172A',
+                        color: isHovered ? '#234C6A' : '#0F172A',
                         transition: 'color 0.3s ease'
                     }}
                 >

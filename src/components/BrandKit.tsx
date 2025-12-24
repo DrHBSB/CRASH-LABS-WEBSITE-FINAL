@@ -19,12 +19,12 @@ const BrandKit: React.FC = () => {
   const colors = [
     { name: 'Navy 900', hex: '#0F172A', tailwind: 'navy-900', usage: 'Primary text, headings, dark backgrounds' },
     { name: 'Navy 800', hex: '#1E293B', tailwind: 'navy-800', usage: 'Secondary dark elements' },
-    { name: 'Brand Blue (Green)', hex: '#1A5F4A', tailwind: 'brand-blue', usage: 'Primary accent, CTAs, links, hover states' },
+    { name: 'Brand Blue', hex: '#234C6A', tailwind: 'brand-blue', usage: 'Primary accent, CTAs, links, hover states' },
+    { name: 'Steel 500', hex: '#456882', tailwind: 'steel-500', usage: 'Secondary accent, highlights, status indicators' },
+    { name: 'Brand Dark', hex: '#1B3C53', tailwind: 'brand-dark', usage: 'Deep blue accents, dark cards' },
     { name: 'Paper', hex: '#FAFAF8', tailwind: 'paper', usage: 'Main background color' },
-    { name: 'White', hex: '#FFFFFF', tailwind: 'white', usage: 'Cards, elevated surfaces' },
+    { name: 'Brand Muted', hex: '#E3E3E3', tailwind: 'brand-muted', usage: 'Light backgrounds, subtle elements' },
     { name: 'Slate 700', hex: '#334155', tailwind: 'slate-700', usage: 'Body text (paragraphs)' },
-    { name: 'Gray 200', hex: '#E2E8F0', tailwind: 'gray-200', usage: 'Borders, dividers' },
-    { name: 'Gray 500', hex: '#6B7280', tailwind: 'gray-500', usage: 'Muted text, captions' },
   ];
 
 
@@ -154,8 +154,8 @@ const BrandKit: React.FC = () => {
               <div className="h-32 rounded-2xl bg-gradient-to-r from-navy-900 to-[#1a2744] flex items-end p-4">
                 <span className="text-xs font-mono text-white/70">navy-900 → #1a2744</span>
               </div>
-              <div className="h-32 rounded-2xl bg-gradient-to-r from-brand-blue to-emerald-400 flex items-end p-4">
-                <span className="text-xs font-mono text-white/70">brand-blue → emerald-400</span>
+              <div className="h-32 rounded-2xl bg-gradient-to-r from-brand-dark via-brand-blue to-brand-light flex items-end p-4">
+                <span className="text-xs font-mono text-white/70">brand-dark → brand-light</span>
               </div>
               <div className="h-32 rounded-2xl bg-gradient-to-br from-[#0d1321] via-[#111827] to-[#0f172a] flex items-end p-4">
                 <span className="text-xs font-mono text-white/70">Dashboard gradient</span>
@@ -263,7 +263,7 @@ const BrandKit: React.FC = () => {
           {/* Font Import Code */}
           <div className="mt-12 bg-navy-900 rounded-2xl p-6">
             <h3 className="text-sm font-semibold text-white mb-4">Google Fonts Import</h3>
-            <pre className="text-xs font-mono text-green-400 overflow-x-auto">
+            <pre className="text-xs font-mono text-steel-400 overflow-x-auto">
               {`<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">`}
             </pre>
           </div>
@@ -311,7 +311,7 @@ const BrandKit: React.FC = () => {
                 <span className="px-3 py-1.5 bg-brand-blue/10 text-brand-blue text-xs font-medium rounded-full">
                   Coming Soon
                 </span>
-                <span className="px-2 py-0.5 bg-emerald-500 text-white text-[7px] font-bold rounded uppercase">
+                <span className="px-2 py-0.5 bg-steel-500 text-white text-[7px] font-bold rounded uppercase">
                   New
                 </span>
               </div>

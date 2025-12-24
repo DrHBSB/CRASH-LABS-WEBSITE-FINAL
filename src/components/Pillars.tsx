@@ -107,7 +107,7 @@ const Pillars: React.FC = () => {
                 <div className="mb-16">
                     <FadeIn>
                         <h2 className="text-5xl md:text-7xl font-serif font-semibold text-white leading-tight tracking-tight">
-                            <AnimatedHeading text="Our" /> <span className="text-brand-blue"><AnimatedHeading text="Four Pillars" /></span>
+                            <AnimatedHeading text="Our" /> <span className="text-steel-200"><AnimatedHeading text="Four Pillars" /></span>
                         </h2>
                     </FadeIn>
                 </div>
@@ -125,7 +125,7 @@ const Pillars: React.FC = () => {
                             >
                                 <Icon
                                     size={20}
-                                    className={`mb-3 transition-colors ${currentIndex === index ? 'text-brand-blue' : 'text-white/50'
+                                    className={`mb-3 transition-colors ${currentIndex === index ? 'text-steel-300' : 'text-white/50'
                                         }`}
                                 />
                                 <h3 className={`text-sm font-semibold mb-2 transition-colors ${currentIndex === index ? 'text-white' : 'text-white/70'
@@ -290,9 +290,9 @@ const DataCommonsIso = () => {
                             </div>
                             <span className="text-xs font-semibold text-white">Federated Network</span>
                         </div>
-                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-500/20 rounded-full">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                            <span className="text-[9px] text-emerald-400 font-medium">Connected</span>
+                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-steel-500/20 rounded-full">
+                            <div className="w-1.5 h-1.5 rounded-full bg-steel-400 animate-pulse"></div>
+                            <span className="text-[9px] text-steel-400 font-medium">Connected</span>
                         </div>
                     </div>
 
@@ -356,7 +356,7 @@ const DataCommonsIso = () => {
                 {/* Floating Badge */}
                 <div className={`absolute -right-3 -top-3 bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/20 z-20 transition-all duration-500 ${isHovered ? 'translate-x-1 -translate-y-1' : ''}`} style={{ animation: 'gentleFloat 4s ease-in-out infinite' }}>
                     <div className="flex items-center gap-2">
-                        <Shield size={14} className="text-emerald-400" />
+                        <Shield size={14} className="text-steel-400" />
                         <span className="text-[9px] text-white font-semibold">End-to-End Encrypted</span>
                     </div>
                 </div>
@@ -401,8 +401,8 @@ const StandardsIso = () => {
                             </div>
                             <span className="text-xs font-semibold text-navy-900">Evaluation Suite</span>
                         </div>
-                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-50 rounded-full">
-                            <span className="text-[9px] text-emerald-700 font-semibold">ALL PASS</span>
+                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-steel-50 rounded-full">
+                            <span className="text-[9px] text-steel-700 font-semibold">ALL PASS</span>
                         </div>
                     </div>
 
@@ -420,7 +420,7 @@ const StandardsIso = () => {
                                     <div className="h-full bg-brand-blue rounded-full" style={{ width: `${metric.score}%` }}></div>
                                 </div>
                                 <div className="text-xs font-semibold text-gray-600 w-12 text-right">{metric.score}%</div>
-                                <div className="px-1.5 py-0.5 bg-emerald-100 text-emerald-700 text-[9px] font-bold rounded">
+                                <div className="px-1.5 py-0.5 bg-steel-100 text-steel-700 text-[9px] font-bold rounded">
                                     {metric.grade}
                                 </div>
                             </div>
@@ -437,8 +437,8 @@ const StandardsIso = () => {
                 {/* Floating Badge */}
                 <div className={`absolute -left-3 bottom-8 bg-white rounded-xl p-2.5 shadow-xl border border-gray-100 z-20 transition-all duration-500 ${isHovered ? '-translate-x-1 translate-y-1' : ''}`} style={{ animation: 'gentleFloat 5s ease-in-out infinite' }}>
                     <div className="flex items-center gap-2">
-                        <div className="p-1.5 bg-emerald-100 rounded-lg">
-                            <Shield size={12} className="text-emerald-600" />
+                        <div className="p-1.5 bg-steel-100 rounded-lg">
+                            <Shield size={12} className="text-steel-600" />
                         </div>
                         <div>
                             <div className="text-[9px] font-semibold text-navy-900">FDA Ready</div>
@@ -559,7 +559,7 @@ const ModelsIso = () => {
 
                 {/* Floating Badge */}
                 <div className={`absolute -right-3 -top-3 bg-white rounded-xl p-2 shadow-xl border border-gray-100 z-20 transition-all duration-500 ${isHovered ? 'translate-x-1 -translate-y-1' : ''}`} style={{ animation: 'gentleFloat 4s ease-in-out infinite' }}>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-orange-100 via-white to-green-100 rounded-lg">
+                    <div className="flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-steel-100 via-white to-steel-50 rounded-lg">
                         <span className="text-[9px] font-bold text-navy-900 uppercase tracking-wider">Made for India</span>
                     </div>
                 </div>
@@ -610,9 +610,9 @@ const HumanIso = () => {
                             </div>
                             <span className="text-xs font-semibold text-white">Clinical Assistant</span>
                         </div>
-                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-emerald-500/20 rounded-full">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                            <span className="text-[9px] text-emerald-400 font-medium">Online</span>
+                        <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-steel-500/20 rounded-full">
+                            <div className="w-1.5 h-1.5 rounded-full bg-steel-400 animate-pulse"></div>
+                            <span className="text-[9px] text-steel-400 font-medium">Online</span>
                         </div>
                     </div>
 

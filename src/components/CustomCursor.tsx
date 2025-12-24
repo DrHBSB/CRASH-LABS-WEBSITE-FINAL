@@ -139,8 +139,8 @@ const CustomCursor: React.FC = () => {
   };
 
   // Universal cursor colors that work on both light beige and dark navy backgrounds
-  const cursorBorder = isButton ? '#10b981' : 'rgba(255, 255, 255, 0.9)';
-  const cursorBg = isButton ? 'rgba(16, 185, 129, 0.15)' : 'rgba(0, 0, 0, 0.1)';
+  const cursorBorder = isButton ? '#456882' : 'rgba(255, 255, 255, 0.9)';
+  const cursorBg = isButton ? 'rgba(69, 104, 130, 0.15)' : 'rgba(0, 0, 0, 0.1)';
 
   return (
     <>

@@ -173,8 +173,8 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
                                         <div className="text-4xl font-serif text-white font-medium mb-1">
                                             {post.imageOverlay.stat.value}
                                         </div>
-                                        <div className="text-xs font-bold text-green-400 uppercase tracking-wider flex items-center gap-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                                        <div className="text-xs font-bold text-steel-400 uppercase tracking-wider flex items-center gap-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-steel-400"></span>
                                             {post.imageOverlay.stat.sublabel}
                                         </div>
                                     </div>

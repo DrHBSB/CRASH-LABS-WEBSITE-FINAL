@@ -103,7 +103,7 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
                 <div className="h-8 border-b border-white/10 bg-navy-950/50 flex items-center px-4 gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-                  <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+                  <div className="w-2 h-2 rounded-full bg-steel-500/50"></div>
                   <span className="ml-auto text-[8px] font-mono text-white/30">radle_benchmark.json</span>
                 </div>
 
@@ -133,16 +133,16 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
                     </div>
 
                     {/* Row 2 - Gemini 3.0 Pro */}
-                    <div className="flex items-center gap-3 p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                      <div className="w-5 h-5 rounded bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-[9px]">02</div>
+                    <div className="flex items-center gap-3 p-2.5 bg-steel-500/10 border border-steel-500/20 rounded-lg">
+                      <div className="w-5 h-5 rounded bg-steel-500/20 flex items-center justify-center text-steel-400 font-bold text-[9px]">02</div>
                       <div className="flex-1">
                         <div className="text-[11px] font-medium text-white flex items-center gap-2">
                           Gemini 3.0 Pro
-                          <span className="px-1 py-0.5 bg-emerald-500 text-[7px] font-bold rounded text-white">NEW</span>
+                          <span className="px-1 py-0.5 bg-steel-500 text-[7px] font-bold rounded text-white">NEW</span>
                         </div>
                         <div className="text-[9px] text-gray-500">Google DeepMind</div>
                       </div>
-                      <div className="text-xs font-mono text-emerald-400 font-bold">57%</div>
+                      <div className="text-xs font-mono text-steel-400 font-bold">57%</div>
                     </div>
 
                     {/* Row 3 - Radiology Trainees */}
@@ -179,8 +179,8 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
                   <FileText size={10} className="text-white/60" />
                   <span className="text-[8px] font-bold text-white/60 uppercase tracking-wider">Accuracy Delta</span>
                 </div>
-                <div className="text-2xl font-mono font-bold text-green-400">+6.0%</div>
-                <div className="text-[9px] text-green-400/60 mt-0.5">vs Trainees</div>
+                <div className="text-2xl font-mono font-bold text-steel-400">+6.0%</div>
+                <div className="text-[9px] text-steel-400/60 mt-0.5">vs Trainees</div>
               </div>
 
               {/* Floating Chart Element */}
@@ -198,8 +198,8 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
 
               {/* Connection Lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30">
-                <line x1="50%" y1="30%" x2="85%" y2="15%" stroke="#1a5f4a" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite' }} />
-                <line x1="50%" y1="70%" x2="15%" y2="85%" stroke="#1a5f4a" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite reverse' }} />
+                <line x1="50%" y1="30%" x2="85%" y2="15%" stroke="#234C6A" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite' }} />
+                <line x1="50%" y1="70%" x2="15%" y2="85%" stroke="#234C6A" strokeWidth="1" strokeDasharray="4 4" style={{ animation: 'dashMove 3s linear infinite reverse' }} />
               </svg>
 
               {/* Floating Data Particles */}
@@ -233,7 +233,7 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
           </div>
 
           {/* Title */}
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white leading-[1.1] mb-6 group-hover:text-emerald-100 transition-colors">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white leading-[1.1] mb-6 group-hover:text-steel-100 transition-colors">
             Gemini 3.0 Pro Surpasses Radiology Trainees on Radiology's Last Exam (RadLE)
           </h3>
 
