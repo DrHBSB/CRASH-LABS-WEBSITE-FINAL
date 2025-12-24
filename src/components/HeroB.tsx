@@ -5,11 +5,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface HeroProps {
+interface HeroBProps {
   onPartnerClick?: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
+const HeroB: React.FC<HeroBProps> = ({ onPartnerClick }) => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -406,5 +406,5 @@ const LogoSlider: React.FC = () => {
   );
 };
 
-export default Hero;
+export default HeroB;
 

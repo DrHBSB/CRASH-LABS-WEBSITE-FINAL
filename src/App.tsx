@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+// Original hero saved as Hero.original.tsx
 import MissionVision from './components/MissionVision';
 import WhyCrashLab from './components/WhyCrashLab';
 import Commitment from './components/Commitment';
