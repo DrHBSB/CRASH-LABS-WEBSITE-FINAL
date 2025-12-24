@@ -119,15 +119,15 @@ const FeaturedUpdateCard: React.FC<FeaturedUpdateCardProps> = ({ onReadMore }) =
                   <div className="space-y-2">
                     {/* Row 1 - Expert Radiologists */}
                     <div className="relative group/row">
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#5B5FC7] to-purple-600 rounded-lg opacity-40 blur"></div>
-                      <div className="relative flex items-center gap-3 p-3 bg-navy-900 border border-[#5B5FC7]/40 rounded-lg">
-                        <div className="w-6 h-6 rounded bg-[#5B5FC7] flex items-center justify-center text-white font-bold text-[10px]">01</div>
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-blue to-brand-light rounded-lg opacity-40 blur"></div>
+                      <div className="relative flex items-center gap-3 p-3 bg-navy-900 border border-brand-blue/40 rounded-lg">
+                        <div className="w-6 h-6 rounded bg-brand-blue flex items-center justify-center text-white font-bold text-[10px]">01</div>
                         <div className="flex-1">
                           <div className="text-xs font-bold text-white">Expert Radiologists</div>
                           <div className="text-[9px] text-white/50">Human Baseline</div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm font-mono font-bold text-[#5B5FC7]">83%</div>
+                          <div className="text-sm font-mono font-bold text-brand-blue">83%</div>
                         </div>
                       </div>
                     </div>
