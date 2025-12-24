@@ -26,10 +26,17 @@ const teamMembers = [
     isLead: false
   },
   {
+    name:"Dr. Nishtha Mahajan",
+    role:"Researcher",
+    initials:"NM",
+    image:"/images/team/nishtha-mahajan.jpeg",
+    isLead:false
+  },
+  {
     name: "Dr. Lakshmi Vennela Chowdary Kaza",
     role: "Researcher",
     initials: "LK",
-    image: "/images/team/lakshmi-kaza.jpeg",
+    image: "/images/team/lakshmi-vennela.jpeg",
     isLead: false
   },
   {
@@ -79,6 +86,20 @@ const teamMembers = [
     role:"Researcher",
     initials:"HR",
     image:"/images/team/haritha.jpeg",
+    isLead:false
+  },
+  {
+    name:"Gadha Lekshmi P",
+    role:"Researcher",
+    initials:"LP",
+    image:"/images/team/gadha-lekshmi.jpeg",
+    isLead:false
+  },
+  {
+    name:"Swarna Radhakrishnan",
+    role:"Researcher",
+    initials:"SR",
+    image:"/images/team/swarna-radhakrishnan.jpeg",
     isLead:false
   }
 ];
@@ -287,7 +308,9 @@ const Team: React.FC = () => {
                 </p>
               </div>
               <a
-                href="mailto:suvrankar.datta@ashoka.edu.in"
+                href="https://forms.cloud.microsoft/r/bMKyZtTX6r"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 px-8 py-4 bg-white text-navy-900 text-sm font-bold uppercase tracking-wider rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
               >
                 Get in Touch

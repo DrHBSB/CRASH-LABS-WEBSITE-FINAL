@@ -4,9 +4,10 @@ import Logo from './Logo';
 
 interface FooterProps {
   onNavigateHome?: () => void;
+  onPartnerClick?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
+const Footer: React.FC<FooterProps> = ({ onNavigateHome, onPartnerClick }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -49,13 +50,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
             <p className="text-lg text-white/80 mb-8 max-w-xl">
               Whether you're a clinician, researcher, or industry partner — we'd love to collaborate.
             </p>
-            <a
-              href="mailto:suvrankar.datta@ashoka.edu.in"
+            <button
+              onClick={onPartnerClick}
               className="group inline-flex items-center gap-3 px-6 py-3 bg-brand-blue text-white font-semibold rounded-full hover:bg-white hover:text-navy-900 transition-all duration-300"
             >
               Get in Touch
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -89,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome }) => {
             </h3>
             <div className="space-y-2 text-sm">
               <p>
-                <a href="https://www.kcdh.iitb.ac.in" target="_blank" rel="noopener noreferrer" className="text-white/90 hover:text-white transition-colors">
+                <a href="https://www.koitafoundation.org/" target="_blank" rel="noopener noreferrer" className="text-white/90 hover:text-white transition-colors">
                   Koita Centre for Digital Health
                 </a>
               </p>

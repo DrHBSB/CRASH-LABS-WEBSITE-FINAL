@@ -5,10 +5,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const timelineEvents = [
+interface TimelineItem {
+  date: string;
+  title: string;
+  active: boolean;
+  highlight?: string;
+}
+
+const timelineEvents: TimelineItem[] = [
   { date: "April 2025", title: "CRASH Lab Founded at Koita Centre for Digital Health", active: true },
   { date: "Q3 2025", title: "First RSNA Research Cohort Launched", active: true },
-  { date: "Q4 2025", title: "15 Papers Accepted at Major Conferences", active: true, highlight: "(Target: Highest from any Indian lab)" },
+  { date: "Q4 2025", title: "15 Papers Accepted at Major Conferences", active: true},
   { date: "Q1 2026", title: "NeurIPS Research Cohort Initiated", active: false },
   { date: "Q2 2026", title: "RSNA Cutting-Edge Track", active: false },
   { date: "Q3 2026", title: "Radiology's Last Exam v1.0 Publication", active: false },
