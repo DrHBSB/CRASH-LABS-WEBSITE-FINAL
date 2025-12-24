@@ -275,8 +275,6 @@ const PartnerLogo = React.forwardRef<HTMLDivElement, { logo: { name: string; src
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
-        // Removed default grayscale/opacity classes here; they will be controlled by the parent ticker
-        // initialized with base styles for SSR/initial render
         className={`w-auto object-contain mix-blend-multiply transition-opacity duration-500 
           ${isLoaded && !hasError ? 'opacity-100' : 'opacity-0'} 
           ${logo.style}`}
@@ -323,8 +321,8 @@ const LogoSlider: React.FC = () => {
     // Dynamic coloring based on position
     const updateLogoStyles = () => {
       const viewportWidth = window.innerWidth;
-      const centerMin = viewportWidth * 0.25; // Start of center zone (25%)
-      const centerMax = viewportWidth * 0.75; // End of center zone (75%)
+      const centerMin = viewportWidth * 0.25;
+      const centerMax = viewportWidth * 0.75;
       
       logoRefs.current.forEach((logo) => {
         if (!logo) return;
@@ -335,36 +333,24 @@ const LogoSlider: React.FC = () => {
         
         if (!img) return;
 
-        // Check if logo is within the center ("color") zone
-        // We add a little feathering/transition area
-        
-        let grayscale = 1; // Default fully grayscale
-        let opacity = 0.4; // Default low opacity
+        let grayscale = 1;
+        let opacity = 0.4;
 
         if (logoCenter >= centerMin && logoCenter <= centerMax) {
-          // Inside the zone: Full color, Full opacity
           grayscale = 0;
           opacity = 1;
         } else {
-           // Outside zone: Calculate distance from nearest edge for smooth transition (optional)
-           // For now, per requirement: "automatically... when they are outside the middel... use the filters"
-           // To make it smooth, we can interpolate slightly near the edges
-           
            const distToZone = logoCenter < centerMin 
               ? centerMin - logoCenter 
               : logoCenter - centerMax;
             
-           // Transition over 100px pixels
            const transitionRange = 100;
-           const factor = Math.min(distToZone / transitionRange, 1); // 0 (at edge) -> 1 (far away)
+           const factor = Math.min(distToZone / transitionRange, 1);
            
-           // Simple smoothstep-like transition
            grayscale = factor; 
-           opacity = 1 - (factor * 0.6); // 1 -> 0.4
+           opacity = 1 - (factor * 0.6);
         }
         
-        // Apply styles directly for performance
-        // Added contrast and brightness to help remove background artifacts (make white backgrounds pure white for blend mode)
         gsap.set(img, { 
             filter: `grayscale(${grayscale}) contrast(1.2) brightness(1.1)`,
             opacity: opacity
@@ -372,7 +358,6 @@ const LogoSlider: React.FC = () => {
       });
     };
 
-    // Add listener to GSAP ticker for performance (runs every frame)
     gsap.ticker.add(updateLogoStyles);
 
     return () => {
