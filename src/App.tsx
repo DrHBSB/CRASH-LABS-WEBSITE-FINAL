@@ -118,7 +118,7 @@ const App: React.FC = () => {
             ) : null}
           </main>
 
-          <Footer onNavigateHome={navigateToHome} />
+          <Footer onNavigateHome={navigateToHome} onPartnerClick={() => setIsPartnerModalOpen(true)} />
         </>
       )}
 

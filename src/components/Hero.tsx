@@ -102,7 +102,9 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
             style={{ opacity: 0 }}
           >
             <a 
-              href="mailto:suvrankar.datta@ashoka.edu.in" 
+              href="https://forms.cloud.microsoft/r/bMKyZtTX6r"
+              target="_blank"
+              rel="noopener noreferrer" 
               className="group flex items-center justify-center gap-3 px-7 py-3.5 bg-navy-900 text-white text-sm font-medium rounded-full hover:bg-brand-blue transition-all duration-300"
             >
               Join the Team
