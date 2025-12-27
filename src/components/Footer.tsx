@@ -83,7 +83,7 @@ const Footer: React.FC<FooterProps> = ({ onPartnerClick }) => {
               </span>
             </div>
             <p className="text-sm text-white/70 mt-4 max-w-xs">
-              Centre for Responsible Autonomous Systems in Healthcare
+              Centre for Responsible Autonomous Systems in Healthcare at Koita Centre for Digital Health, Ashoka University
             </p>
           </div>
 
