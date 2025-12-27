@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import gsap from 'gsap';
 
-interface NavbarProps {
-  onNavigateHome?: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
+const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +21,18 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Handle hash scroll when location or hash changes
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   // Animation for mobile menu
   useEffect(() => {
@@ -56,9 +68,27 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
   }, [isMobileMenuOpen]);
 
   const handleLogoClick = (e: React.MouseEvent) => {
-    if (onNavigateHome) {
-      e.preventDefault();
-      onNavigateHome();
+    e.preventDefault();
+    if (location.pathname !== '/') {
+        navigate('/');
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleNavClick = (e: React.MouseEvent, targetId: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false); // Close mobile menu if open
+    
+    if (location.pathname !== '/') {
+        navigate(`/#${targetId}`);
+    } else {
+        const element = document.getElementById(targetId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            // Update URL hash without jumping
+            window.history.pushState(null, '', `/#${targetId}`);
+        }
     }
   };
 
@@ -71,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" onClick={handleLogoClick} className="flex items-center gap-3 cursor-pointer z-[9002] group relative">
+        <a href="/" onClick={handleLogoClick} className="flex items-center gap-3 cursor-pointer z-[9002] group relative">
           <div className="text-navy-900 group-hover:text-brand-blue transition-colors duration-300">
 <Logo className="w-8 h-8 md:w-10 md:h-10" />
           </div>
@@ -85,17 +115,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
           {menuItems.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={(e) => {
-                if (onNavigateHome) {
-                  e.preventDefault();
-                  onNavigateHome();
-                  setTimeout(() => {
-                    const element = document.getElementById(item.toLowerCase());
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
-                  }, 100);
-                }
-              }}
+              href={`/#${item.toLowerCase()}`}
+              onClick={(e) => handleNavClick(e, item.toLowerCase())}
               className="text-xs font-medium uppercase tracking-[0.05em] text-navy-900 hover:text-brand-blue transition-colors relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[1px] after:bg-brand-blue after:transition-all after:duration-300 hover:after:w-full"
             >
               {item}
@@ -135,12 +156,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
               <a
                 key={item}
                 ref={(el) => { menuItemsRef.current[index] = el; }}
-                href={`#${item.toLowerCase()}`}
+                href={`/#${item.toLowerCase()}`}
                 className="group flex items-center justify-between text-3xl font-serif font-medium text-navy-900 tracking-tight border-b border-navy-900/10 pb-4"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  if (onNavigateHome) onNavigateHome();
-                }}
+                onClick={(e) => handleNavClick(e, item.toLowerCase())}
               >
                 <span className="group-hover:text-brand-blue transition-colors duration-300">{item}</span>
                 <ArrowRight size={20} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-brand-blue" />

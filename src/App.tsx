@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 // Original hero saved as Hero.original.tsx
@@ -17,65 +18,36 @@ import PartnershipModal from './components/PartnershipModal';
 import BrandKit from './components/BrandKit';
 // import Advisors from './components/Advisors';
 
-const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'blog' | 'brand'>('home');
-  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
-  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
 
-  // Check URL for routing on mount and browser navigation
   useEffect(() => {
-    const checkRoute = () => {
-      const path = window.location.pathname;
-      const params = new URLSearchParams(window.location.search);
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-      if (path === '/brand' || params.has('brand')) {
-        setCurrentView('brand');
-        setSelectedPostId(null);
-      } else if (path.startsWith('/blog/')) {
-        const postId = path.replace('/blog/', '');
-        const post = blogPosts.find(p => p.id === postId);
+  return null;
+};
 
-        if (post) {
-          setSelectedPostId(postId);
-          setCurrentView('blog');
-        } else {
-          // Invalid blog post ID, redirect to home
-          setCurrentView('home');
-          setSelectedPostId(null);
-          window.history.replaceState({}, '', '/');
-        }
-      } else {
-        // Home route
-        setCurrentView('home');
-        setSelectedPostId(null);
-      }
-    };
+const HomePage: React.FC<{ onPartnerClick: () => void }> = ({ onPartnerClick }) => {
+  return (
+    <>
+      <Hero onPartnerClick={onPartnerClick} />
+      <MissionVision />
+      <WhyCrashLab onReadMore={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })} />
+      <Commitment />
+      <Pillars />
+      <Timeline />
+      <Team />
+      {/* <Advisors /> */}
+      <Blog />
+    </>
+  );
+};
 
-    checkRoute();
-    window.addEventListener('popstate', checkRoute);
-    return () => window.removeEventListener('popstate', checkRoute);
-  }, []);
-
-  const handleViewPost = (postId: string) => {
-    setSelectedPostId(postId);
-    setCurrentView('blog');
-    window.history.pushState({}, '', `/blog/${postId}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleBackToList = () => {
-    setSelectedPostId(null);
-    setCurrentView('home');
-    window.history.pushState({}, '', '/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const navigateToHome = () => {
-    setCurrentView('home');
-    setSelectedPostId(null);
-    window.history.pushState({}, '', '/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+const AppContent: React.FC = () => {
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const location = useLocation();
+  const isBrandPage = location.pathname === '/brand';
 
   return (
     <div className="w-full min-h-screen flex flex-col font-sans bg-paper selection:bg-brand-blue selection:text-white relative">
@@ -88,37 +60,29 @@ const App: React.FC = () => {
         }}
       />
 
+      <ScrollToTop />
       <CustomCursor />
-      <Navbar onNavigateHome={navigateToHome} />
+      
+      {/* Navbar is always present */}
+      <Navbar onNavigateHome={() => { /* Handled by Link in Navbar usually, or keep empty if standard nav */ }} />
 
-      {currentView === 'brand' ? (
+      {isBrandPage ? (
         <main className="flex-grow">
-          <BrandKit />
+          <Routes>
+            <Route path="/brand" element={<BrandKit />} />
+          </Routes>
         </main>
       ) : (
         <>
           <main className="flex-grow pt-16">
-            {currentView === 'home' ? (
-              <>
-                <Hero onPartnerClick={() => setIsPartnerModalOpen(true)} />
-                <MissionVision />
-                <WhyCrashLab onReadMore={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })} />
-                <Commitment />
-                <Pillars />
-                <Timeline />
-                <Team />
-                {/* <Advisors /> */}
-                <Blog onViewPost={handleViewPost} />
-              </>
-            ) : selectedPostId ? (
-              <BlogPost
-                post={blogPosts.find(p => p.id === selectedPostId)!}
-                onBack={handleBackToList}
-              />
-            ) : null}
+            <Routes>
+              <Route path="/" element={<HomePage onPartnerClick={() => setIsPartnerModalOpen(true)} />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+              {/* Fallback route */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
           </main>
-
-          <Footer onNavigateHome={navigateToHome} onPartnerClick={() => setIsPartnerModalOpen(true)} />
+          <Footer onNavigateHome={() => {}} onPartnerClick={() => setIsPartnerModalOpen(true)} />
         </>
       )}
 
@@ -128,6 +92,14 @@ const App: React.FC = () => {
         onClose={() => setIsPartnerModalOpen(false)}
       />
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 };
 

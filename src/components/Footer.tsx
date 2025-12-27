@@ -1,40 +1,44 @@
 import React from 'react';
 import { ArrowUp, ArrowRight } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
 interface FooterProps {
-  onNavigateHome?: () => void;
   onPartnerClick?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onNavigateHome, onPartnerClick }) => {
+const Footer: React.FC<FooterProps> = ({ onPartnerClick }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSectionClick = (sectionId: string) => {
     // Check if we're on the home page
-    const isHome = window.location.pathname === '/';
+    const isHome = location.pathname === '/';
     
     if (isHome) {
       // Already on home, just scroll to section
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+        // Update URL hash without jumping
+        window.history.pushState(null, '', `/#${sectionId}`);
       }
     } else {
-      // Navigate to home first, then scroll to section
-      if (onNavigateHome) {
-        onNavigateHome();
-      }
-      // Use setTimeout to allow navigation to complete before scrolling
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+      // Navigate to home first, then scroll to section (handled by Navbar's useEffect usually, or need to pass hash)
+      navigate(`/#${sectionId}`);
     }
+  };
+
+  const handleLogoClick = () => {
+      if (location.pathname !== '/') {
+          navigate('/');
+      } else {
+          scrollToTop();
+      }
   };
 
   return (
@@ -70,7 +74,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome, onPartnerClick }) => {
           {/* Logo */}
           <div
             className="cursor-pointer group"
-            onClick={() => { if (onNavigateHome) onNavigateHome(); scrollToTop(); }}
+            onClick={handleLogoClick}
           >
             <div className="flex items-center gap-3">
 <Logo className="w-10 h-10 text-white group-hover:text-brand-blue transition-colors" />
@@ -90,7 +94,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateHome, onPartnerClick }) => {
             </h3>
             <div className="space-y-2 text-sm">
               <p>
-                <a href="https://www.koitafoundation.org/" target="_blank" rel="noopener noreferrer" className="text-white/90 hover:text-white transition-colors">
+                <a href="https://www.ashoka.edu.in/page/koita-centre-for-digital-health-at-ashoka/" target="_blank" rel="noopener noreferrer" className="text-white/90 hover:text-white transition-colors">
                   Koita Centre for Digital Health
                 </a>
               </p>

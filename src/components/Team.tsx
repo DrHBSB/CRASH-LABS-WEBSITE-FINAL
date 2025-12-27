@@ -105,94 +105,86 @@ const teamMembers = [
 ];
 
 const Team: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const [progress, setProgress] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
-  const itemsPerView = {
-    mobile: 1,
-    tablet: 2,
-    desktop: 4
-  };
-
-  const getItemsPerView = () => {
-    if (typeof window === 'undefined') return itemsPerView.desktop;
-    if (window.innerWidth < 768) return itemsPerView.mobile;
-    if (window.innerWidth < 1024) return itemsPerView.tablet;
-    return itemsPerView.desktop;
-  };
-
-  const [visibleItems, setVisibleItems] = useState(itemsPerView.desktop);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setVisibleItems(getItemsPerView());
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      nextSlide();
+  // Handle scroll progress
+  const handleScroll = () => {
+    if (sliderRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+      const scrollProgress = (scrollLeft / (scrollWidth - clientWidth)) * 100;
+      setProgress(scrollProgress);
     }
-    if (isRightSwipe) {
-      prevSlide();
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDown.current = true;
+    if (sliderRef.current) {
+      startX.current = e.pageX - sliderRef.current.offsetLeft;
+      scrollLeft.current = sliderRef.current.scrollLeft;
+      sliderRef.current.style.cursor = 'grabbing';
     }
-
-    setTouchEnd(0);
-    setTouchStart(0);
   };
 
-  const maxIndex = Math.max(0, teamMembers.length - visibleItems);
-
-  const nextSlide = () => {
-    if (isAnimating || currentIndex >= maxIndex) return;
-    setIsAnimating(true);
-    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
-    setTimeout(() => setIsAnimating(false), 500);
+  const handleMouseLeave = () => {
+    isDown.current = false;
+    if (sliderRef.current) {
+      sliderRef.current.style.cursor = 'grab';
+    }
   };
 
-  const prevSlide = () => {
-    if (isAnimating || currentIndex <= 0) return;
-    setIsAnimating(true);
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
-    setTimeout(() => setIsAnimating(false), 500);
+  const handleMouseUp = () => {
+    isDown.current = false;
+    if (sliderRef.current) {
+      sliderRef.current.style.cursor = 'grab';
+    }
   };
 
-  // GSAP animation on mount
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown.current || !sliderRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX.current) * 2; // Scroll-fast multiplier
+    sliderRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (sliderRef.current) {
+      // On mobile, scroll the full view width (since we show 1 item roughly). 
+      // On desktop, scroll half view width.
+      const isMobile = window.innerWidth < 768;
+      const scrollAmount = isMobile 
+        ? sliderRef.current.clientWidth 
+        : sliderRef.current.clientWidth / 2;
+        
+      sliderRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // GSAP animation on mount - animating cards in
   useEffect(() => {
-    cardsRef.current.forEach((card, index) => {
-      if (card) {
-        gsap.fromTo(card,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            delay: index * 0.1,
-            ease: 'power3.out'
-          }
-        );
+    const cards = document.querySelectorAll('.team-card-wrapper');
+    gsap.fromTo(cards,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sliderRef.current,
+          start: 'top bottom-=100',
+        }
       }
-    });
+    );
   }, []);
 
   return (
@@ -200,92 +192,86 @@ const Team: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <FadeIn>
             <h2 className="text-4xl md:text-6xl font-serif font-semibold text-navy-900 tracking-tight">
               <AnimatedHeading text="Our Team" />
             </h2>
           </FadeIn>
-        </div>
-
-        {/* Slider */}
-        <div className="relative">
-          <div
-            ref={sliderRef}
-            className="overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{
-                transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
-              }}
-            >
-              {teamMembers.map((member, index) => (
-                <div
-                  key={index}
-                  ref={el => { cardsRef.current[index] = el; }}
-                  className="flex-shrink-0 px-3"
-                  style={{ width: `${100 / visibleItems}%` }}
-                >
-                  <TeamCard member={member} index={index} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Controls with Progress Indicator */}
-          <div className="flex justify-center items-center gap-4 md:gap-6 mt-10">
-            {/* Previous Button */}
+          
+          {/* Controls - Top Right on Desktop */}
+          <div className="hidden md:flex items-center gap-4">
             <button
-              onClick={prevSlide}
-              disabled={currentIndex === 0}
-              aria-label="Previous slide"
-              className={`w-10 h-10 md:w-12 md:h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${currentIndex === 0
-                  ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                  : 'border-navy-900/20 text-navy-900 hover:bg-navy-900 hover:text-white hover:border-navy-900'
-                }`}
+              onClick={() => scroll('left')}
+              className="w-12 h-12 rounded-full border border-navy-900/20 flex items-center justify-center text-navy-900 hover:bg-navy-900 hover:text-white transition-all duration-300"
+              aria-label="Scroll left"
             >
               <ChevronLeft size={20} />
             </button>
-
-            {/* Progress Indicator */}
-            <div className="flex justify-center gap-2">
-              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    if (!isAnimating) {
-                      setIsAnimating(true);
-                      setCurrentIndex(idx);
-                      setTimeout(() => setIsAnimating(false), 500);
-                    }
-                  }}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex
-                      ? 'bg-brand-blue w-8'
-                      : 'bg-gray-200 w-4 hover:bg-gray-300'
-                    }`}
-                />
-              ))}
-            </div>
-
-            {/* Next Button */}
             <button
-              onClick={nextSlide}
-              disabled={currentIndex >= maxIndex}
-              aria-label="Next slide"
-              className={`w-10 h-10 md:w-12 md:h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${currentIndex >= maxIndex
-                  ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                  : 'border-navy-900/20 text-navy-900 hover:bg-navy-900 hover:text-white hover:border-navy-900'
-                }`}
+              onClick={() => scroll('right')}
+              className="w-12 h-12 rounded-full border border-navy-900/20 flex items-center justify-center text-navy-900 hover:bg-navy-900 hover:text-white transition-all duration-300"
+              aria-label="Scroll right"
             >
               <ChevronRight size={20} />
             </button>
           </div>
         </div>
+
+        {/* Draggable Slider */}
+        <div className="relative -mx-6 md:-mx-12 px-6 md:px-12">
+          <div
+            ref={sliderRef}
+            className="flex gap-6 overflow-x-auto pb-12 pt-4 cursor-grab scrollbar-hide select-none"
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch' 
+            }}
+            onScroll={handleScroll}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+          >
+            {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                className="team-card-wrapper flex-shrink-0 w-[85vw] md:w-[45%] lg:w-[32%] transition-colors duration-300"
+              >
+                <TeamCard member={member} index={index} />
+              </div>
+            ))}
+            
+             {/* Spacer for right padlock feeling */}
+             <div className="w-1 flex-shrink-0" />
+          </div>
+          
+           {/* Custom Scrollbar / Progress */}
+           <div className="mt-4 h-[2px] w-full bg-navy-900/10 rounded-full overflow-hidden relative max-w-md mx-auto md:mx-0">
+              <div 
+                className="absolute left-0 top-0 h-full bg-brand-blue transition-all duration-100 ease-out"
+                style={{ width: `${Math.max(5, progress)}%` }} // Minimum 5% width for visibility
+              />
+           </div>
+        </div>
+        
+        {/* Mobile Controls - Bottom */}
+         <div className="flex md:hidden justify-center items-center gap-4 mt-8">
+            <button
+              onClick={() => scroll('left')}
+              className="w-10 h-10 rounded-full border border-navy-900/20 flex items-center justify-center text-navy-900 hover:bg-navy-900 hover:text-white transition-all duration-300"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              className="w-10 h-10 rounded-full border border-navy-900/20 flex items-center justify-center text-navy-900 hover:bg-navy-900 hover:text-white transition-all duration-300"
+            >
+              <ChevronRight size={20} />
+            </button>
+        </div>
+
 
         {/* Join the Team Section */}
         <FadeIn delay={400}>
@@ -331,7 +317,7 @@ const Team: React.FC = () => {
                 { name: 'Koita Foundation', src: '/images/logos/optimized/KoitaFoundation.webp', className: 'h-8 md:h-10 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' },
                 { name: 'Ashoka University', src: '/images/logos/optimized/AshokaUni.webp', className: 'h-10 md:h-12 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' },
                 { name: 'IIT Bombay', src: '/images/logos/optimized/IITBombayText.webp', className: 'h-12 md:h-16 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300 mix-blend-multiply' },
-                { name: 'RSNA', src: '/images/logos/optimized/RSNA.webp', className: 'h-8 md:h-10 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' }
+                // { name: 'RSNA', src: '/images/logos/optimized/RSNA.webp', className: 'h-8 md:h-10 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300' }
               ].map((logo, index) => (
                 <img
                   key={index}

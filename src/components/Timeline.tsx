@@ -14,11 +14,11 @@ interface TimelineItem {
 
 const timelineEvents: TimelineItem[] = [
   { date: "April 2025", title: "CRASH Lab Founded at Koita Centre for Digital Health", active: true },
-  { date: "Q3 2025", title: "First RSNA Research Cohort Launched", active: true },
-  { date: "Q4 2025", title: "15 Papers Accepted at Major Conferences", active: true},
-  { date: "Q1 2026", title: "NeurIPS Research Cohort Initiated", active: false },
-  { date: "Q2 2026", title: "RSNA Cutting-Edge Track", active: false },
-  { date: "Q3 2026", title: "Radiology's Last Exam v1.0 Publication", active: false },
+  { date: "Q2 2025", title: "First RSNA Research Cohort Launched", active: true },
+  { date: "Q2 2025", title: "15 Papers Accepted at Major Conferences", active: true},
+  { date: "Q2 2025", title: "NeurIPS Research Cohort Initiated", active: false },
+  { date: "Q3 2025", title: "RSNA Cutting-Edge Track", active: false },
+  { date: "Q3 2025", title: "Radiology's Last Exam v1.0 Publication", active: false },
 ];
 
 const Timeline: React.FC = () => {
