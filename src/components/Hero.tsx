@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, BarChart3 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -85,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
             style={{ opacity: 0, fontFamily: "'Space Grotesk', sans-serif", letterSpacing: '-0.02em' }}
           >
             Responsible AI,<br />
-            <span className="text-brand-blue">built for Healthcare.</span>
+            <span >built for <span className="text-brand-blue">Healthcare.</span></span>
           </h1>
           
           <p 
@@ -137,7 +138,11 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
             <div className="absolute -inset-1 bg-brand-blue/10 rounded-3xl blur-xl"></div>
             
             {/* Main Dashboard Container */}
-            <div className="relative bg-gradient-to-br from-[#0d1321] via-[#111827] to-[#0f172a] rounded-2xl border border-white/10 overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12),0_0_40px_rgba(35,76,106,0.15)]">
+            <Link 
+              to="/blog/gemini-3-0-radle" 
+              className="block relative bg-gradient-to-br from-[#111827] via-[#111827] to-[#0f172a] rounded-2xl border border-white/10 overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12),0_0_40px_rgba(35,76,106,0.15)] transition-transform hover:scale-[1.005] duration-300"
+              data-no-cursor
+            >
               
               {/* Scanline Effect */}
               <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.03)_50%)] bg-[length:100%_4px] pointer-events-none z-30 opacity-40"></div>
@@ -185,7 +190,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                       {/* Gemini 3.0 Pro */}
                       <div className="flex flex-col items-center flex-1 relative group" style={{ height: '69%' }}>
                         <div className="absolute -top-10 md:-top-16 left-1/2 -translate-x-1/2 px-1.5 md:px-2.5 py-0.5 md:py-1 bg-steel-500 text-white text-[6px] md:text-[8px] font-bold rounded uppercase">New</div>
-                        <div className="absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 text-xs md:text-base font-mono font-bold text-steel-300 whitespace-nowrap">57%</div>
+                        <div className="absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 text-xs md:text-base font-mono font-bold text-white whitespace-nowrap">57%</div>
                         <div className="w-full h-full bg-gradient-to-t from-steel-700 via-steel-500 to-steel-400 rounded-t-md md:rounded-t-lg shadow-lg shadow-steel-500/20"></div>
                         <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/60 text-center leading-tight font-medium whitespace-nowrap">Gemini</div>
                       </div>
@@ -194,21 +199,21 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                       <div className="flex flex-col items-center flex-1 relative" style={{ height: '61%' }}>
                         <div className="absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 text-xs md:text-base font-mono font-bold text-white/50 whitespace-nowrap">51%</div>
                         <div className="w-full h-full bg-gradient-to-t from-white/25 to-white/15 rounded-t-md md:rounded-t-lg"></div>
-                        <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/40 text-center leading-tight font-medium whitespace-nowrap">Web</div>
+                        <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/60 text-center leading-tight font-medium whitespace-nowrap">Web</div>
                       </div>
                       
                       {/* Radiology Trainees */}
                       <div className="flex flex-col items-center flex-1 relative" style={{ height: '54%' }}>
                         <div className="absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 text-xs md:text-base font-mono font-bold text-white/50 whitespace-nowrap">45%</div>
                         <div className="w-full h-full bg-gradient-to-t from-white/20 to-white/10 rounded-t-md md:rounded-t-lg"></div>
-                        <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/40 text-center leading-tight font-medium whitespace-nowrap">Trainees</div>
+                        <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/60 text-center leading-tight font-medium whitespace-nowrap">Trainees</div>
                       </div>
                       
                       {/* GPT-5 */}
                       <div className="flex flex-col items-center flex-1 relative" style={{ height: '36%' }}>
                         <div className="absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 text-xs md:text-base font-mono font-bold text-white/50 whitespace-nowrap">30%</div>
                         <div className="w-full h-full bg-gradient-to-t from-white/15 to-white/8 rounded-t-md md:rounded-t-lg"></div>
-                        <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/40 text-center leading-tight font-medium whitespace-nowrap">GPT-5</div>
+                        <div className="absolute -bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 text-[9px] md:text-xs text-white/60 text-center leading-tight font-medium whitespace-nowrap">GPT-5</div>
                       </div>
                     </div>
                   </div>
@@ -241,8 +246,8 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                       <div className="p-2.5 md:p-4 bg-brand-blue/10 rounded-lg md:rounded-xl border border-brand-blue/20">
                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                           <div>
-                            <div className="text-[8px] md:text-[10px] text-brand-blue/60 uppercase tracking-wide mb-0.5 md:mb-1">Best AI</div>
-                            <div className="text-lg md:text-2xl lg:text-3xl font-bold text-brand-blue font-mono">57%</div>
+                            <div className="text-[8px] md:text-[10px] text-white/40 uppercase tracking-wide mb-0.5 md:mb-1">Best AI</div>
+                            <div className="text-lg md:text-2xl lg:text-3xl font-bold text-white font-mono">57%</div>
                           </div>
                           <div className="hidden lg:flex w-12 h-12 rounded-full bg-brand-blue/20 items-center justify-center">
                             <span className="text-xl">🤖</span>
@@ -255,7 +260,7 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                           <div>
                             <div className="text-[8px] md:text-[10px] text-white/40 uppercase tracking-wide mb-0.5 md:mb-1">Gap</div>
-                            <div className="text-lg md:text-2xl lg:text-3xl font-bold text-steel-300 font-mono">26pt</div>
+                            <div className="text-lg md:text-2xl lg:text-3xl font-bold text-white font-mono">26pt</div>
                           </div>
                           <div className="hidden lg:flex w-12 h-12 rounded-full bg-steel-500/20 items-center justify-center">
                             <span className="text-xl">📊</span>
@@ -276,20 +281,20 @@ const Hero: React.FC<HeroProps> = ({ onPartnerClick }) => {
                       <div className="px-2 md:px-3 py-1 md:py-1.5 bg-steel-500/20 rounded md:rounded-lg text-[8px] md:text-[9px] font-bold text-steel-300 uppercase w-fit">+12% vs Trainees</div>
                     </div>
                     
-                    <span className="mt-3 md:mt-5 text-[10px] md:text-xs font-medium text-brand-blue/60 flex items-center gap-1 md:gap-1.5">
+                    <div className="mt-3 md:mt-5 text-[10px] md:text-xs font-medium text-white flex items-center gap-1 md:gap-1.5 hover:text-brand-blue transition-colors">
                       Read full analysis <ArrowRight size={10} className="md:hidden" /><ArrowRight size={12} className="hidden md:block" />
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Footer */}
               <div className="px-6 py-3 border-t border-white/5 bg-white/5 flex items-center justify-between">
-                <span className="text-[9px] font-mono text-white/30 uppercase tracking-wider">RSNA 2025 • Cutting Edge Oral Presentation</span>
-                <span className="text-[9px] font-mono text-brand-blue/60">crashlab.in/radle</span>
+                <span className="text-[9px] font-mono text-white/60 uppercase tracking-wider">RSNA 2025 • Cutting Edge Oral Presentation</span>
+                <span className="text-[9px] font-mono text-white">crashlab.in/radle</span>
               </div>
               
-            </div>
+            </Link>
           </div>
         </div>
       </div>

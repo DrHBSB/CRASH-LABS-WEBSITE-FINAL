@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { FadeIn, AnimatedHeading } from './Animations';
 import { blogPosts } from '../data/blogPosts';
 
-interface BlogProps {
-  onViewPost?: (postId: string) => void;
-}
-
 const POSTS_PER_PAGE = 5;
 
-const Blog: React.FC<BlogProps> = ({ onViewPost }) => {
+const Blog: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   // Count RSNA accepted abstracts
   const rsnaAcceptedCount = blogPosts.filter(
@@ -29,8 +27,8 @@ const Blog: React.FC<BlogProps> = ({ onViewPost }) => {
   const handlePostClick = (postId: string, hasLink?: string) => {
     if (hasLink) {
       window.open(hasLink, '_blank');
-    } else if (onViewPost) {
-      onViewPost(postId);
+    } else {
+      navigate(`/blog/${postId}`);
     }
   };
 
@@ -147,5 +145,6 @@ const Blog: React.FC<BlogProps> = ({ onViewPost }) => {
     </section>
   );
 };
+
 
 export default Blog;

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, Share2, Download, FileText } from 'lucide-react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FadeIn } from './Animations';
-import { BlogPostData, ContentSection, TableData, CalloutData } from '../data/blogPosts';
+import { blogPosts, ContentSection, TableData, CalloutData } from '../data/blogPosts';
 
-interface BlogPostProps {
-    post: BlogPostData;
-    onBack: () => void;
-}
+const BlogPost: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
+    
+    const post = blogPosts.find(p => p.id === id);
 
-const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
+    useEffect(() => {
+        if (!post) {
+            navigate('/');
+        }
+    }, [post, navigate]);
+
+    if (!post) {
+        return null; // Or a loading spinner / 404 component
+    }
+
     const renderContentSection = (section: ContentSection, index: number) => {
         switch (section.type) {
             case 'heading':
@@ -126,16 +137,16 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onBack }) => {
     };
 
     return (
-        <article className="bg-paper min-h-screen pt-20 md:pt-24 pb-16 md:pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <article className="bg-paper min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
             {/* Navigation / Header */}
             <div className="container mx-auto px-4 md:px-6 lg:px-12 mb-8 md:mb-12">
-                <button
-                    onClick={onBack}
-                    className="group flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-navy-900 hover:text-brand-blue transition-colors mb-12"
+                <Link
+                    to="/"
+                    className="group flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-navy-900 hover:text-brand-blue transition-colors mb-12 w-fit"
                 >
                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                     Back to Research
-                </button>
+                </Link>
 
                 <FadeIn className="max-w-5xl mx-auto">
                     {/* Featured Image Card */}
