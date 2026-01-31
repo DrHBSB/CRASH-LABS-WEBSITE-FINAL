@@ -38,3 +38,7 @@ dist-ssr
 .turbo
 .parcel-cache
 .cache
+
+/docs
+
+Code.gs

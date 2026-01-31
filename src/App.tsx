@@ -15,6 +15,7 @@ import BlogPost from './components/BlogPost';
 import { blogPosts } from './data/blogPosts';
 import CustomCursor from './components/CustomCursor';
 import PartnershipModal from './components/PartnershipModal';
+import { ApplicationModal } from './components/forms/ApplicationForm';
 import BrandKit from './components/BrandKit';
 // import Advisors from './components/Advisors';
 
@@ -28,10 +29,10 @@ const ScrollToTop = () => {
   return null;
 };
 
-const HomePage: React.FC<{ onPartnerClick: () => void }> = ({ onPartnerClick }) => {
+const HomePage: React.FC<{ onPartnerClick: () => void; onJoinClick: () => void }> = ({ onPartnerClick, onJoinClick }) => {
   return (
     <>
-      <Hero onPartnerClick={onPartnerClick} />
+      <Hero onPartnerClick={onPartnerClick} onJoinClick={onJoinClick} />
       <MissionVision />
       <WhyCrashLab onReadMore={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })} />
       <Commitment />
@@ -46,6 +47,7 @@ const HomePage: React.FC<{ onPartnerClick: () => void }> = ({ onPartnerClick }) 
 
 const AppContent: React.FC = () => {
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
   const location = useLocation();
   const isBrandPage = location.pathname === '/brand';
 
@@ -62,7 +64,7 @@ const AppContent: React.FC = () => {
 
       <ScrollToTop />
       <CustomCursor />
-      
+
       {/* Navbar is always present */}
       <Navbar onNavigateHome={() => { /* Handled by Link in Navbar usually, or keep empty if standard nav */ }} />
 
@@ -76,13 +78,13 @@ const AppContent: React.FC = () => {
         <>
           <main className="flex-grow pt-16">
             <Routes>
-              <Route path="/" element={<HomePage onPartnerClick={() => setIsPartnerModalOpen(true)} />} />
+              <Route path="/" element={<HomePage onPartnerClick={() => setIsPartnerModalOpen(true)} onJoinClick={() => setIsJoinModalOpen(true)} />} />
               <Route path="/blog/:id" element={<BlogPost />} />
               {/* Fallback route */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
-          <Footer onNavigateHome={() => {}} onPartnerClick={() => setIsPartnerModalOpen(true)} />
+          <Footer onNavigateHome={() => { }} onPartnerClick={() => setIsPartnerModalOpen(true)} />
         </>
       )}
 
@@ -90,6 +92,12 @@ const AppContent: React.FC = () => {
       <PartnershipModal
         isOpen={isPartnerModalOpen}
         onClose={() => setIsPartnerModalOpen(false)}
+      />
+
+      {/* Application Modal */}
+      <ApplicationModal
+        isOpen={isJoinModalOpen}
+        onClose={() => setIsJoinModalOpen(false)}
       />
     </div>
   );
