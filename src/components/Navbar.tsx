@@ -112,6 +112,14 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10">
+          <a
+            href="https://radle.crashlab.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-bold uppercase tracking-[0.05em] text-navy-900 hover:text-brand-blue transition-colors relative"
+          >
+            RadLE Platform
+          </a>
           {menuItems.map((item) => (
             <a
               key={item}
@@ -152,6 +160,16 @@ const Navbar: React.FC = () => {
           className="fixed inset-0 bg-white z-[9998] flex flex-col pt-32 px-8 md:hidden translate-x-full shadow-2xl"
         >
           <div className="flex flex-col gap-8">
+            <a
+              href="https://radle.crashlab.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between text-3xl font-serif font-medium text-navy-900 tracking-tight border-b border-navy-900/10 pb-4"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span className="group-hover:text-brand-blue transition-colors duration-300">RadLE Platform</span>
+              <ArrowRight size={20} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-brand-blue" />
+            </a>
             {menuItems.map((item, index) => (
               <a
                 key={item}

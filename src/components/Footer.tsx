@@ -144,6 +144,14 @@ const Footer: React.FC<FooterProps> = ({ onPartnerClick }) => {
               >
                 Team
               </button>
+              <a 
+                href="https://radle.crashlab.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white/90 hover:text-white transition-colors block w-fit"
+              >
+                RadLE Platform
+              </a>
             </div>
           </div>
         </div>
